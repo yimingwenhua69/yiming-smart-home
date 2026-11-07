@@ -5,3 +5,5 @@ checkpoints/
 evidence/
 state/
 hooks/*.sh
+
+cache/

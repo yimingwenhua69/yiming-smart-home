@@ -1,0 +1,34 @@
+{
+  "id": "GATE-G5-1794052379467-wl2bv7",
+  "gate": "G5",
+  "status": "PASSED",
+  "passed": true,
+  "evidence": "Test command: provided by CLI/config override for test\nOutput kept raw: 15 lines, 81 estimated tokens\n> yiming-smart-home@0.1.0 test\n> tsx --test tests/*.test.ts\n\n✔ accepts PostgreSQL connection strings (2.257558ms)\n✔ rejects missing configuration (0.688977ms)\n✔ rejects invalid URLs and other database protocols (0.513683ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 279.880432\nEstimated tokens: 81 -> 81 (saved 0)\nCommand run evidence: CMD-1794052379466-77ac7fb1",
+  "evidenceItems": [
+    {
+      "id": "EVID-1794052379467-crbnk2",
+      "kind": "command",
+      "label": "Test command",
+      "passed": true,
+      "command": "npm test",
+      "exitCode": 0,
+      "durationMs": 531,
+      "cwd": "/workspace/yiming-smart-home",
+      "startedAt": 1794052378935,
+      "endedAt": 1794052379466,
+      "stdoutTail": "\n> yiming-smart-home@0.1.0 test\n> tsx --test tests/*.test.ts\n\n✔ accepts PostgreSQL connection strings (2.257558ms)\n✔ rejects missing configuration (0.688977ms)\n✔ rejects invalid URLs and other database protocols (0.513683ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 279.880432",
+      "stderrTail": "",
+      "outputHash": "8242adcdea86ed4929b37a8bc7d2b7627fdfee13d775e97426541249c9302cda",
+      "rawEstimatedTokens": 81,
+      "compressedEstimatedTokens": 81,
+      "savedEstimatedTokens": 0,
+      "compressionRatio": 1,
+      "commandRunEvidenceId": "CMD-1794052379466-77ac7fb1",
+      "source": "override",
+      "detail": "provided by CLI/config override for test\nOutput kept raw: 15 lines, 81 estimated tokens\n> yiming-smart-home@0.1.0 test\n> tsx --test tests/*.test.ts\n\n✔ accepts PostgreSQL connection strings (2.257558ms)\n✔ rejects missing configuration (0.688977ms)\n✔ rejects invalid URLs and other database protocols (0.513683ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 279.880432\nEstimated tokens: 81 -> 81 (saved 0)\nCommand run evidence: CMD-1794052379466-77ac7fb1"
+    }
+  ],
+  "blockers": [],
+  "durationMs": 532,
+  "createdAt": 1794052379467
+}

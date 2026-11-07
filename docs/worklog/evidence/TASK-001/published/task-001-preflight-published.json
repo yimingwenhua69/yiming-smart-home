@@ -1,0 +1,224 @@
+{
+  "phase": "PREFLIGHT",
+  "profile": "default",
+  "preflightProfile": "quick",
+  "gates": [
+    "G3",
+    "G0",
+    "G4",
+    "G5"
+  ],
+  "services": [
+    "yiming-smart-home"
+  ],
+  "warnings": [],
+  "policy": {
+    "optionalToolsWarnOnly": true,
+    "artifactGate": "off",
+    "artifactGateLevels": [
+      "M",
+      "L",
+      "CRITICAL"
+    ],
+    "engineeringStandardsGate": "warn",
+    "productSmokeGate": "warn",
+    "ecosystemReadinessGate": "warn",
+    "ecosystemReadinessPacks": [
+      "full"
+    ],
+    "ecosystemReadinessSkillScope": "required",
+    "mode": "minimal"
+  },
+  "workspaceSafety": {
+    "checked": true,
+    "gitRepository": true,
+    "blocked": false,
+    "conflicts": [],
+    "message": "No unresolved git conflicts detected."
+  },
+  "engineeringStandards": {
+    "mode": "warn",
+    "checked": true,
+    "blocked": false,
+    "ok": true,
+    "findings": [],
+    "summary": {
+      "filesScanned": 0,
+      "totalFindings": 0,
+      "blockingFindings": 0,
+      "bySeverity": {
+        "info": 0,
+        "warn": 0,
+        "fail": 0
+      },
+      "byCategory": {
+        "logging": 0,
+        "security": 0,
+        "database": 0,
+        "architecture": 0,
+        "code-quality": 0,
+        "framework": 0,
+        "testing": 0,
+        "uiux": 0
+      }
+    },
+    "changedFiles": []
+  },
+  "ecosystemReadiness": {
+    "mode": "warn",
+    "checked": false,
+    "ok": true,
+    "blocked": false,
+    "packIds": [
+      "full"
+    ],
+    "summary": {
+      "blockingIssues": [],
+      "warningCount": 0,
+      "installedTools": 0,
+      "totalTools": 0,
+      "missingTools": [],
+      "installedWorkflowSkills": 0,
+      "totalWorkflowSkills": 0,
+      "missingWorkflowSkills": [],
+      "missingRequiredWorkflowSkills": [],
+      "missingRecommendedWorkflowSkills": [],
+      "missingOptionalWorkflowSkills": [],
+      "blockingMissingWorkflowSkills": [],
+      "skillScope": "required"
+    },
+    "warnings": [
+      "ecosystem readiness is only checked by the ci preflight profile; current profile is quick"
+    ],
+    "recommendations": []
+  },
+  "targets": [
+    {
+      "service": "yiming-smart-home",
+      "cwd": "/workspace/yiming-smart-home",
+      "gates": [
+        {
+          "gate": "G3",
+          "status": "PASSED",
+          "passed": true,
+          "evidence": "TDD cycle: TDD cycle not strictly verified; provide --tdd-evidence or use --tdd-strict to enforce",
+          "evidenceItems": [
+            {
+              "id": "EVID-1794052369346-ubr21f",
+              "kind": "manual",
+              "label": "TDD cycle",
+              "passed": true,
+              "detail": "TDD cycle not strictly verified; provide --tdd-evidence or use --tdd-strict to enforce",
+              "source": "tdd-gate"
+            }
+          ],
+          "blockers": [],
+          "durationMs": 0,
+          "evidenceRecordId": "GATE-G3-1794052369346-s6k216"
+        },
+        {
+          "gate": "G0",
+          "status": "PASSED",
+          "passed": true,
+          "evidence": "Build command: provided by CLI/config override for build\nOutput kept raw: 44 lines, 261 estimated tokens\n[stdout]\n\n> yiming-smart-home@0.1.0 prebuild\n> npm run db:generate\n\n\n> yiming-smart-home@0.1.0 db:generate\n> prisma generate\n\n\n✔ Generated Prisma Client (7.10.1) to ./src/generated/prisma in 36ms\n\n\n> yiming-smart-home@0.1.0 build\n> next build\n\n▲ Next.js 16.4.5 (Turbopack)\n- Environments: .env\n✓ Running next.config.ts took 31ms\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 328ms\n  Running TypeScript ...\n  Finished TypeScript in 1545ms ...\n  Collecting page data using 4 workers ...\n  Generating static pages using 4 workers (0/4) ...\n  Generating static pages using 4 workers (1/4) \n  Generating static pages using 4 workers (2/4) \n  Generating static pages using 4 workers (3/4) \n✓ Generating static pages using 4 workers (4/4) in 142ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ○ /\n├ ○ /_not-found\n└ ƒ /api/health\n\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand\n[stderr]\nLoaded Prisma config from prisma.config.ts.\n\nPrisma schema loaded from prisma/schema.prisma.\nEstimated tokens: 261 -> 261 (saved 0)\nCommand run evidence: CMD-1794052376788-ddd4e7a8",
+          "evidenceItems": [
+            {
+              "id": "EVID-1794052376789-jy4x8g",
+              "kind": "command",
+              "label": "Build command",
+              "passed": true,
+              "command": "npm run build",
+              "exitCode": 0,
+              "durationMs": 7439,
+              "cwd": "/workspace/yiming-smart-home",
+              "startedAt": 1794052369347,
+              "endedAt": 1794052376786,
+              "stdoutTail": " TypeScript in 1545ms ...\n  Collecting page data using 4 workers ...\n  Generating static pages using 4 workers (0/4) ...\n  Generating static pages using 4 workers (1/4) \r\n  Generating static pages using 4 workers (2/4) \r\n  Generating static pages using 4 workers (3/4) \r\n✓ Generating static pages using 4 workers (4/4) in 142ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ○ /\n├ ○ /_not-found\n└ ƒ /api/health\n\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand\n",
+              "stderrTail": "Loaded Prisma config from prisma.config.ts.\n\nPrisma schema loaded from prisma/schema.prisma.",
+              "outputHash": "b3190a9b13e30bf76bdda23400cad2d1763b3fcc6a63b3f3abca7b754f02a8c5",
+              "rawEstimatedTokens": 261,
+              "compressedEstimatedTokens": 261,
+              "savedEstimatedTokens": 0,
+              "compressionRatio": 1,
+              "commandRunEvidenceId": "CMD-1794052376788-ddd4e7a8",
+              "source": "override",
+              "detail": "provided by CLI/config override for build\nOutput kept raw: 44 lines, 261 estimated tokens\n[stdout]\n\n> yiming-smart-home@0.1.0 prebuild\n> npm run db:generate\n\n\n> yiming-smart-home@0.1.0 db:generate\n> prisma generate\n\n\n✔ Generated Prisma Client (7.10.1) to ./src/generated/prisma in 36ms\n\n\n> yiming-smart-home@0.1.0 build\n> next build\n\n▲ Next.js 16.4.5 (Turbopack)\n- Environments: .env\n✓ Running next.config.ts took 31ms\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 328ms\n  Running TypeScript ...\n  Finished TypeScript in 1545ms ...\n  Collecting page data using 4 workers ...\n  Generating static pages using 4 workers (0/4) ...\n  Generating static pages using 4 workers (1/4) \n  Generating static pages using 4 workers (2/4) \n  Generating static pages using 4 workers (3/4) \n✓ Generating static pages using 4 workers (4/4) in 142ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ○ /\n├ ○ /_not-found\n└ ƒ /api/health\n\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand\n[stderr]\nLoaded Prisma config from prisma.config.ts.\n\nPrisma schema loaded from prisma/schema.prisma.\nEstimated tokens: 261 -> 261 (saved 0)\nCommand run evidence: CMD-1794052376788-ddd4e7a8"
+            }
+          ],
+          "blockers": [],
+          "durationMs": 7443,
+          "evidenceRecordId": "GATE-G0-1794052376789-4drbvd"
+        },
+        {
+          "gate": "G4",
+          "status": "PASSED",
+          "passed": true,
+          "evidence": "Lint command: provided by CLI/config override for lint\nOutput kept raw: 3 lines, 10 estimated tokens\n> yiming-smart-home@0.1.0 lint\n> eslint\nEstimated tokens: 10 -> 10 (saved 0)\nCommand run evidence: CMD-1794052378929-2667a050",
+          "evidenceItems": [
+            {
+              "id": "EVID-1794052378929-yh6z63",
+              "kind": "command",
+              "label": "Lint command",
+              "passed": true,
+              "command": "npm run lint",
+              "exitCode": 0,
+              "durationMs": 2132,
+              "cwd": "/workspace/yiming-smart-home",
+              "startedAt": 1794052376796,
+              "endedAt": 1794052378928,
+              "stdoutTail": "\n> yiming-smart-home@0.1.0 lint\n> eslint\n",
+              "stderrTail": "",
+              "outputHash": "761b3c94be5656bd129e8d17f33a11e110a2156b1a083f07f16b8f071e134e80",
+              "rawEstimatedTokens": 10,
+              "compressedEstimatedTokens": 10,
+              "savedEstimatedTokens": 0,
+              "compressionRatio": 1,
+              "commandRunEvidenceId": "CMD-1794052378929-2667a050",
+              "source": "override",
+              "detail": "provided by CLI/config override for lint\nOutput kept raw: 3 lines, 10 estimated tokens\n> yiming-smart-home@0.1.0 lint\n> eslint\nEstimated tokens: 10 -> 10 (saved 0)\nCommand run evidence: CMD-1794052378929-2667a050"
+            }
+          ],
+          "blockers": [],
+          "durationMs": 2133,
+          "evidenceRecordId": "GATE-G4-1794052378929-fhh9zj"
+        },
+        {
+          "gate": "G5",
+          "status": "PASSED",
+          "passed": true,
+          "evidence": "Test command: provided by CLI/config override for test\nOutput kept raw: 15 lines, 81 estimated tokens\n> yiming-smart-home@0.1.0 test\n> tsx --test tests/*.test.ts\n\n✔ accepts PostgreSQL connection strings (2.257558ms)\n✔ rejects missing configuration (0.688977ms)\n✔ rejects invalid URLs and other database protocols (0.513683ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 279.880432\nEstimated tokens: 81 -> 81 (saved 0)\nCommand run evidence: CMD-1794052379466-77ac7fb1",
+          "evidenceItems": [
+            {
+              "id": "EVID-1794052379467-crbnk2",
+              "kind": "command",
+              "label": "Test command",
+              "passed": true,
+              "command": "npm test",
+              "exitCode": 0,
+              "durationMs": 531,
+              "cwd": "/workspace/yiming-smart-home",
+              "startedAt": 1794052378935,
+              "endedAt": 1794052379466,
+              "stdoutTail": "\n> yiming-smart-home@0.1.0 test\n> tsx --test tests/*.test.ts\n\n✔ accepts PostgreSQL connection strings (2.257558ms)\n✔ rejects missing configuration (0.688977ms)\n✔ rejects invalid URLs and other database protocols (0.513683ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 279.880432",
+              "stderrTail": "",
+              "outputHash": "8242adcdea86ed4929b37a8bc7d2b7627fdfee13d775e97426541249c9302cda",
+              "rawEstimatedTokens": 81,
+              "compressedEstimatedTokens": 81,
+              "savedEstimatedTokens": 0,
+              "compressionRatio": 1,
+              "commandRunEvidenceId": "CMD-1794052379466-77ac7fb1",
+              "source": "override",
+              "detail": "provided by CLI/config override for test\nOutput kept raw: 15 lines, 81 estimated tokens\n> yiming-smart-home@0.1.0 test\n> tsx --test tests/*.test.ts\n\n✔ accepts PostgreSQL connection strings (2.257558ms)\n✔ rejects missing configuration (0.688977ms)\n✔ rejects invalid URLs and other database protocols (0.513683ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 279.880432\nEstimated tokens: 81 -> 81 (saved 0)\nCommand run evidence: CMD-1794052379466-77ac7fb1"
+            }
+          ],
+          "blockers": [],
+          "durationMs": 532,
+          "evidenceRecordId": "GATE-G5-1794052379467-wl2bv7"
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "commandTargetsSkipped": false,
+  "passed": true
+}

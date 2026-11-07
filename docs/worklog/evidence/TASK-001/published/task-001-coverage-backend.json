@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "executionId": "SHELL-RUN-eb288a57",
+  "plan": {
+    "version": 1,
+    "planId": "SHELL-PLAN-8cf857e7",
+    "command": "npm run test:coverage",
+    "cwd": "/workspace/yiming-smart-home",
+    "createdAt": "2026-11-07T11:54:40.173Z",
+    "risk": "read",
+    "blocked": false,
+    "requiresApproval": false,
+    "approved": false,
+    "reasons": [
+      "read-only or verification command"
+    ],
+    "saferAlternatives": [],
+    "parsed": {
+      "file": "npm",
+      "args": [
+        "run",
+        "test:coverage"
+      ]
+    }
+  },
+  "status": "passed",
+  "startedAt": "2026-11-07T11:54:40.174Z",
+  "endedAt": "2026-11-07T11:54:41.191Z",
+  "durationMs": 1017,
+  "result": {
+    "exitCode": 0,
+    "stdout": "\n> yiming-smart-home@0.1.0 test:coverage\n> node --import tsx --experimental-test-coverage --test-coverage-include=src/lib/** --test-coverage-include=src/app/api/** --test-coverage-lines=80 --test-coverage-branches=80 --test-coverage-functions=80 --test tests/*.test.ts\n\n✔ accepts PostgreSQL connection strings (3.394047ms)\n✔ rejects missing configuration (0.893815ms)\n✔ rejects invalid URLs and other database protocols (0.490488ms)\n✔ health executes a real PostgreSQL query and reuses the client (101.49594ms)\n✔ health hides invalid environment configuration (1.241127ms)\n✔ health returns 503 when PostgreSQL is unavailable (39.399005ms)\nℹ tests 6\nℹ suites 0\nℹ pass 6\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 785.301242\nℹ start of coverage report\nℹ -------------------------------------------------------------\nℹ file         | line % | branch % | funcs % | uncovered lines\nℹ -------------------------------------------------------------\nℹ src          |        |          |         | \nℹ  app         |        |          |         | \nℹ   api        |        |          |         | \nℹ    health    |        |          |         | \nℹ     route.ts | 100.00 |   100.00 |  100.00 | \nℹ  lib         |        |          |         | \nℹ   db.ts      |  92.31 |    92.31 |  100.00 | 13\nℹ   env.ts     | 100.00 |   100.00 |  100.00 | \nℹ -------------------------------------------------------------\nℹ all files    |  97.14 |    97.50 |  100.00 | \nℹ -------------------------------------------------------------\nℹ end of coverage report",
+    "stderr": ""
+  },
+  "evidence": {
+    "id": "CMD-1794052481193-c2bd0f43",
+    "taskId": "general",
+    "gate": "agent-os-shell:read",
+    "source": "agent-os-smart-shell",
+    "command": "npm run test:coverage",
+    "cwd": "/workspace/yiming-smart-home",
+    "status": "passed",
+    "exitCode": 0,
+    "durationMs": 1017,
+    "startedAt": "2026-11-07T11:54:40.174Z",
+    "endedAt": "2026-11-07T11:54:41.191Z",
+    "compressorId": "scale-command-output-compressor/v1",
+    "compressionStrategy": "vitest",
+    "summary": "Test output compressed (passed): 0/34 lines preserved",
+    "compressedOutput": "> yiming-smart-home@0.1.0 test:coverage\n> node --import tsx --experimental-test-coverage --test-coverage-include=src/lib/** --test-coverage-include=src/app/api/** --test-coverage-lines=80 --test-coverage-branches=80 --test-coverage-functions=80 --test tests/*.test.ts\n\n✔ accepts PostgreSQL connection strings (3.394047ms)\n✔ rejects missing configuration (0.893815ms)\n✔ rejects invalid URLs and other database protocols (0.490488ms)\n✔ health executes a real PostgreSQL query and reuses the client (101.49594ms)\n✔ health hides invalid environment configuration (1.241127ms)\n✔ health returns 503 when PostgreSQL is unavailable (39.399005ms)\nℹ tests 6\nℹ suites 0\nℹ pass 6\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 785.301242\nℹ start of coverage report\nℹ -------------------------------------------------------------\nℹ file         | line % | branch % | funcs % | uncovered lines\nℹ -------------------------------------------------------------\nℹ src          |        |          |         | \nℹ  app         |        |          |         | \nℹ   api        |        |          |         | \nℹ    health    |        |          |         | \nℹ     route.ts | 100.00 |   100.00 |  100.00 | \nℹ  lib         |        |          |         | \nℹ   db.ts      |  92.31 |    92.31 |  100.00 | 13\nℹ   env.ts     | 100.00 |   100.00 |  100.00 | \nℹ -------------------------------------------------------------\nℹ all files    |  97.14 |    97.50 |  100.00 | \nℹ -------------------------------------------------------------\nℹ end of coverage report",
+    "rawTail": "\n> yiming-smart-home@0.1.0 test:coverage\n> node --import tsx --experimental-test-coverage --test-coverage-include=src/lib/** --test-coverage-include=src/app/api/** --test-coverage-lines=80 --test-coverage-branches=80 --test-coverage-functions=80 --test tests/*.test.ts\n\n✔ accepts PostgreSQL connection strings (3.394047ms)\n✔ rejects missing configuration (0.893815ms)\n✔ rejects invalid URLs and other database protocols (0.490488ms)\n✔ health executes a real PostgreSQL query and reuses the client (101.49594ms)\n✔ health hides invalid environment configuration (1.241127ms)\n✔ health returns 503 when PostgreSQL is unavailable (39.399005ms)\nℹ tests 6\nℹ suites 0\nℹ pass 6\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 785.301242\nℹ start of coverage report\nℹ -------------------------------------------------------------\nℹ file         | line % | branch % | funcs % | uncovered lines\nℹ -------------------------------------------------------------\nℹ src          |        |          |         | \nℹ  app         |        |          |         | \nℹ   api        |        |          |         | \nℹ    health    |        |          |         | \nℹ     route.ts | 100.00 |   100.00 |  100.00 | \nℹ  lib         |        |          |         | \nℹ   db.ts      |  92.31 |    92.31 |  100.00 | 13\nℹ   env.ts     | 100.00 |   100.00 |  100.00 | \nℹ -------------------------------------------------------------\nℹ all files    |  97.14 |    97.50 |  100.00 | \nℹ -------------------------------------------------------------\nℹ end of coverage report",
+    "rawSha256": "e42ec9f95566360cb0c859597f6a0f1934cdef0edd0583204eb732b5a00e8805",
+    "rawBytes": 1602,
+    "compressedBytes": 1601,
+    "rawEstimatedTokens": 386,
+    "compressedEstimatedTokens": 386,
+    "savedEstimatedTokens": 0,
+    "compressionRatio": 1,
+    "truncated": false,
+    "redactionApplied": false,
+    "sequence": 1
+  },
+  "events": {
+    "planned": {
+      "agentId": "agent-os-shell",
+      "sessionId": "SHELL-PLAN-8cf857e7",
+      "type": "shell.planned",
+      "summary": "Planned shell command (read)",
+      "metadata": {
+        "planId": "SHELL-PLAN-8cf857e7",
+        "command": "npm run test:coverage",
+        "cwd": "/workspace/yiming-smart-home",
+        "blocked": false,
+        "reasons": [
+          "read-only or verification command"
+        ]
+      },
+      "id": "EXEC-1794052480174-d69147cb",
+      "ts": "2026-11-07T11:54:40.174Z"
+    },
+    "executed": {
+      "agentId": "agent-os-shell",
+      "sessionId": "SHELL-PLAN-8cf857e7",
+      "type": "shell.executed",
+      "summary": "Shell command passed: npm run test:coverage",
+      "metadata": {
+        "planId": "SHELL-PLAN-8cf857e7",
+        "command": "npm run test:coverage",
+        "status": "passed",
+        "exitCode": 0,
+        "evidenceId": "CMD-1794052481193-c2bd0f43"
+      },
+      "id": "EXEC-1794052481193-f0f03fed",
+      "ts": "2026-11-07T11:54:41.193Z"
+    }
+  }
+}

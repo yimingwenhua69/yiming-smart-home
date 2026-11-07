@@ -46,3 +46,7 @@
 当前代码与依赖已补齐至 P2 待验证骨架。以 `docs/worklog/TASK-001.md` 为最新状态，本文原始环境与下一步段落保留为历史交接信息。原始和本轮 SCALE JSON 证据的原样副本位于 `docs/worklog/evidence/TASK-001/`，以便新任务读取；原 `.scale/evidence` 未修改。
 
 新任务需选择保存 P2 的分支，先核对网络放行是否实际生效，再按 README 生成 Prisma 客户端、验证 schema、build、typecheck 和健康接口。生成器为 prisma-client，Prisma / client / adapter-pg 为 7.10.1。当前不能宣称 P2 完成，不进入 P3。
+
+## 发布后验证更新（最新）
+
+旧网络阻塞已解除：Prisma 生成、schema 校验、生产 build、typecheck、健康接口 200/503 均已验证。现有 6 项测试、后端覆盖率门槛和 2 项浏览器测试通过。详见 docs/worklog/TASK-001.md 最新章节；全量 audit 有 8 项开发依赖中危，生产依赖为 0，治理工具仍有降级，不宣称所有门禁或 P3 已完成。新任务使用该分支最新提交，不重复修改/发布环境。
