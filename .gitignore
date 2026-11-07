@@ -48,3 +48,7 @@ next-env.d.ts
 
 /test-results/
 /playwright-report/
+
+# Regenerable local code intelligence
+/.codegraph/
+/graphify-out/

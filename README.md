@@ -46,3 +46,19 @@ Playwright 默认使用 `/usr/bin/chromium`；其他环境通过 `CHROMIUM_PATH`
 ## 生产健康接口复验
 
 构建完成后，在两个终端分别启动 `npm run start -- --hostname 127.0.0.1 --port 3100`，以及 `DATABASE_URL=postgresql://invalid:invalid@127.0.0.1:1/unavailable npm run start -- --hostname 127.0.0.1 --port 3101`，然后执行 `node scripts/qa/health-smoke.mjs`。第二个实例仅用于验证数据库不可用时的 503 响应，不修改正常数据库。验证完停止这两个测试实例。
+
+## 开发工具依赖与代码索引
+
+TypeScript ESLint 8.72.1 的 minimatch 间接依赖受到 GHSA-g3hv-75wg-m249 影响。package.json 仅对该版本的 typescript-estree 设置 minimatch 11.0.1 覆盖；保留 Next.js / ESLint 主版本及其他 minimatch 依赖。升级 typescript-eslint 时重新评估并移除此临时覆盖。`npm run check:lint-deps` 实测项目服务的包含/排除匹配。
+
+覆盖率保留 Node 原生报告，同时从其 test:coverage 事件生成 SCALE 0.58 可识别的汇总，数值取行、分支、函数覆盖率的最小值。不更改测试结果、80% 阈值或退出码。
+
+可选代码分析工具仅在工作区安装，不修改环境设置或全局 agent 配置：
+
+```bash
+bash scripts/qa/code-intelligence.sh
+export PATH="/workspace/.tools/codegraph/node_modules/.bin:/workspace/.tools/bin:$PATH"
+npm_config_cache=/workspace/.npm-cache npx -y @hongmaple0820/scale-engine@0.58.0 codegraph status --dir . --json
+```
+
+需要 npm 与 uv；安装固定版本 CodeGraph 1.6.2、graphifyy 0.9.103（官方发行名，命令为 graphify）。Graphify 只执行本地代码 AST 分析，不调用模型；不提供文档/图片语义分析。索引目录可重新生成，不提交数据库或图缓存。

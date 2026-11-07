@@ -11,10 +11,11 @@
     "db:dev": "prisma dev --name yiming",
     "db:validate": "prisma validate",
     "test": "tsx --test tests/*.test.ts",
-    "test:coverage": "node --import tsx --experimental-test-coverage --test-coverage-include=src/lib/** --test-coverage-include=src/app/api/** --test-coverage-lines=80 --test-coverage-branches=80 --test-coverage-functions=80 --test tests/*.test.ts",
+    "test:coverage": "node --import tsx --experimental-test-coverage --test-coverage-include=src/lib/** --test-coverage-include=src/app/api/** --test-coverage-lines=80 --test-coverage-branches=80 --test-coverage-functions=80 --test-reporter=./scripts/qa/coverage-reporter.mjs --test tests/*.test.ts",
     "test:e2e": "playwright test",
     "typecheck": "tsc --noEmit",
-    "prebuild": "npm run db:generate"
+    "prebuild": "npm run db:generate",
+    "check:lint-deps": "node scripts/qa/lint-dependency-smoke.mjs"
   },
   "dependencies": {
     "@prisma/adapter-pg": "7.10.1",
@@ -39,5 +40,10 @@
     "tailwindcss": "^4",
     "tsx": "4.23.15",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@typescript-eslint/typescript-estree@8.72.1": {
+      "minimatch": "11.0.1"
+    }
   }
 }

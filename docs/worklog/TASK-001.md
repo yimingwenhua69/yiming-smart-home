@@ -78,3 +78,29 @@ P2 的首页、Prisma 数据库连接和健康接口功能目标已验证。未�
 ### 新任务交接指令
 
 继续 TASK-001 / P2，选择 codex/task-001-p2-20261107 分支最新提交。先读 CODEX_HANDOFF.md、本记录的“发布后实际验证”及 README，不重复应用旧的环境草稿。先检查实际环境和工作区。按 README 启动本地数据库，生成 Prisma 客户端，再运行 schema validate、build、typecheck、lint、6 项测试、后端覆盖率和 2 项浏览器测试；如需复验 HTTP 健康契约，按 README 启动正常/失败两个生产实例并运行 health-smoke。继续评估 8 项开发依赖中危告警和治理工具降级，保留证据；P2 其余门禁验收完成前不进入 P3，不发布环境。
+
+## P2 剩余门禁处理（最新）
+
+### 安全修复
+
+先运行 npm audit fix --dry-run，未发现兼容范围内的修复。8 项中危均由 typescript-estree 8.72.1 的 minimatch 10.2.6 传播；上游最新版仍约束 ^10.2.2。检查 minimatch 11.0.1 的包元数据、接口差异和消费者源码后，采用仅限该父依赖版本的 override，不降级或升级 Next.js / ESLint，不改其他 minimatch 3.x 使用者。修复版在 Node 24 上可运行。新增 check:lint-deps 实测消费者的 projectService allowDefaultProject 包含/排除匹配；两项均通过。
+
+修复后 npm audit 全量结果为 0 vulnerabilities，先前的 8 项中危已清零，历史审计结果保留。
+
+### 治理能力
+
+CodeGraph 1.6.2 已安装并实际索引项目，查询 getDatabase、分析调用影响均成功。Graphify 按官方 README 的发行名称 graphifyy 0.9.103 安装；旧提示 uv tool install graphify 返回无可用版本，已按官方来源纠正，不重复失败命令。实际执行 code-only / no-cluster AST 提取，不调用 LLM，不上传代码。SCALE codegraph status 确认 codegraph 与 graphify 可用。Graphify 提示部分配置/测试文件无可提取符号；不将 AST 图等同于完整语义分析。
+
+脚本 scripts/qa/code-intelligence.sh 已完整执行并验证可重复运行，提供独立安装和索引步骤；不修改/发布环境或全局 agent 配置，不安装与本任务无关的全部工具包。hrain 本地内存仍可用；完整 full 工具包中其他能力（如 rtk、飞书、其他代理 CLI）未全部安装，不宣称 full capability verify 通过。这些能力与本轮应用功能验收分开报告。
+
+### 覆盖率报告集成与结果
+
+full preflight 最初失败：Node 覆盖率实测达标但 SCALE 0.58 不能解析其原生小写/带标记表格。增加 coverage-reporter.mjs，保留 Node spec 报告，以真实 test:coverage 事件计算三项覆盖率的最小值，向下截取两位小数后输出 SCALE 兼容汇总。沿用 80% 原生门槛。负向检查将行门槛设为 100%，实际退出 1，确认未吞掉失败。
+
+调试期间有一次自定义 reporter 的流接入未消费事件，SCALE 记录为空报告失败；随后改为 Node stream compose 正确消费。修复后 SCALE 曾复用旧 G6 缓存：识别出相同 command evidence ID，把可再生成的 .scale/cache/scans 归档至 scratch 后重新运行，不改写历史 evidence。保留全部失败记录；最后一次新鲜执行的 full preflight G3 / G0 / G4 / G5 / G6 / G7 全部 PASSED，6 项测试通过，后端覆盖率最小值 97.14%。G3 仍为非严格 TDD，不声称测试先行已被证明。
+
+### 审查与阶段结论
+
+SCALE review --mode ai-self 实际执行，缺陷 findings 为空；这是自动/自我审查，不是独立第三方评审。启发式 judge 提示未声明验证面、不能仅凭 diff 判定需求符合性，Karpathy 部分建议未满足；报告保留这些局限，不将 passed 扩大解释为独立人工批准。实际需求与测试映射：数据库配置协议由 env 测试覆盖；连接及错误响应由 health 测试和已保存的生产 HTTP 冒烟覆盖；中文响应式首页由既有手机/桌面浏览器实测覆盖；本轮开发依赖变更由专用消费者兼容性检查、lint、build、typecheck 和全量 audit 覆盖。
+
+P2 应用功能和 full preflight 技术门禁已通过。保持 P2，不自动进入 P3。完整治理工具包安装、独立评审及生产部署安全验收不在本次“全部技术门禁通过”的声明内。

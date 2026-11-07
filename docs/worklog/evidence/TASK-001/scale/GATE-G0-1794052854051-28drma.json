@@ -1,0 +1,34 @@
+{
+  "id": "GATE-G0-1794052854051-28drma",
+  "gate": "G0",
+  "status": "PASSED",
+  "passed": true,
+  "evidence": "Build command: provided by CLI/config override for build\nOutput kept raw: 44 lines, 261 estimated tokens\n[stdout]\n\n> yiming-smart-home@0.1.0 prebuild\n> npm run db:generate\n\n\n> yiming-smart-home@0.1.0 db:generate\n> prisma generate\n\n\n✔ Generated Prisma Client (7.10.1) to ./src/generated/prisma in 32ms\n\n\n> yiming-smart-home@0.1.0 build\n> next build\n\n▲ Next.js 16.4.5 (Turbopack)\n- Environments: .env\n✓ Running next.config.ts took 36ms\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 303ms\n  Running TypeScript ...\n  Finished TypeScript in 1449ms ...\n  Collecting page data using 4 workers ...\n  Generating static pages using 4 workers (0/4) ...\n  Generating static pages using 4 workers (1/4) \n  Generating static pages using 4 workers (2/4) \n  Generating static pages using 4 workers (3/4) \n✓ Generating static pages using 4 workers (4/4) in 131ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ○ /\n├ ○ /_not-found\n└ ƒ /api/health\n\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand\n[stderr]\nLoaded Prisma config from prisma.config.ts.\n\nPrisma schema loaded from prisma/schema.prisma.\nEstimated tokens: 261 -> 261 (saved 0)\nCommand run evidence: CMD-1794052854051-fe37ba20",
+  "evidenceItems": [
+    {
+      "id": "EVID-1794052854051-w99qvz",
+      "kind": "command",
+      "label": "Build command",
+      "passed": true,
+      "command": "npm run build",
+      "exitCode": 0,
+      "durationMs": 7445,
+      "cwd": "/workspace/yiming-smart-home",
+      "startedAt": 1794052846604,
+      "endedAt": 1794052854049,
+      "stdoutTail": " TypeScript in 1449ms ...\n  Collecting page data using 4 workers ...\n  Generating static pages using 4 workers (0/4) ...\n  Generating static pages using 4 workers (1/4) \r\n  Generating static pages using 4 workers (2/4) \r\n  Generating static pages using 4 workers (3/4) \r\n✓ Generating static pages using 4 workers (4/4) in 131ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ○ /\n├ ○ /_not-found\n└ ƒ /api/health\n\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand\n",
+      "stderrTail": "Loaded Prisma config from prisma.config.ts.\n\nPrisma schema loaded from prisma/schema.prisma.",
+      "outputHash": "74be6a03fc157473bce159d67b5894af7803ebff735435ffaec4c893f38132db",
+      "rawEstimatedTokens": 261,
+      "compressedEstimatedTokens": 261,
+      "savedEstimatedTokens": 0,
+      "compressionRatio": 1,
+      "commandRunEvidenceId": "CMD-1794052854051-fe37ba20",
+      "source": "override",
+      "detail": "provided by CLI/config override for build\nOutput kept raw: 44 lines, 261 estimated tokens\n[stdout]\n\n> yiming-smart-home@0.1.0 prebuild\n> npm run db:generate\n\n\n> yiming-smart-home@0.1.0 db:generate\n> prisma generate\n\n\n✔ Generated Prisma Client (7.10.1) to ./src/generated/prisma in 32ms\n\n\n> yiming-smart-home@0.1.0 build\n> next build\n\n▲ Next.js 16.4.5 (Turbopack)\n- Environments: .env\n✓ Running next.config.ts took 36ms\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 303ms\n  Running TypeScript ...\n  Finished TypeScript in 1449ms ...\n  Collecting page data using 4 workers ...\n  Generating static pages using 4 workers (0/4) ...\n  Generating static pages using 4 workers (1/4) \n  Generating static pages using 4 workers (2/4) \n  Generating static pages using 4 workers (3/4) \n✓ Generating static pages using 4 workers (4/4) in 131ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ○ /\n├ ○ /_not-found\n└ ƒ /api/health\n\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand\n[stderr]\nLoaded Prisma config from prisma.config.ts.\n\nPrisma schema loaded from prisma/schema.prisma.\nEstimated tokens: 261 -> 261 (saved 0)\nCommand run evidence: CMD-1794052854051-fe37ba20"
+    }
+  ],
+  "blockers": [],
+  "durationMs": 7447,
+  "createdAt": 1794052854051
+}

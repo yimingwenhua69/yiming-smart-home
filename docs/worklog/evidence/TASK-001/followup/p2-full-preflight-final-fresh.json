@@ -1,0 +1,632 @@
+{
+  "phase": "PREFLIGHT",
+  "profile": "default",
+  "preflightProfile": "full",
+  "gates": [
+    "G3",
+    "G0",
+    "G4",
+    "G5",
+    "G6",
+    "G7"
+  ],
+  "services": [
+    "yiming-smart-home"
+  ],
+  "warnings": [],
+  "policy": {
+    "optionalToolsWarnOnly": true,
+    "artifactGate": "off",
+    "artifactGateLevels": [
+      "M",
+      "L",
+      "CRITICAL"
+    ],
+    "engineeringStandardsGate": "warn",
+    "productSmokeGate": "warn",
+    "ecosystemReadinessGate": "warn",
+    "ecosystemReadinessPacks": [
+      "full"
+    ],
+    "ecosystemReadinessSkillScope": "required",
+    "mode": "minimal"
+  },
+  "workspaceSafety": {
+    "checked": true,
+    "gitRepository": true,
+    "blocked": false,
+    "conflicts": [],
+    "message": "No unresolved git conflicts detected."
+  },
+  "engineeringStandards": {
+    "mode": "warn",
+    "checked": true,
+    "blocked": false,
+    "ok": true,
+    "findings": [],
+    "summary": {
+      "filesScanned": 0,
+      "totalFindings": 0,
+      "blockingFindings": 0,
+      "bySeverity": {
+        "info": 0,
+        "warn": 0,
+        "fail": 0
+      },
+      "byCategory": {
+        "logging": 0,
+        "security": 0,
+        "database": 0,
+        "architecture": 0,
+        "code-quality": 0,
+        "framework": 0,
+        "testing": 0,
+        "uiux": 0
+      }
+    },
+    "changedFiles": [
+      ".gitignore",
+      ".scale/ledger/events.jsonl",
+      ".scale/shell/runs.json",
+      "package-lock.json",
+      "package.json",
+      ".scale/judges/spec-conformance.json",
+      ".scale/reviews/REVIEW-1794053000070-h0ivuq.json",
+      "scripts/qa/code-intelligence.sh",
+      "scripts/qa/coverage-reporter.mjs",
+      "scripts/qa/lint-dependency-smoke.mjs"
+    ]
+  },
+  "ecosystemReadiness": {
+    "mode": "warn",
+    "checked": false,
+    "ok": true,
+    "blocked": false,
+    "packIds": [
+      "full"
+    ],
+    "summary": {
+      "blockingIssues": [],
+      "warningCount": 0,
+      "installedTools": 0,
+      "totalTools": 0,
+      "missingTools": [],
+      "installedWorkflowSkills": 0,
+      "totalWorkflowSkills": 0,
+      "missingWorkflowSkills": [],
+      "missingRequiredWorkflowSkills": [],
+      "missingRecommendedWorkflowSkills": [],
+      "missingOptionalWorkflowSkills": [],
+      "blockingMissingWorkflowSkills": [],
+      "skillScope": "required"
+    },
+    "warnings": [
+      "ecosystem readiness is only checked by the ci preflight profile; current profile is full"
+    ],
+    "recommendations": []
+  },
+  "targets": [
+    {
+      "service": "yiming-smart-home",
+      "cwd": "/workspace/yiming-smart-home",
+      "gates": [
+        {
+          "gate": "G3",
+          "status": "PASSED",
+          "passed": true,
+          "evidence": "TDD cycle: TDD cycle not strictly verified; provide --tdd-evidence or use --tdd-strict to enforce",
+          "evidenceItems": [
+            {
+              "id": "EVID-1794053043233-cwpx9w",
+              "kind": "manual",
+              "label": "TDD cycle",
+              "passed": true,
+              "detail": "TDD cycle not strictly verified; provide --tdd-evidence or use --tdd-strict to enforce",
+              "source": "tdd-gate"
+            }
+          ],
+          "blockers": [],
+          "durationMs": 0,
+          "evidenceRecordId": "GATE-G3-1794053043233-qc5mr4"
+        },
+        {
+          "gate": "G0",
+          "status": "PASSED",
+          "passed": true,
+          "evidence": "Build command: provided by CLI/config override for build\nOutput kept raw: 44 lines, 261 estimated tokens\n[stdout]\n\n> yiming-smart-home@0.1.0 prebuild\n> npm run db:generate\n\n\n> yiming-smart-home@0.1.0 db:generate\n> prisma generate\n\n\n✔ Generated Prisma Client (7.10.1) to ./src/generated/prisma in 35ms\n\n\n> yiming-smart-home@0.1.0 build\n> next build\n\n▲ Next.js 16.4.5 (Turbopack)\n- Environments: .env\n✓ Running next.config.ts took 30ms\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 328ms\n  Running TypeScript ...\n  Finished TypeScript in 1730ms ...\n  Collecting page data using 4 workers ...\n  Generating static pages using 4 workers (0/4) ...\n  Generating static pages using 4 workers (1/4) \n  Generating static pages using 4 workers (2/4) \n  Generating static pages using 4 workers (3/4) \n✓ Generating static pages using 4 workers (4/4) in 163ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ○ /\n├ ○ /_not-found\n└ ƒ /api/health\n\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand\n[stderr]\nLoaded Prisma config from prisma.config.ts.\n\nPrisma schema loaded from prisma/schema.prisma.\nEstimated tokens: 261 -> 261 (saved 0)\nCommand run evidence: CMD-1794053050780-a3f7cd6c",
+          "evidenceItems": [
+            {
+              "id": "EVID-1794053050781-xug1ul",
+              "kind": "command",
+              "label": "Build command",
+              "passed": true,
+              "command": "npm run build",
+              "exitCode": 0,
+              "durationMs": 7545,
+              "cwd": "/workspace/yiming-smart-home",
+              "startedAt": 1794053043233,
+              "endedAt": 1794053050778,
+              "stdoutTail": " TypeScript in 1730ms ...\n  Collecting page data using 4 workers ...\n  Generating static pages using 4 workers (0/4) ...\n  Generating static pages using 4 workers (1/4) \r\n  Generating static pages using 4 workers (2/4) \r\n  Generating static pages using 4 workers (3/4) \r\n✓ Generating static pages using 4 workers (4/4) in 163ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ○ /\n├ ○ /_not-found\n└ ƒ /api/health\n\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand\n",
+              "stderrTail": "Loaded Prisma config from prisma.config.ts.\n\nPrisma schema loaded from prisma/schema.prisma.",
+              "outputHash": "61b88d544cbf4578b11434a405503d4dcd231e8c53a6a7fc7485ae0502f5079a",
+              "rawEstimatedTokens": 261,
+              "compressedEstimatedTokens": 261,
+              "savedEstimatedTokens": 0,
+              "compressionRatio": 1,
+              "commandRunEvidenceId": "CMD-1794053050780-a3f7cd6c",
+              "source": "override",
+              "detail": "provided by CLI/config override for build\nOutput kept raw: 44 lines, 261 estimated tokens\n[stdout]\n\n> yiming-smart-home@0.1.0 prebuild\n> npm run db:generate\n\n\n> yiming-smart-home@0.1.0 db:generate\n> prisma generate\n\n\n✔ Generated Prisma Client (7.10.1) to ./src/generated/prisma in 35ms\n\n\n> yiming-smart-home@0.1.0 build\n> next build\n\n▲ Next.js 16.4.5 (Turbopack)\n- Environments: .env\n✓ Running next.config.ts took 30ms\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 328ms\n  Running TypeScript ...\n  Finished TypeScript in 1730ms ...\n  Collecting page data using 4 workers ...\n  Generating static pages using 4 workers (0/4) ...\n  Generating static pages using 4 workers (1/4) \n  Generating static pages using 4 workers (2/4) \n  Generating static pages using 4 workers (3/4) \n✓ Generating static pages using 4 workers (4/4) in 163ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ○ /\n├ ○ /_not-found\n└ ƒ /api/health\n\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand\n[stderr]\nLoaded Prisma config from prisma.config.ts.\n\nPrisma schema loaded from prisma/schema.prisma.\nEstimated tokens: 261 -> 261 (saved 0)\nCommand run evidence: CMD-1794053050780-a3f7cd6c"
+            }
+          ],
+          "blockers": [],
+          "durationMs": 7548,
+          "evidenceRecordId": "GATE-G0-1794053050781-8c0emf"
+        },
+        {
+          "gate": "G4",
+          "status": "PASSED",
+          "passed": true,
+          "evidence": "Lint command: provided by CLI/config override for lint\nOutput kept raw: 3 lines, 10 estimated tokens\n> yiming-smart-home@0.1.0 lint\n> eslint\nEstimated tokens: 10 -> 10 (saved 0)\nCommand run evidence: CMD-1794053052534-a5530fdf",
+          "evidenceItems": [
+            {
+              "id": "EVID-1794053052534-66c9dk",
+              "kind": "command",
+              "label": "Lint command",
+              "passed": true,
+              "command": "npm run lint",
+              "exitCode": 0,
+              "durationMs": 1743,
+              "cwd": "/workspace/yiming-smart-home",
+              "startedAt": 1794053050791,
+              "endedAt": 1794053052534,
+              "stdoutTail": "\n> yiming-smart-home@0.1.0 lint\n> eslint\n",
+              "stderrTail": "",
+              "outputHash": "761b3c94be5656bd129e8d17f33a11e110a2156b1a083f07f16b8f071e134e80",
+              "rawEstimatedTokens": 10,
+              "compressedEstimatedTokens": 10,
+              "savedEstimatedTokens": 0,
+              "compressionRatio": 1,
+              "commandRunEvidenceId": "CMD-1794053052534-a5530fdf",
+              "source": "override",
+              "detail": "provided by CLI/config override for lint\nOutput kept raw: 3 lines, 10 estimated tokens\n> yiming-smart-home@0.1.0 lint\n> eslint\nEstimated tokens: 10 -> 10 (saved 0)\nCommand run evidence: CMD-1794053052534-a5530fdf"
+            }
+          ],
+          "blockers": [],
+          "durationMs": 1743,
+          "evidenceRecordId": "GATE-G4-1794053052534-1otbx0"
+        },
+        {
+          "gate": "G5",
+          "status": "PASSED",
+          "passed": true,
+          "evidence": "Test command: provided by CLI/config override for test\nOutput kept raw: 18 lines, 133 estimated tokens\n> yiming-smart-home@0.1.0 test\n> tsx --test tests/*.test.ts\n\n✔ accepts PostgreSQL connection strings (2.268273ms)\n✔ rejects missing configuration (0.705712ms)\n✔ rejects invalid URLs and other database protocols (0.609477ms)\n✔ health executes a real PostgreSQL query and reuses the client (85.504604ms)\n✔ health hides invalid environment configuration (1.234358ms)\n✔ health returns 503 when PostgreSQL is unavailable (27.859133ms)\nℹ tests 6\nℹ suites 0\nℹ pass 6\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 356.943298\nEstimated tokens: 133 -> 132 (saved 1)\nCommand run evidence: CMD-1794053053105-a0d97779",
+          "evidenceItems": [
+            {
+              "id": "EVID-1794053053105-c4lq31",
+              "kind": "command",
+              "label": "Test command",
+              "passed": true,
+              "command": "npm test",
+              "exitCode": 0,
+              "durationMs": 565,
+              "cwd": "/workspace/yiming-smart-home",
+              "startedAt": 1794053052540,
+              "endedAt": 1794053053105,
+              "stdoutTail": "st\n> tsx --test tests/*.test.ts\n\n✔ accepts PostgreSQL connection strings (2.268273ms)\n✔ rejects missing configuration (0.705712ms)\n✔ rejects invalid URLs and other database protocols (0.609477ms)\n✔ health executes a real PostgreSQL query and reuses the client (85.504604ms)\n✔ health hides invalid environment configuration (1.234358ms)\n✔ health returns 503 when PostgreSQL is unavailable (27.859133ms)\nℹ tests 6\nℹ suites 0\nℹ pass 6\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 356.943298",
+              "stderrTail": "",
+              "outputHash": "b31421b09ca68138f0282b4c8dddab5957752b8513ec330898a2f559cad87ae3",
+              "rawEstimatedTokens": 133,
+              "compressedEstimatedTokens": 132,
+              "savedEstimatedTokens": 1,
+              "compressionRatio": 0.992,
+              "commandRunEvidenceId": "CMD-1794053053105-a0d97779",
+              "source": "override",
+              "detail": "provided by CLI/config override for test\nOutput kept raw: 18 lines, 133 estimated tokens\n> yiming-smart-home@0.1.0 test\n> tsx --test tests/*.test.ts\n\n✔ accepts PostgreSQL connection strings (2.268273ms)\n✔ rejects missing configuration (0.705712ms)\n✔ rejects invalid URLs and other database protocols (0.609477ms)\n✔ health executes a real PostgreSQL query and reuses the client (85.504604ms)\n✔ health hides invalid environment configuration (1.234358ms)\n✔ health returns 503 when PostgreSQL is unavailable (27.859133ms)\nℹ tests 6\nℹ suites 0\nℹ pass 6\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 356.943298\nEstimated tokens: 133 -> 132 (saved 1)\nCommand run evidence: CMD-1794053053105-a0d97779"
+            }
+          ],
+          "blockers": [],
+          "durationMs": 565,
+          "evidenceRecordId": "GATE-G5-1794053053106-ou06rx"
+        },
+        {
+          "gate": "G6",
+          "status": "PASSED",
+          "passed": true,
+          "evidence": "Coverage command: provided by CLI/config override for coverage\nCoverage: 97.14%",
+          "evidenceItems": [
+            {
+              "id": "EVID-1794053053852-1h5f2r",
+              "kind": "command",
+              "label": "Coverage command",
+              "passed": true,
+              "command": "npm run test:coverage",
+              "exitCode": 0,
+              "durationMs": 738,
+              "cwd": "/workspace/yiming-smart-home",
+              "startedAt": 1794053053112,
+              "endedAt": 1794053053850,
+              "stdoutTail": "|         | \nℹ     route.ts | 100.00 |   100.00 |  100.00 | \nℹ  lib         |        |          |         | \nℹ   db.ts      |  92.31 |    92.31 |  100.00 | 13\nℹ   env.ts     | 100.00 |   100.00 |  100.00 | \nℹ -------------------------------------------------------------\nℹ all files    |  97.14 |    97.50 |  100.00 | \nℹ -------------------------------------------------------------\nℹ end of coverage report\n\nSCALE aggregate: minimum of measured line, branch and function coverage\nAll files | 97.14 |",
+              "stderrTail": "",
+              "outputHash": "5ae62946bd1453e174e0cec5d516d95aad597711430e3331f5bd9aba15368ea3",
+              "rawEstimatedTokens": 421,
+              "compressedEstimatedTokens": 23,
+              "savedEstimatedTokens": 398,
+              "compressionRatio": 0.055,
+              "commandRunEvidenceId": "CMD-1794053053851-b39f28f0",
+              "source": "override",
+              "detail": "provided by CLI/config override for coverage\nCoverage: 97.14%"
+            }
+          ],
+          "blockers": [],
+          "durationMs": 740,
+          "evidenceRecordId": "GATE-G6-1794053053852-vcpzrh"
+        },
+        {
+          "gate": "G7",
+          "status": "PASSED",
+          "passed": true,
+          "evidence": "Security scan: no built-in security findings detected\nG7 dependency audit: 20 package(s) audited, findings=37, critical=0, high=2, medium=35, low=0, mode=compatibility\nDependency finding dependency.bin-script: MEDIUM @playwright/test@1.65.0: Dependency exposes executable bin scripts.; playwright\nDependency finding dependency.network-access: MEDIUM @prisma/client@7.10.1: Dependency source performs network access.; line 57: `}var fn=class e{#e;#t;#r;#i;#o;constructor(t,r,n){this.#e=t,this.#t=r,this.#r=n,this.#i=r.getConnectionInfo?.(),this.#o=dr.forSql({onQuery:this.#e.onQuery,tracingHelper:this.#e.tr\nDependency finding dependency.network-access: MEDIUM @prisma/client@7.10.1: Dependency source performs network access.; line 58: ${n.backtrace}`,{clientVersion:this.config.clientVersion})}catch{return t}}#d(t){return t instanceof ne.PrismaClientRustPanicError?t:typeof t.message==\"string\"&&typeof t.code==\"str\nDependency finding dependency.network-access: MEDIUM @prisma/client@7.10.1: Dependency source performs network access.; line 65: `)}var zi=({clientMethod:e,activeProvider:t,clientVersion:r})=>n=>{let i=\"\",o;if(Ur(n))i=n.sql,o={values:It(n.values,r),__prismaRawParameters__:!0};else if(Array.isArray(n)){let[s,\nDependency finding dependency.network-access: MEDIUM @prisma/client@7.10.1: Dependency source performs network access.; line 100: `)),P?.kind===\"batch\"&&await P.lock,this._requestHandler.request({protocolQuery:M,modelName:u,action:a,clientMethod:i,dataPath:o,callsite:s,args:n,extensions:this._extensions,trans\nDependency finding dependency.network-access: MEDIUM @prisma/client@7.10.1: Dependency source performs network access.; line 64: `}var un=class e{#e;#t;#r;#i;#o;constructor(t,r,n){this.#e=t,this.#t=r,this.#r=n,this.#i=r.getConnectionInfo?.(),this.#o=or.forSql({onQuery:this.#e.onQuery,tracingHelper:this.#e.tr\nDependency finding dependency.network-access: MEDIUM @prisma/client@7.10.1: Dependency source performs network access.; line 65: ${n.backtrace}`,{clientVersion:this.config.clientVersion})}catch{return t}}#d(t){return t instanceof ur?t:typeof t.message==\"string\"&&typeof t.code==\"string\"?new Vi(t.message,{code\nDependency finding dependency.network-access: MEDIUM @prisma/client@7.10.1: Dependency source performs network access.; line 72: `)}var Ui=({clientMethod:e,activeProvider:t,clientVersion:r})=>n=>{let i=\"\",o;if(Mr(n))i=n.sql,o={values:vt(n.values,r),__prismaRawParameters__:!0};else if(Array.isArray(n)){let[s,\nDependency finding dependency.network-access: MEDIUM @prisma/client@7.10.1: Dependency source performs network access.; line 107: `)),P?.kind===\"batch\"&&await P.lock,this._requestHandler.request({protocolQuery:M,modelName:u,action:a,clientMethod:i,dataPath:o,callsite:s,args:n,extensions:this._extensions,trans\nDependency finding dependency.bin-script: MEDIUM dotenv@18.0.9: Dependency exposes executable bin scripts.; dotenv\nDependency finding dependency.bin-script: MEDIUM eslint@9.39.5: Dependency exposes executable bin scripts.; eslint\nDependency finding dependency.deprecated: HIGH eslint@9.39.5: Dependency is marked deprecated.; This version is no longer supported. Please see https://eslint.org/version-support for other options.\nDependency finding dependency.bin-script: MEDIUM next@16.4.5: Dependency exposes executable bin scripts.; next\nDependency finding dependency.install-script: HIGH prisma@7.10.1: Dependency declares an install lifecycle script.; hasInstallScript=true\nDependency finding dependency.bin-script: MEDIUM prisma@7.10.1: Dependency exposes executable bin scripts.; prisma\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4110: return (request = request.onBrowserBailout), request(error, errorInfo), \"\";\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4112: error = request(error, errorInfo);\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 5864: request();\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 5876: request();\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4161: return (request = request.onBrowserBailout), request(error, errorInfo), \"\";\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4163: error = request(error, errorInfo);\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 5941: request();\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 5953: request();\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4686: return (request = request.onBrowserBailout), request(error, errorInfo), \"\";\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4688: error = request(error, errorInfo);\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 6494: request();\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 6506: request();\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4336: return (request = request.onBrowserBailout), request(error, errorInfo), \"\";\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4338: error = request(error, errorInfo);\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 6182: request();\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 6194: request();\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4742: return (request = request.onBrowserBailout), request(error, errorInfo), \"\";\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4744: error = request(error, errorInfo);\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 6576: request();\nDependency finding dependency.network-access: MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 6588: request();\nDependency finding dependency.bin-script: MEDIUM tsx@4.23.15: Dependency exposes executable bin scripts.; tsx\nDependency finding dependency.bin-script: MEDIUM typescript@5.9.3: Dependency exposes executable bin scripts.; tsc, tsserver",
+          "evidenceItems": [
+            {
+              "id": "EVID-1794053053944-p3b82r",
+              "kind": "scan",
+              "label": "Security scan",
+              "passed": true,
+              "path": "src",
+              "detail": "no built-in security findings detected",
+              "source": "built-in-security-scan"
+            },
+            {
+              "id": "EVID-1794053053944-jit039",
+              "kind": "scan",
+              "label": "G7 dependency audit",
+              "passed": true,
+              "path": "/workspace/yiming-smart-home/package-lock.json",
+              "detail": "20 package(s) audited, findings=37, critical=0, high=2, medium=35, low=0, mode=compatibility",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-cs51od",
+              "kind": "scan",
+              "label": "Dependency finding dependency.bin-script",
+              "passed": true,
+              "path": "node_modules/@playwright/test",
+              "detail": "MEDIUM @playwright/test@1.65.0: Dependency exposes executable bin scripts.; playwright",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-tbqkeh",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/@prisma/client/runtime/client.js",
+              "detail": "MEDIUM @prisma/client@7.10.1: Dependency source performs network access.; line 57: `}var fn=class e{#e;#t;#r;#i;#o;constructor(t,r,n){this.#e=t,this.#t=r,this.#r=n,this.#i=r.getConnectionInfo?.(),this.#o=dr.forSql({onQuery:this.#e.onQuery,tracingHelper:this.#e.tr",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-oa66mr",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/@prisma/client/runtime/client.js",
+              "detail": "MEDIUM @prisma/client@7.10.1: Dependency source performs network access.; line 58: ${n.backtrace}`,{clientVersion:this.config.clientVersion})}catch{return t}}#d(t){return t instanceof ne.PrismaClientRustPanicError?t:typeof t.message==\"string\"&&typeof t.code==\"str",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-1mkux5",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/@prisma/client/runtime/client.js",
+              "detail": "MEDIUM @prisma/client@7.10.1: Dependency source performs network access.; line 65: `)}var zi=({clientMethod:e,activeProvider:t,clientVersion:r})=>n=>{let i=\"\",o;if(Ur(n))i=n.sql,o={values:It(n.values,r),__prismaRawParameters__:!0};else if(Array.isArray(n)){let[s,",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-jb7og6",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/@prisma/client/runtime/client.js",
+              "detail": "MEDIUM @prisma/client@7.10.1: Dependency source performs network access.; line 100: `)),P?.kind===\"batch\"&&await P.lock,this._requestHandler.request({protocolQuery:M,modelName:u,action:a,clientMethod:i,dataPath:o,callsite:s,args:n,extensions:this._extensions,trans",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-255v3o",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/@prisma/client/runtime/client.mjs",
+              "detail": "MEDIUM @prisma/client@7.10.1: Dependency source performs network access.; line 64: `}var un=class e{#e;#t;#r;#i;#o;constructor(t,r,n){this.#e=t,this.#t=r,this.#r=n,this.#i=r.getConnectionInfo?.(),this.#o=or.forSql({onQuery:this.#e.onQuery,tracingHelper:this.#e.tr",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-hezrw5",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/@prisma/client/runtime/client.mjs",
+              "detail": "MEDIUM @prisma/client@7.10.1: Dependency source performs network access.; line 65: ${n.backtrace}`,{clientVersion:this.config.clientVersion})}catch{return t}}#d(t){return t instanceof ur?t:typeof t.message==\"string\"&&typeof t.code==\"string\"?new Vi(t.message,{code",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-2ca42o",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/@prisma/client/runtime/client.mjs",
+              "detail": "MEDIUM @prisma/client@7.10.1: Dependency source performs network access.; line 72: `)}var Ui=({clientMethod:e,activeProvider:t,clientVersion:r})=>n=>{let i=\"\",o;if(Mr(n))i=n.sql,o={values:vt(n.values,r),__prismaRawParameters__:!0};else if(Array.isArray(n)){let[s,",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-hhaa9g",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/@prisma/client/runtime/client.mjs",
+              "detail": "MEDIUM @prisma/client@7.10.1: Dependency source performs network access.; line 107: `)),P?.kind===\"batch\"&&await P.lock,this._requestHandler.request({protocolQuery:M,modelName:u,action:a,clientMethod:i,dataPath:o,callsite:s,args:n,extensions:this._extensions,trans",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-djuipl",
+              "kind": "scan",
+              "label": "Dependency finding dependency.bin-script",
+              "passed": true,
+              "path": "node_modules/dotenv",
+              "detail": "MEDIUM dotenv@18.0.9: Dependency exposes executable bin scripts.; dotenv",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-z146zl",
+              "kind": "scan",
+              "label": "Dependency finding dependency.bin-script",
+              "passed": true,
+              "path": "node_modules/eslint",
+              "detail": "MEDIUM eslint@9.39.5: Dependency exposes executable bin scripts.; eslint",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-1i5e9n",
+              "kind": "scan",
+              "label": "Dependency finding dependency.deprecated",
+              "passed": true,
+              "path": "node_modules/eslint",
+              "detail": "HIGH eslint@9.39.5: Dependency is marked deprecated.; This version is no longer supported. Please see https://eslint.org/version-support for other options.",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-bakb7p",
+              "kind": "scan",
+              "label": "Dependency finding dependency.bin-script",
+              "passed": true,
+              "path": "node_modules/next",
+              "detail": "MEDIUM next@16.4.5: Dependency exposes executable bin scripts.; next",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-3atbxo",
+              "kind": "scan",
+              "label": "Dependency finding dependency.install-script",
+              "passed": true,
+              "path": "node_modules/prisma",
+              "detail": "HIGH prisma@7.10.1: Dependency declares an install lifecycle script.; hasInstallScript=true",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-o0w9fg",
+              "kind": "scan",
+              "label": "Dependency finding dependency.bin-script",
+              "passed": true,
+              "path": "node_modules/prisma",
+              "detail": "MEDIUM prisma@7.10.1: Dependency exposes executable bin scripts.; prisma",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-f87pi5",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server-legacy.browser.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4110: return (request = request.onBrowserBailout), request(error, errorInfo), \"\";",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-pa41ff",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server-legacy.browser.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4112: error = request(error, errorInfo);",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-hju7wl",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server-legacy.browser.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 5864: request();",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-m09jxw",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server-legacy.browser.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 5876: request();",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-abo8f1",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4161: return (request = request.onBrowserBailout), request(error, errorInfo), \"\";",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-9vndz7",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4163: error = request(error, errorInfo);",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-utlri7",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 5941: request();",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-icaksl",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 5953: request();",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-seun8u",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server.browser.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4686: return (request = request.onBrowserBailout), request(error, errorInfo), \"\";",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-zfi96o",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server.browser.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4688: error = request(error, errorInfo);",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-9o6ynl",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server.browser.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 6494: request();",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-znmxkw",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server.browser.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 6506: request();",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-fdeb2y",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server.bun.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4336: return (request = request.onBrowserBailout), request(error, errorInfo), \"\";",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-mmw06m",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server.bun.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4338: error = request(error, errorInfo);",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-qj9yfy",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server.bun.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 6182: request();",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-m4drzu",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server.bun.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 6194: request();",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-v1huo8",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server.edge.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4742: return (request = request.onBrowserBailout), request(error, errorInfo), \"\";",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-ld7oqy",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server.edge.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 4744: error = request(error, errorInfo);",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-kujrh1",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server.edge.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 6576: request();",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-2vcrp0",
+              "kind": "scan",
+              "label": "Dependency finding dependency.network-access",
+              "passed": true,
+              "path": "node_modules/react-dom/cjs/react-dom-server.edge.production.js",
+              "detail": "MEDIUM react-dom@19.3.0: Dependency source performs network access.; line 6588: request();",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-cjs8yf",
+              "kind": "scan",
+              "label": "Dependency finding dependency.bin-script",
+              "passed": true,
+              "path": "node_modules/tsx",
+              "detail": "MEDIUM tsx@4.23.15: Dependency exposes executable bin scripts.; tsx",
+              "source": "dependency-audit"
+            },
+            {
+              "id": "EVID-1794053053944-zlzrv4",
+              "kind": "scan",
+              "label": "Dependency finding dependency.bin-script",
+              "passed": true,
+              "path": "node_modules/typescript",
+              "detail": "MEDIUM typescript@5.9.3: Dependency exposes executable bin scripts.; tsc, tsserver",
+              "source": "dependency-audit"
+            }
+          ],
+          "blockers": [],
+          "durationMs": 86,
+          "evidenceRecordId": "GATE-G7-1794053053945-jcmbay"
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "commandTargetsSkipped": false,
+  "passed": true
+}

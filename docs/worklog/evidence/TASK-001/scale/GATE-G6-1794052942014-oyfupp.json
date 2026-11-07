@@ -1,0 +1,36 @@
+{
+  "id": "GATE-G6-1794052942014-oyfupp",
+  "gate": "G6",
+  "status": "FAILED",
+  "passed": false,
+  "evidence": "Coverage command: provided by CLI/config override for coverage\n\n> yiming-smart-home@0.1.0 test:coverage\n> node --import tsx --experimental-test-coverage --test-coverage-include=src/lib/** --test-coverage-include=src/app/api/** --test-coverage-lines=80 --test-coverage-branches=80 --test-coverage-functions=80 --test-reporter=./scripts/qa/coverage-reporter.mjs --test tests/*.test.ts\n",
+  "evidenceItems": [
+    {
+      "id": "EVID-1794052942014-fwahlh",
+      "kind": "command",
+      "label": "Coverage command",
+      "passed": false,
+      "command": "npm run test:coverage",
+      "exitCode": 0,
+      "durationMs": 786,
+      "cwd": "/workspace/yiming-smart-home",
+      "startedAt": 1794052941227,
+      "endedAt": 1794052942013,
+      "stdoutTail": "\n> yiming-smart-home@0.1.0 test:coverage\n> node --import tsx --experimental-test-coverage --test-coverage-include=src/lib/** --test-coverage-include=src/app/api/** --test-coverage-lines=80 --test-coverage-branches=80 --test-coverage-functions=80 --test-reporter=./scripts/qa/coverage-reporter.mjs --test tests/*.test.ts\n",
+      "stderrTail": "",
+      "outputHash": "c5cb9147577289a782174cd8c6b3678664872d71ef6ef4b3cab4da1b5d5bdd50",
+      "rawEstimatedTokens": 80,
+      "compressedEstimatedTokens": 80,
+      "savedEstimatedTokens": 0,
+      "compressionRatio": 1,
+      "commandRunEvidenceId": "CMD-1794052942014-d78859ac",
+      "source": "override",
+      "detail": "provided by CLI/config override for coverage\n\n> yiming-smart-home@0.1.0 test:coverage\n> node --import tsx --experimental-test-coverage --test-coverage-include=src/lib/** --test-coverage-include=src/app/api/** --test-coverage-lines=80 --test-coverage-branches=80 --test-coverage-functions=80 --test-reporter=./scripts/qa/coverage-reporter.mjs --test tests/*.test.ts\n"
+    }
+  ],
+  "blockers": [
+    "Coverage percentage could not be parsed"
+  ],
+  "durationMs": 787,
+  "createdAt": 1794052942014
+}
