@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "writings": [
+    {
+      "path": ".claude/settings.json",
+      "kind": "external",
+      "idempotent": "json-merge",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    },
+    {
+      "path": ".cline/settings.json",
+      "kind": "external",
+      "idempotent": "json-merge",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    },
+    {
+      "path": ".cline/skills",
+      "kind": "external",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    },
+    {
+      "path": ".clinerules",
+      "kind": "external",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    },
+    {
+      "path": ".clinerules/SCALE.md",
+      "kind": "external",
+      "idempotent": "markers",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    },
+    {
+      "path": ".codex/config.toml",
+      "kind": "external",
+      "idempotent": "json-merge",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    },
+    {
+      "path": ".codex/hooks.json",
+      "kind": "external",
+      "idempotent": "json-merge",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    },
+    {
+      "path": ".cursor/settings.json",
+      "kind": "external",
+      "idempotent": "json-merge",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    },
+    {
+      "path": ".cursor/skills",
+      "kind": "external",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    },
+    {
+      "path": ".cursorrules",
+      "kind": "external",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    },
+    {
+      "path": ".qoder/rules",
+      "kind": "external",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    },
+    {
+      "path": ".qoder/rules/SCALE.md",
+      "kind": "external",
+      "idempotent": "markers",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    },
+    {
+      "path": ".qoder/settings.json",
+      "kind": "external",
+      "idempotent": "json-merge",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    },
+    {
+      "path": ".qoder/skills",
+      "kind": "external",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    },
+    {
+      "path": ".windsurf",
+      "kind": "external",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    },
+    {
+      "path": ".windsurf/rules.md",
+      "kind": "external",
+      "idempotent": "markers",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    },
+    {
+      "path": ".windsurf/settings.json",
+      "kind": "external",
+      "idempotent": "json-merge",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    },
+    {
+      "path": ".windsurf/skills",
+      "kind": "external",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    },
+    {
+      "path": "AGENTS.md",
+      "kind": "external",
+      "idempotent": "markers",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    },
+    {
+      "path": "CLAUDE.md",
+      "kind": "external",
+      "idempotent": "markers",
+      "writtenAt": "2026-11-07T10:15:56.315Z",
+      "by": "scale setup:governance"
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "executionId": "SHELL-RUN-601eb3bf",
+  "plan": {
+    "version": 1,
+    "planId": "SHELL-PLAN-543d01cf",
+    "command": "npm run test:coverage",
+    "cwd": "/workspace/yiming-smart-home",
+    "createdAt": "2026-11-07T11:20:47.184Z",
+    "risk": "read",
+    "blocked": false,
+    "requiresApproval": false,
+    "approved": false,
+    "reasons": [
+      "read-only or verification command"
+    ],
+    "saferAlternatives": [],
+    "parsed": {
+      "file": "npm",
+      "args": [
+        "run",
+        "test:coverage"
+      ]
+    }
+  },
+  "status": "passed",
+  "startedAt": "2026-11-07T11:20:47.185Z",
+  "endedAt": "2026-11-07T11:20:47.653Z",
+  "durationMs": 468,
+  "result": {
+    "exitCode": 0,
+    "stdout": "\n> yiming-smart-home@0.1.0 test:coverage\n> node --import tsx --experimental-test-coverage --test-coverage-include=src/lib/env.ts --test tests/*.test.ts\n\n✔ accepts PostgreSQL connection strings (2.7879ms)\n✔ rejects missing configuration (0.825749ms)\n✔ rejects invalid URLs and other database protocols (0.460896ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 302.608154\nℹ start of coverage report\nℹ ----------------------------------------------------------\nℹ file      | line % | branch % | funcs % | uncovered lines\nℹ ----------------------------------------------------------\nℹ src       |        |          |         | \nℹ  lib      |        |          |         | \nℹ   env.ts  | 100.00 |   100.00 |  100.00 | \nℹ ----------------------------------------------------------\nℹ all files | 100.00 |   100.00 |  100.00 | \nℹ ----------------------------------------------------------\nℹ end of coverage report",
+    "stderr": ""
+  },
+  "evidence": {
+    "id": "CMD-1794050447654-5b115b44",
+    "taskId": "general",
+    "gate": "agent-os-shell:read",
+    "source": "agent-os-smart-shell",
+    "command": "npm run test:coverage",
+    "cwd": "/workspace/yiming-smart-home",
+    "status": "passed",
+    "exitCode": 0,
+    "durationMs": 468,
+    "startedAt": "2026-11-07T11:20:47.185Z",
+    "endedAt": "2026-11-07T11:20:47.653Z",
+    "compressorId": "scale-command-output-compressor/v1",
+    "compressionStrategy": "bounded-raw",
+    "summary": "Output kept raw: 26 lines, 237 estimated tokens",
+    "compressedOutput": "> yiming-smart-home@0.1.0 test:coverage\n> node --import tsx --experimental-test-coverage --test-coverage-include=src/lib/env.ts --test tests/*.test.ts\n\n✔ accepts PostgreSQL connection strings (2.7879ms)\n✔ rejects missing configuration (0.825749ms)\n✔ rejects invalid URLs and other database protocols (0.460896ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 302.608154\nℹ start of coverage report\nℹ ----------------------------------------------------------\nℹ file      | line % | branch % | funcs % | uncovered lines\nℹ ----------------------------------------------------------\nℹ src       |        |          |         | \nℹ  lib      |        |          |         | \nℹ   env.ts  | 100.00 |   100.00 |  100.00 | \nℹ ----------------------------------------------------------\nℹ all files | 100.00 |   100.00 |  100.00 | \nℹ ----------------------------------------------------------\nℹ end of coverage report",
+    "rawTail": "\n> yiming-smart-home@0.1.0 test:coverage\n> node --import tsx --experimental-test-coverage --test-coverage-include=src/lib/env.ts --test tests/*.test.ts\n\n✔ accepts PostgreSQL connection strings (2.7879ms)\n✔ rejects missing configuration (0.825749ms)\n✔ rejects invalid URLs and other database protocols (0.460896ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 302.608154\nℹ start of coverage report\nℹ ----------------------------------------------------------\nℹ file      | line % | branch % | funcs % | uncovered lines\nℹ ----------------------------------------------------------\nℹ src       |        |          |         | \nℹ  lib      |        |          |         | \nℹ   env.ts  | 100.00 |   100.00 |  100.00 | \nℹ ----------------------------------------------------------\nℹ all files | 100.00 |   100.00 |  100.00 | \nℹ ----------------------------------------------------------\nℹ end of coverage report",
+    "rawSha256": "4a909a535dd7408ddedb85ae6c39d3c7aebdfbd79ec7040893437e3b57f3e635",
+    "rawBytes": 992,
+    "compressedBytes": 991,
+    "rawEstimatedTokens": 237,
+    "compressedEstimatedTokens": 237,
+    "savedEstimatedTokens": 0,
+    "compressionRatio": 1,
+    "truncated": false,
+    "redactionApplied": false,
+    "sequence": 1
+  },
+  "events": {
+    "planned": {
+      "agentId": "agent-os-shell",
+      "sessionId": "SHELL-PLAN-543d01cf",
+      "type": "shell.planned",
+      "summary": "Planned shell command (read)",
+      "metadata": {
+        "planId": "SHELL-PLAN-543d01cf",
+        "command": "npm run test:coverage",
+        "cwd": "/workspace/yiming-smart-home",
+        "blocked": false,
+        "reasons": [
+          "read-only or verification command"
+        ]
+      },
+      "id": "EXEC-1794050447185-537913e2",
+      "ts": "2026-11-07T11:20:47.185Z"
+    },
+    "executed": {
+      "agentId": "agent-os-shell",
+      "sessionId": "SHELL-PLAN-543d01cf",
+      "type": "shell.executed",
+      "summary": "Shell command passed: npm run test:coverage",
+      "metadata": {
+        "planId": "SHELL-PLAN-543d01cf",
+        "command": "npm run test:coverage",
+        "status": "passed",
+        "exitCode": 0,
+        "evidenceId": "CMD-1794050447654-5b115b44"
+      },
+      "id": "EXEC-1794050447655-c2d5ec4a",
+      "ts": "2026-11-07T11:20:47.655Z"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+# SCALE Shield policy — compiled into runtime hooks by `scale shield compile`.
+# Generated from the built-in defaults; edit and re-run `scale shield compile` to apply.
+version: 1
+rules:
+  - id: protect-scale-dir
+    description: Protect .scale/ governance infrastructure from unauthorized modification
+    hookType: PreToolUse
+    matcher: Write|Edit
+    action: block
+    conditions:
+      - type: protected_path
+        pattern: .scale/
+        message: Modifying .scale/ governance files is blocked
+  - id: block-dangerous-commands
+    description: 'Block dangerous shell commands: rm -rf, DROP TABLE, force push, curl-pipe-bash'
+    hookType: PreToolUse
+    matcher: Bash
+    action: block
+    conditions:
+      - type: dangerous_command
+        message: Dangerous command detected
+  - id: require-gate-quality
+    description: Block git commits without passing gate-quality checks
+    hookType: PreToolUse
+    matcher: Bash
+    action: block
+    conditions:
+      - type: gate_required
+        pattern: git commit
+        message: Gate quality must pass before commit
+  - id: block-secret-exposure
+    description: Block commands that may expose secrets (cat .env, echo $API_KEY)
+    hookType: PreToolUse
+    matcher: Bash
+    action: block
+    conditions:
+      - type: secret_pattern
+        message: Potential secret exposure detected
+  - id: prevent-hook-bypass
+    description: Block attempts to skip hooks or bypass governance
+    hookType: PreToolUse
+    matcher: Bash
+    action: block
+    conditions:
+      - type: custom
+        pattern: (--no-verify|--no-gpg-sign|SKIP_HOOKS|bypass|dang[eo]rously)
+        message: Governance bypass attempt blocked
+  - id: require-clean-worktree
+    description: Warn on session stop when the worktree has uncommitted changes (allowlisted tool artifacts excluded)
+    hookType: Stop
+    matcher: ''
+    action: warn
+    conditions:
+      - type: dirty_tree
+        pattern: >-
+          ^(\.workbuddy(/|-)|\.workbuddy-ai/|output/|tmp/|\.scale-test-session/|\.hook-state/|\.planning/cache/)|\.timestamp-\d+-[0-9a-f]+\.mjs$
+        message: Uncommitted changes detected
+settings:
+  blockMode: strict
+  hookStateDir: .hook-state
+  notifyOnBlock: true

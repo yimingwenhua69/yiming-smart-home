@@ -1,0 +1,255 @@
+{
+  "phase": "PREFLIGHT",
+  "profile": "default",
+  "preflightProfile": "quick",
+  "gates": [
+    "G3",
+    "G0",
+    "G4",
+    "G5"
+  ],
+  "services": [
+    "yiming-smart-home"
+  ],
+  "warnings": [],
+  "policy": {
+    "optionalToolsWarnOnly": true,
+    "artifactGate": "off",
+    "artifactGateLevels": [
+      "M",
+      "L",
+      "CRITICAL"
+    ],
+    "engineeringStandardsGate": "warn",
+    "productSmokeGate": "warn",
+    "ecosystemReadinessGate": "warn",
+    "ecosystemReadinessPacks": [
+      "full"
+    ],
+    "ecosystemReadinessSkillScope": "required",
+    "mode": "minimal"
+  },
+  "workspaceSafety": {
+    "checked": true,
+    "gitRepository": true,
+    "blocked": false,
+    "conflicts": [],
+    "message": "No unresolved git conflicts detected."
+  },
+  "engineeringStandards": {
+    "mode": "warn",
+    "checked": true,
+    "blocked": false,
+    "ok": true,
+    "findings": [],
+    "summary": {
+      "filesScanned": 5,
+      "totalFindings": 0,
+      "blockingFindings": 0,
+      "bySeverity": {
+        "info": 0,
+        "warn": 0,
+        "fail": 0
+      },
+      "byCategory": {
+        "logging": 0,
+        "security": 0,
+        "database": 0,
+        "architecture": 0,
+        "code-quality": 0,
+        "framework": 0,
+        "testing": 0,
+        "uiux": 0
+      }
+    },
+    "changedFiles": [
+      "README.md",
+      ".claude/hooks/shield-block-dangerous-commands.cjs",
+      ".claude/hooks/shield-block-secret-exposure.cjs",
+      ".claude/hooks/shield-pre-tool.cjs",
+      ".claude/hooks/shield-prevent-hook-bypass.cjs",
+      ".claude/hooks/shield-protect-scale-dir.cjs",
+      ".claude/hooks/shield-require-clean-worktree.cjs",
+      ".claude/hooks/shield-require-gate-quality.cjs",
+      ".claude/settings.json",
+      ".cline/settings.json",
+      ".clinerules/SCALE.md",
+      ".codex/config.toml",
+      ".codex/hooks.json",
+      ".cursor/hooks.json",
+      ".cursor/settings.json",
+      ".cursorrules",
+      ".env.example",
+      ".gitignore",
+      ".qoder/rules/SCALE.md",
+      ".qoder/settings.json",
+      ".scale/.gitignore",
+      ".scale/agent-language.md",
+      ".scale/assets.json",
+      ".scale/config.yaml",
+      ".scale/engineering-standards-baseline.json",
+      ".scale/engineering-standards.json",
+      ".scale/frameworks.json",
+      ".scale/governance.lock.json",
+      ".scale/manifest.json",
+      ".scale/output-policy.json",
+      ".scale/policy.yaml",
+      ".scale/product-smoke.json",
+      ".scale/reports/workflow/README.md",
+      ".scale/reports/workflow/frontend-app.md",
+      ".scale/reports/workflow/templates/api-contract.md",
+      ".scale/reports/workflow/templates/architecture-review.md",
+      ".scale/reports/workflow/templates/db-change-plan.md",
+      ".scale/reports/workflow/templates/docs-impact.md",
+      ".scale/reports/workflow/templates/e2e-plan.md",
+      ".scale/reports/workflow/templates/explore.md",
+      ".scale/reports/workflow/templates/github-actions-scale-preflight.yml",
+      ".scale/reports/workflow/templates/mini-prd.md",
+      ".scale/reports/workflow/templates/plan.md",
+      ".scale/reports/workflow/templates/pre-push-scale-preflight.sh",
+      ".scale/reports/workflow/templates/product-smoke.md",
+      ".scale/reports/workflow/templates/reality-check.md",
+      ".scale/reports/workflow/templates/resource-cleanup.md",
+      ".scale/reports/workflow/templates/resource-impact.md",
+      ".scale/reports/workflow/templates/review.md",
+      ".scale/reports/workflow/templates/runtime.md",
+      ".scale/reports/workflow/templates/security-review.md",
+      ".scale/reports/workflow/templates/skill-evidence.md",
+      ".scale/reports/workflow/templates/skill-plan.md",
+      ".scale/reports/workflow/templates/standards-impact.md",
+      ".scale/reports/workflow/templates/summary.md",
+      ".scale/reports/workflow/templates/ui-spec.md",
+      ".scale/reports/workflow/templates/verification.md",
+      ".scale/reports/workflow/templates/visual-review.md",
+      ".scale/resource-policy.json",
+      ".scale/skills.json",
+      ".scale/thresholds.json",
+      ".scale/tools.json",
+      ".scale/verification.json",
+      ".scale/workspace.json",
+      ".windsurf/rules.md",
+      ".windsurf/settings.json",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "CODEX_HANDOFF.md",
+      "docs/worklog/metrics.md",
+      "eslint.config.mjs",
+      "next.config.ts",
+      "package-lock.json",
+      "package.json",
+      "playwright.config.ts",
+      "prisma.config.ts",
+      "prisma/schema.prisma",
+      "public/file.svg",
+      "public/globe.svg",
+      "public/next.svg",
+      "public/vercel.svg",
+      "public/window.svg",
+      "scripts/qa/product-smoke.ps1",
+      "scripts/qa/product-smoke.sh",
+      "src/app/api/health/route.ts",
+      "src/app/favicon.ico",
+      "src/app/globals.css",
+      "src/app/layout.tsx",
+      "src/app/page.tsx",
+      "src/lib/db.ts",
+      "src/lib/env.ts",
+      "tests/e2e/home.spec.ts",
+      "tests/env.test.ts",
+      "tsconfig.json"
+    ]
+  },
+  "ecosystemReadiness": {
+    "mode": "warn",
+    "checked": false,
+    "ok": true,
+    "blocked": false,
+    "packIds": [
+      "full"
+    ],
+    "summary": {
+      "blockingIssues": [],
+      "warningCount": 0,
+      "installedTools": 0,
+      "totalTools": 0,
+      "missingTools": [],
+      "installedWorkflowSkills": 0,
+      "totalWorkflowSkills": 0,
+      "missingWorkflowSkills": [],
+      "missingRequiredWorkflowSkills": [],
+      "missingRecommendedWorkflowSkills": [],
+      "missingOptionalWorkflowSkills": [],
+      "blockingMissingWorkflowSkills": [],
+      "skillScope": "required"
+    },
+    "warnings": [
+      "ecosystem readiness is only checked by the ci preflight profile; current profile is quick"
+    ],
+    "recommendations": []
+  },
+  "targets": [
+    {
+      "service": "yiming-smart-home",
+      "cwd": "/workspace/yiming-smart-home",
+      "gates": [
+        {
+          "gate": "G3",
+          "status": "PASSED",
+          "passed": true,
+          "evidence": "TDD cycle: TDD cycle not strictly verified; provide --tdd-evidence or use --tdd-strict to enforce",
+          "evidenceItems": [
+            {
+              "id": "EVID-1794050387581-5s43k3",
+              "kind": "manual",
+              "label": "TDD cycle",
+              "passed": true,
+              "detail": "TDD cycle not strictly verified; provide --tdd-evidence or use --tdd-strict to enforce",
+              "source": "tdd-gate"
+            }
+          ],
+          "blockers": [],
+          "durationMs": 0,
+          "evidenceRecordId": "GATE-G3-1794050387581-dr5p1s"
+        },
+        {
+          "gate": "G0",
+          "status": "FAILED",
+          "passed": false,
+          "evidence": "Build command: provided by CLI/config override for build\nOutput kept raw: 34 lines, 288 estimated tokens\n[stdout]\n\n> yiming-smart-home@0.1.0 build\n> next build\n\n▲ Next.js 16.4.5 (Turbopack)\n✓ Running next.config.ts took 25ms\n\n  Creating an optimized production build ...\n[stderr]\n\n> Build error occurred\nError: Turbopack build failed with 1 error:\n./src/lib/db.ts:2:1\nError: Module not found: Can't resolve '@/generated/prisma/client'\n  \u001b[90m1 |\u001b[0m \u001b[36mimport\u001b[0m { \u001b[33mPrismaPg\u001b[0m } \u001b[36mfrom\u001b[0m \u001b[32m\"@prisma/adapter-pg\"\u001b[0m;\n\u001b[31m\u001b[1m>\u001b[0m \u001b[90m2 |\u001b[0m \u001b[36mimport\u001b[0m { \u001b[33mPrismaClient\u001b[0m } \u001b[36mfrom\u001b[0m \u001b[32m\"@/generated/prisma/client\"\u001b[0m;\n  \u001b[90m  |\u001b[0m \u001b[31m\u001b[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\u001b[0m\n  \u001b[90m3 |\u001b[0m \u001b[36mimport\u001b[0m { getEnvironment } \u001b[36mfrom\u001b[0m \u001b[32m\"./env\"\u001b[0m;\n  \u001b[90m4 |\u001b[0m\n  \u001b[90m5 |\u001b[0m \u001b[36mconst\u001b[0m globalForPrisma = globalThis \u001b[36mas\u001b[0m unknown \u001b[36mas\u001b[0m { prisma?: \u001b[33mPrismaClient\u001b[0m };\n\nImport map: aliased to relative './src/generated/prisma/client' inside of [project]/\n\n\nImport trace:\n  App Route:\n    ./src/lib/db.ts\n    ./src/app/api/health/route.ts\n\nhttps://nextjs.org/docs/messages/module-not-found\n\n\n    at <unknown> (https://nextjs.org/docs/messages/module-not-found)\nEstimated tokens: 288 -> 288 (saved 0)\nCommand run evidence: CMD-1794050390586-660bd199",
+          "evidenceItems": [
+            {
+              "id": "EVID-1794050390586-blw9o6",
+              "kind": "command",
+              "label": "Build command",
+              "passed": false,
+              "command": "npm run build",
+              "exitCode": 1,
+              "durationMs": 3003,
+              "cwd": "/workspace/yiming-smart-home",
+              "startedAt": 1794050387581,
+              "endedAt": 1794050390584,
+              "stdoutTail": "\n> yiming-smart-home@0.1.0 build\n> next build\n\n▲ Next.js 16.4.5 (Turbopack)\n✓ Running next.config.ts took 25ms\n\n  Creating an optimized production build ...",
+              "stderrTail": " \u001b[36mimport\u001b[0m { getEnvironment } \u001b[36mfrom\u001b[0m \u001b[32m\"./env\"\u001b[0m;\n  \u001b[90m4 |\u001b[0m\n  \u001b[90m5 |\u001b[0m \u001b[36mconst\u001b[0m globalForPrisma = globalThis \u001b[36mas\u001b[0m unknown \u001b[36mas\u001b[0m { prisma?: \u001b[33mPrismaClient\u001b[0m };\n\nImport map: aliased to relative './src/generated/prisma/client' inside of [project]/\n\n\nImport trace:\n  App Route:\n    ./src/lib/db.ts\n    ./src/app/api/health/route.ts\n\nhttps://nextjs.org/docs/messages/module-not-found\n\n\n    at <unknown> (https://nextjs.org/docs/messages/module-not-found)",
+              "outputHash": "3bf0570f5253b5dc4eb8d2d989d802e6c78d5cf0fd06d6ca2268cd0b887e794d",
+              "rawEstimatedTokens": 288,
+              "compressedEstimatedTokens": 288,
+              "savedEstimatedTokens": 0,
+              "compressionRatio": 1,
+              "commandRunEvidenceId": "CMD-1794050390586-660bd199",
+              "source": "override",
+              "detail": "provided by CLI/config override for build\nOutput kept raw: 34 lines, 288 estimated tokens\n[stdout]\n\n> yiming-smart-home@0.1.0 build\n> next build\n\n▲ Next.js 16.4.5 (Turbopack)\n✓ Running next.config.ts took 25ms\n\n  Creating an optimized production build ...\n[stderr]\n\n> Build error occurred\nError: Turbopack build failed with 1 error:\n./src/lib/db.ts:2:1\nError: Module not found: Can't resolve '@/generated/prisma/client'\n  \u001b[90m1 |\u001b[0m \u001b[36mimport\u001b[0m { \u001b[33mPrismaPg\u001b[0m } \u001b[36mfrom\u001b[0m \u001b[32m\"@prisma/adapter-pg\"\u001b[0m;\n\u001b[31m\u001b[1m>\u001b[0m \u001b[90m2 |\u001b[0m \u001b[36mimport\u001b[0m { \u001b[33mPrismaClient\u001b[0m } \u001b[36mfrom\u001b[0m \u001b[32m\"@/generated/prisma/client\"\u001b[0m;\n  \u001b[90m  |\u001b[0m \u001b[31m\u001b[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\u001b[0m\n  \u001b[90m3 |\u001b[0m \u001b[36mimport\u001b[0m { getEnvironment } \u001b[36mfrom\u001b[0m \u001b[32m\"./env\"\u001b[0m;\n  \u001b[90m4 |\u001b[0m\n  \u001b[90m5 |\u001b[0m \u001b[36mconst\u001b[0m globalForPrisma = globalThis \u001b[36mas\u001b[0m unknown \u001b[36mas\u001b[0m { prisma?: \u001b[33mPrismaClient\u001b[0m };\n\nImport map: aliased to relative './src/generated/prisma/client' inside of [project]/\n\n\nImport trace:\n  App Route:\n    ./src/lib/db.ts\n    ./src/app/api/health/route.ts\n\nhttps://nextjs.org/docs/messages/module-not-found\n\n\n    at <unknown> (https://nextjs.org/docs/messages/module-not-found)\nEstimated tokens: 288 -> 288 (saved 0)\nCommand run evidence: CMD-1794050390586-660bd199"
+            }
+          ],
+          "blockers": [
+            "Build failed: \n> Build error occurred\nError: Turbopack build failed with 1 error:\n./src/lib/db.ts:2:1\nError: Module not found: Can't resolve '@/generated/prisma/client'\n  \u001b[90m1 |\u001b[0m \u001b[36mimport\u001b[0m { \u001b[33mPrismaPg\u001b[0m } \u001b[36mfrom\u001b[0m \u001b[32m\"@prisma/adapter-pg\"\u001b[0m;\n\u001b[31m\u001b[1m>\u001b[0m \u001b[90m2 |\u001b[0m \u001b[36mimport\u001b[0m { \u001b[33mPrismaClient\u001b[0m } \u001b[36mfrom\u001b[0m \u001b[32m\"@/generated/prisma/client\"\u001b[0m;\n  \u001b[90m  |\u001b[0m \u001b[31m\u001b[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\u001b[0m\n  \u001b[90m3 |\u001b[0m \u001b[36mimport\u001b[0m { getEnvironment } \u001b[36mfrom\u001b[0m \u001b[32m\"./env\"\u001b[0m;\n  \u001b[90m4 |\u001b[0m\n  \u001b[90m5 |\u001b[0m \u001b[36mconst\u001b[0m globalForPrisma = globalThis \u001b[36mas\u001b[0m unknown \u001b[36mas\u001b[0m { prisma?: \u001b[33mPrismaClient\u001b[0m };\n\nImport map: aliased to relative './src/generated/prisma/client' inside of [project]/\n\n\nImport trace:\n  App Route:\n    ./src/lib/db.ts\n    ./src/app/api/health/route.ts\n\nhttps://nextjs.org/docs/messages/module-not-found\n\n\n    at <unknown> (https://nextjs.org/docs/messages/module-not-found)"
+          ],
+          "durationMs": 3006,
+          "evidenceRecordId": "GATE-G0-1794050390587-7vjo9y"
+        }
+      ],
+      "passed": false
+    }
+  ],
+  "commandTargetsSkipped": false,
+  "passed": false
+}

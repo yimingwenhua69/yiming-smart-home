@@ -1,0 +1,36 @@
+{
+  "id": "GATE-G0-1794046675003-vt31xk",
+  "gate": "G0",
+  "status": "FAILED",
+  "passed": false,
+  "evidence": "Build command: detected package.json \"build\" script\nOutput kept raw: 7 lines, 47 estimated tokens\n[stdout]\n\n> yiming-smart-home@0.1.0 build\n> next build\n[stderr]\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nsh: 1: next: not found\nEstimated tokens: 47 -> 47 (saved 0)\nCommand run evidence: CMD-1794046675002-ba3ef57e",
+  "evidenceItems": [
+    {
+      "id": "EVID-1794046675003-k6gzw4",
+      "kind": "command",
+      "label": "Build command",
+      "passed": false,
+      "command": "npm run build",
+      "exitCode": 127,
+      "durationMs": 151,
+      "cwd": "/workspace/scratch/28116400cf41/yiming-smart-home",
+      "startedAt": 1794046674850,
+      "endedAt": 1794046675001,
+      "stdoutTail": "\n> yiming-smart-home@0.1.0 build\n> next build\n",
+      "stderrTail": "npm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nsh: 1: next: not found",
+      "outputHash": "7410a47c3dcc4f5fd7df2c06f75225fac9368652fd96b574a2f372584bba69a5",
+      "rawEstimatedTokens": 47,
+      "compressedEstimatedTokens": 47,
+      "savedEstimatedTokens": 0,
+      "compressionRatio": 1,
+      "commandRunEvidenceId": "CMD-1794046675002-ba3ef57e",
+      "source": "package-script",
+      "detail": "detected package.json \"build\" script\nOutput kept raw: 7 lines, 47 estimated tokens\n[stdout]\n\n> yiming-smart-home@0.1.0 build\n> next build\n[stderr]\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nsh: 1: next: not found\nEstimated tokens: 47 -> 47 (saved 0)\nCommand run evidence: CMD-1794046675002-ba3ef57e"
+    }
+  ],
+  "blockers": [
+    "Build failed: npm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nsh: 1: next: not found"
+  ],
+  "durationMs": 153,
+  "createdAt": 1794046675003
+}

@@ -1,0 +1,35 @@
+{
+  "coverage": {
+    "minimum": 80,
+    "unit": "percent"
+  },
+  "retry": {
+    "bruteMaximum": 3,
+    "unit": "count"
+  },
+  "severity": {
+    "blockLevel": "HIGH"
+  },
+  "gates": {
+    "G3_build": {
+      "required": false,
+      "exitCode": 0
+    },
+    "G4_lint": {
+      "required": false,
+      "exitCode": 0
+    },
+    "G5_tests": {
+      "required": false,
+      "allPass": true
+    },
+    "G6_coverage": {
+      "required": false,
+      "minimum": 80
+    },
+    "G7_security": {
+      "required": false,
+      "noCritical": true
+    }
+  }
+}
