@@ -11,7 +11,7 @@ export default function Home() {
     <>
       <header className="site-header">
         <Link className="brand" href="/">奕明<span>智能家居</span></Link>
-        <nav aria-label="主导航"><a href="#solutions">智能生活</a><a href="#about">关于奕明</a></nav>
+        <nav aria-label="主导航"><Link href="/devices">设备库</Link><a href="#solutions">智能生活</a><a href="#about">关于奕明</a></nav>
       </header>
       <main>
         <section className="hero" aria-labelledby="hero-title">
