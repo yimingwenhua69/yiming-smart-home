@@ -1,0 +1,28 @@
+# SCALE Engine Configuration
+# Profile: Minimal / Trial — Trial and prototype mode: keep workflow artifacts and basic safety notes, with the lowest interruption level.
+# Customize below, or change profile with: scale config profile <id>
+
+version: 1
+profile: minimal
+locale: zh
+agentLanguage: zh
+
+project:
+  name: yiming-smart-home
+
+storage:
+  db: .scale/scale.db
+  events: .scale/events
+  artifacts: .scale/artifacts
+
+agents:
+  - name: codex
+  - name: claude-code
+  - name: cursor
+  - name: qoder
+  - name: cline
+  - name: windsurf
+
+logging:
+  level: info
+  file: .scale/scale.log

@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "executionId": "SHELL-RUN-0b78bc96",
+  "plan": {
+    "version": 1,
+    "planId": "SHELL-PLAN-1d714cf1",
+    "command": "node scripts/qa/health-smoke.mjs",
+    "cwd": "/workspace/yiming-smart-home",
+    "createdAt": "2026-11-07T11:53:21.122Z",
+    "risk": "read",
+    "blocked": false,
+    "requiresApproval": false,
+    "approved": false,
+    "reasons": [
+      "read-only or verification command"
+    ],
+    "saferAlternatives": [],
+    "parsed": {
+      "file": "node",
+      "args": [
+        "scripts/qa/health-smoke.mjs"
+      ]
+    }
+  },
+  "status": "passed",
+  "startedAt": "2026-11-07T11:53:21.124Z",
+  "endedAt": "2026-11-07T11:53:21.544Z",
+  "durationMs": 420,
+  "result": {
+    "exitCode": 0,
+    "stdout": "Health contract passed: HTTP 200, connected\nHealth contract passed: HTTP 503, unavailable\nProduction homepage passed: HTTP 200, Chinese content",
+    "stderr": ""
+  },
+  "evidence": {
+    "id": "CMD-1794052401546-d3f32d46",
+    "taskId": "general",
+    "gate": "agent-os-shell:read",
+    "source": "agent-os-smart-shell",
+    "command": "node scripts/qa/health-smoke.mjs",
+    "cwd": "/workspace/yiming-smart-home",
+    "status": "passed",
+    "exitCode": 0,
+    "durationMs": 420,
+    "startedAt": "2026-11-07T11:53:21.124Z",
+    "endedAt": "2026-11-07T11:53:21.544Z",
+    "compressorId": "scale-command-output-compressor/v1",
+    "compressionStrategy": "bounded-raw",
+    "summary": "Output kept raw: 3 lines, 36 estimated tokens",
+    "compressedOutput": "Health contract passed: HTTP 200, connected\nHealth contract passed: HTTP 503, unavailable\nProduction homepage passed: HTTP 200, Chinese content",
+    "rawTail": "Health contract passed: HTTP 200, connected\nHealth contract passed: HTTP 503, unavailable\nProduction homepage passed: HTTP 200, Chinese content",
+    "rawSha256": "31472b9e00d559480c66ecc47b6f2b8437ee87fddc0c6cfed85db9ceb1f80aa9",
+    "rawBytes": 143,
+    "compressedBytes": 143,
+    "rawEstimatedTokens": 36,
+    "compressedEstimatedTokens": 36,
+    "savedEstimatedTokens": 0,
+    "compressionRatio": 1,
+    "truncated": false,
+    "redactionApplied": false,
+    "sequence": 1
+  },
+  "events": {
+    "planned": {
+      "agentId": "agent-os-shell",
+      "sessionId": "SHELL-PLAN-1d714cf1",
+      "type": "shell.planned",
+      "summary": "Planned shell command (read)",
+      "metadata": {
+        "planId": "SHELL-PLAN-1d714cf1",
+        "command": "node scripts/qa/health-smoke.mjs",
+        "cwd": "/workspace/yiming-smart-home",
+        "blocked": false,
+        "reasons": [
+          "read-only or verification command"
+        ]
+      },
+      "id": "EXEC-1794052401122-6bb13241",
+      "ts": "2026-11-07T11:53:21.122Z"
+    },
+    "executed": {
+      "agentId": "agent-os-shell",
+      "sessionId": "SHELL-PLAN-1d714cf1",
+      "type": "shell.executed",
+      "summary": "Shell command passed: node scripts/qa/health-smoke.mjs",
+      "metadata": {
+        "planId": "SHELL-PLAN-1d714cf1",
+        "command": "node scripts/qa/health-smoke.mjs",
+        "status": "passed",
+        "exitCode": 0,
+        "evidenceId": "CMD-1794052401546-d3f32d46"
+      },
+      "id": "EXEC-1794052401546-ecbd3f85",
+      "ts": "2026-11-07T11:53:21.546Z"
+    }
+  }
+}

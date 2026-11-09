@@ -1,0 +1,30 @@
+{
+  "hooks": {
+    "pre-exec": [
+      {
+        "matcher": "",
+        "command": "scale gate pre-tool Bash --args-json \"$ARGS\" --session-id \"$SESSION_ID\""
+      }
+    ],
+    "post-exec": [
+      {
+        "matcher": "",
+        "command": "scale gate post-tool Bash --args-json \"$ARGS\" --exit-code \"$EXIT_CODE\" --session-id \"$SESSION_ID\""
+      }
+    ],
+    "PreToolUse": [
+      {
+        "type": "command",
+        "command": "node .claude/hooks/shield-pre-tool.cjs",
+        "timeout": 5000
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": "node .claude/hooks/shield-require-clean-worktree.cjs",
+        "timeout": 10000
+      }
+    ]
+  }
+}

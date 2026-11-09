@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "executionId": "SHELL-RUN-fd29d2ff",
+  "plan": {
+    "version": 1,
+    "planId": "SHELL-PLAN-526872b9",
+    "command": "npm run check:lint-deps",
+    "cwd": "/workspace/yiming-smart-home",
+    "createdAt": "2026-11-07T12:00:41.675Z",
+    "risk": "read",
+    "blocked": false,
+    "requiresApproval": false,
+    "approved": false,
+    "reasons": [
+      "read-only or verification command"
+    ],
+    "saferAlternatives": [],
+    "parsed": {
+      "file": "npm",
+      "args": [
+        "run",
+        "check:lint-deps"
+      ]
+    }
+  },
+  "status": "passed",
+  "startedAt": "2026-11-07T12:00:41.675Z",
+  "endedAt": "2026-11-07T12:00:44.801Z",
+  "durationMs": 3126,
+  "result": {
+    "exitCode": 0,
+    "stdout": "\n> yiming-smart-home@0.1.0 check:lint-deps\n> node scripts/qa/lint-dependency-smoke.mjs\n\nScoped minimatch 11 override: TypeScript ESLint project-service inclusion/exclusion passed",
+    "stderr": ""
+  },
+  "evidence": {
+    "id": "CMD-1794052844802-9fe82e28",
+    "taskId": "general",
+    "gate": "agent-os-shell:read",
+    "source": "agent-os-smart-shell",
+    "command": "npm run check:lint-deps",
+    "cwd": "/workspace/yiming-smart-home",
+    "status": "passed",
+    "exitCode": 0,
+    "durationMs": 3126,
+    "startedAt": "2026-11-07T12:00:41.675Z",
+    "endedAt": "2026-11-07T12:00:44.801Z",
+    "compressorId": "scale-command-output-compressor/v1",
+    "compressionStrategy": "bounded-raw",
+    "summary": "Output kept raw: 5 lines, 45 estimated tokens",
+    "compressedOutput": "> yiming-smart-home@0.1.0 check:lint-deps\n> node scripts/qa/lint-dependency-smoke.mjs\n\nScoped minimatch 11 override: TypeScript ESLint project-service inclusion/exclusion passed",
+    "rawTail": "\n> yiming-smart-home@0.1.0 check:lint-deps\n> node scripts/qa/lint-dependency-smoke.mjs\n\nScoped minimatch 11 override: TypeScript ESLint project-service inclusion/exclusion passed",
+    "rawSha256": "1cc07006b28c29f3c9885040dc200f7643ad2969559dcff45448de088617d295",
+    "rawBytes": 178,
+    "compressedBytes": 177,
+    "rawEstimatedTokens": 45,
+    "compressedEstimatedTokens": 45,
+    "savedEstimatedTokens": 0,
+    "compressionRatio": 1,
+    "truncated": false,
+    "redactionApplied": false,
+    "sequence": 1
+  },
+  "events": {
+    "planned": {
+      "agentId": "agent-os-shell",
+      "sessionId": "SHELL-PLAN-526872b9",
+      "type": "shell.planned",
+      "summary": "Planned shell command (read)",
+      "metadata": {
+        "planId": "SHELL-PLAN-526872b9",
+        "command": "npm run check:lint-deps",
+        "cwd": "/workspace/yiming-smart-home",
+        "blocked": false,
+        "reasons": [
+          "read-only or verification command"
+        ]
+      },
+      "id": "EXEC-1794052841675-a1277da4",
+      "ts": "2026-11-07T12:00:41.675Z"
+    },
+    "executed": {
+      "agentId": "agent-os-shell",
+      "sessionId": "SHELL-PLAN-526872b9",
+      "type": "shell.executed",
+      "summary": "Shell command passed: npm run check:lint-deps",
+      "metadata": {
+        "planId": "SHELL-PLAN-526872b9",
+        "command": "npm run check:lint-deps",
+        "status": "passed",
+        "exitCode": 0,
+        "evidenceId": "CMD-1794052844802-9fe82e28"
+      },
+      "id": "EXEC-1794052844803-c12c4711",
+      "ts": "2026-11-07T12:00:44.803Z"
+    }
+  }
+}

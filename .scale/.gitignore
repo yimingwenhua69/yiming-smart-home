@@ -1,0 +1,9 @@
+*.db
+*.db-journal
+events/
+checkpoints/
+evidence/
+state/
+hooks/*.sh
+
+cache/

@@ -1,0 +1,20 @@
+{
+  "id": "GATE-G3-1794052931386-h3a5uk",
+  "gate": "G3",
+  "status": "PASSED",
+  "passed": true,
+  "evidence": "TDD cycle: TDD cycle not strictly verified; provide --tdd-evidence or use --tdd-strict to enforce",
+  "evidenceItems": [
+    {
+      "id": "EVID-1794052931386-4hwd3p",
+      "kind": "manual",
+      "label": "TDD cycle",
+      "passed": true,
+      "detail": "TDD cycle not strictly verified; provide --tdd-evidence or use --tdd-strict to enforce",
+      "source": "tdd-gate"
+    }
+  ],
+  "blockers": [],
+  "durationMs": 0,
+  "createdAt": 1794052931386
+}

@@ -1,0 +1,9 @@
+[graphify extract] incremental scan of /workspace/yiming-smart-home
+[graphify extract] --code-only: skipping 39 non-code file(s) (34 docs, 0 papers, 5 images) — no LLM extraction
+[graphify extract] 4 code, 0 docs, 0 papers, 0 images changed; 93 unchanged; 0 deleted
+[graphify extract] 13 path(s) ignored by ignore rules (pruned directories count once): '.codegraph/', '.env', '.local/' (+10 more)
+[graphify extract] Review ignore rules if source is missing; --no-gitignore bypasses VCS ignore rules only; .graphifyignore and --exclude still apply.
+[graphify extract] 9 file(s) not classified (no supported extension or shebang), skipped: .cursorrules, .env.example, .gitignore, config.toml, events.jsonl, favicon.ico (+3 more)
+[graphify extract] AST extraction on 4 code files...
+  AST cache: 0/4 files served from cache (0%); 4 to extract
+[graphify extract] wrote /workspace/yiming-smart-home/graphify-out/graph.json — 218 nodes, 255 edges (no clustering)

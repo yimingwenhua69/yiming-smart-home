@@ -1,0 +1,104 @@
+{
+  "projectDir": "/workspace/yiming-smart-home",
+  "scaleDir": "/workspace/yiming-smart-home/.scale",
+  "configPath": "/workspace/yiming-smart-home/.scale/code-intelligence.json",
+  "configExists": false,
+  "projectIndexPath": "/workspace/yiming-smart-home/.codegraph",
+  "projectIndexExists": true,
+  "providers": [
+    {
+      "id": "codegraph",
+      "type": "external-cli",
+      "enabled": true,
+      "available": true,
+      "capabilities": [
+        "symbols",
+        "callers",
+        "callees",
+        "impact",
+        "context",
+        "summary",
+        "module-map"
+      ],
+      "reason": "command available: codegraph; project index found at .codegraph/",
+      "source": "https://github.com/colbymchenry/codegraph",
+      "installHint": "npx @colbymchenry/codegraph or npm i -g @colbymchenry/codegraph",
+      "projectInitHint": "codegraph init -i",
+      "serveCommand": "codegraph serve --mcp"
+    },
+    {
+      "id": "graphify",
+      "type": "artifact",
+      "enabled": true,
+      "available": true,
+      "capabilities": [
+        "symbols",
+        "callers",
+        "callees",
+        "impact",
+        "context",
+        "summary",
+        "module-map"
+      ],
+      "reason": "manifest found at graphify-out/graph.json",
+      "source": "https://github.com/safishamsi/graphify",
+      "installHint": "uv tool install graphify && graphify install --platform codex"
+    },
+    {
+      "id": "code-review-graph",
+      "type": "external-cli",
+      "enabled": true,
+      "available": false,
+      "capabilities": [
+        "symbols",
+        "callers",
+        "callees",
+        "impact",
+        "context",
+        "summary",
+        "module-map"
+      ],
+      "reason": "command not found: code-review-graph",
+      "source": "https://github.com/tirth8205/code-review-graph",
+      "installHint": "pip install code-review-graph",
+      "projectInitHint": "code-review-graph build",
+      "serveCommand": "code-review-graph serve"
+    },
+    {
+      "id": "gitnexus",
+      "type": "external-cli",
+      "enabled": true,
+      "available": false,
+      "capabilities": [
+        "symbols",
+        "callers",
+        "callees",
+        "impact",
+        "context",
+        "summary",
+        "module-map"
+      ],
+      "reason": "command not found: gitnexus",
+      "source": "https://github.com/abhigyanpatwari/GitNexus",
+      "installHint": "npm install -g gitnexus or npx gitnexus@latest analyze --index-only",
+      "projectInitHint": "gitnexus analyze --index-only",
+      "serveCommand": "gitnexus mcp"
+    }
+  ],
+  "fallback": {
+    "enabled": true,
+    "tools": [
+      "internal-scan",
+      "rg",
+      "read"
+    ],
+    "available": true,
+    "reason": "internal source scan fallback is available"
+  },
+  "availableProviderCount": 2,
+  "recommendations": [
+    "Run scale codegraph init to create .scale/code-intelligence.json.",
+    "Install code-review-graph from https://github.com/tirth8205/code-review-graph: pip install code-review-graph.",
+    "Install GitNexus from https://github.com/abhigyanpatwari/GitNexus: npm install -g gitnexus or npx gitnexus@latest analyze --index-only."
+  ]
+}

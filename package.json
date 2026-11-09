@@ -1,0 +1,49 @@
+{
+  "name": "yiming-smart-home",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "db:generate": "prisma generate",
+    "db:dev": "prisma dev --name yiming",
+    "db:validate": "prisma validate",
+    "test": "tsx --test tests/*.test.ts",
+    "test:coverage": "node --import tsx --experimental-test-coverage --test-coverage-include=src/lib/** --test-coverage-include=src/app/api/** --test-coverage-lines=80 --test-coverage-branches=80 --test-coverage-functions=80 --test-reporter=./scripts/qa/coverage-reporter.mjs --test tests/*.test.ts",
+    "test:e2e": "playwright test",
+    "typecheck": "tsc --noEmit",
+    "prebuild": "npm run db:generate",
+    "check:lint-deps": "node scripts/qa/lint-dependency-smoke.mjs"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "7.10.1",
+    "@prisma/client": "7.10.1",
+    "dotenv": "18.0.9",
+    "next": "16.4.5",
+    "pg": "8.23.1",
+    "prisma": "7.10.1",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.0",
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "^20",
+    "@types/pg": "8.23.1",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.5",
+    "tailwindcss": "^4",
+    "tsx": "4.23.15",
+    "typescript": "^5"
+  },
+  "overrides": {
+    "@typescript-eslint/typescript-estree@8.72.1": {
+      "minimatch": "11.0.1"
+    }
+  }
+}

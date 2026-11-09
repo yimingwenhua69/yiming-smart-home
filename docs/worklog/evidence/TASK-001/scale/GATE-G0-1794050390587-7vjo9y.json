@@ -1,0 +1,36 @@
+{
+  "id": "GATE-G0-1794050390587-7vjo9y",
+  "gate": "G0",
+  "status": "FAILED",
+  "passed": false,
+  "evidence": "Build command: provided by CLI/config override for build\nOutput kept raw: 34 lines, 288 estimated tokens\n[stdout]\n\n> yiming-smart-home@0.1.0 build\n> next build\n\n▲ Next.js 16.4.5 (Turbopack)\n✓ Running next.config.ts took 25ms\n\n  Creating an optimized production build ...\n[stderr]\n\n> Build error occurred\nError: Turbopack build failed with 1 error:\n./src/lib/db.ts:2:1\nError: Module not found: Can't resolve '@/generated/prisma/client'\n  \u001b[90m1 |\u001b[0m \u001b[36mimport\u001b[0m { \u001b[33mPrismaPg\u001b[0m } \u001b[36mfrom\u001b[0m \u001b[32m\"@prisma/adapter-pg\"\u001b[0m;\n\u001b[31m\u001b[1m>\u001b[0m \u001b[90m2 |\u001b[0m \u001b[36mimport\u001b[0m { \u001b[33mPrismaClient\u001b[0m } \u001b[36mfrom\u001b[0m \u001b[32m\"@/generated/prisma/client\"\u001b[0m;\n  \u001b[90m  |\u001b[0m \u001b[31m\u001b[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\u001b[0m\n  \u001b[90m3 |\u001b[0m \u001b[36mimport\u001b[0m { getEnvironment } \u001b[36mfrom\u001b[0m \u001b[32m\"./env\"\u001b[0m;\n  \u001b[90m4 |\u001b[0m\n  \u001b[90m5 |\u001b[0m \u001b[36mconst\u001b[0m globalForPrisma = globalThis \u001b[36mas\u001b[0m unknown \u001b[36mas\u001b[0m { prisma?: \u001b[33mPrismaClient\u001b[0m };\n\nImport map: aliased to relative './src/generated/prisma/client' inside of [project]/\n\n\nImport trace:\n  App Route:\n    ./src/lib/db.ts\n    ./src/app/api/health/route.ts\n\nhttps://nextjs.org/docs/messages/module-not-found\n\n\n    at <unknown> (https://nextjs.org/docs/messages/module-not-found)\nEstimated tokens: 288 -> 288 (saved 0)\nCommand run evidence: CMD-1794050390586-660bd199",
+  "evidenceItems": [
+    {
+      "id": "EVID-1794050390586-blw9o6",
+      "kind": "command",
+      "label": "Build command",
+      "passed": false,
+      "command": "npm run build",
+      "exitCode": 1,
+      "durationMs": 3003,
+      "cwd": "/workspace/yiming-smart-home",
+      "startedAt": 1794050387581,
+      "endedAt": 1794050390584,
+      "stdoutTail": "\n> yiming-smart-home@0.1.0 build\n> next build\n\n▲ Next.js 16.4.5 (Turbopack)\n✓ Running next.config.ts took 25ms\n\n  Creating an optimized production build ...",
+      "stderrTail": " \u001b[36mimport\u001b[0m { getEnvironment } \u001b[36mfrom\u001b[0m \u001b[32m\"./env\"\u001b[0m;\n  \u001b[90m4 |\u001b[0m\n  \u001b[90m5 |\u001b[0m \u001b[36mconst\u001b[0m globalForPrisma = globalThis \u001b[36mas\u001b[0m unknown \u001b[36mas\u001b[0m { prisma?: \u001b[33mPrismaClient\u001b[0m };\n\nImport map: aliased to relative './src/generated/prisma/client' inside of [project]/\n\n\nImport trace:\n  App Route:\n    ./src/lib/db.ts\n    ./src/app/api/health/route.ts\n\nhttps://nextjs.org/docs/messages/module-not-found\n\n\n    at <unknown> (https://nextjs.org/docs/messages/module-not-found)",
+      "outputHash": "3bf0570f5253b5dc4eb8d2d989d802e6c78d5cf0fd06d6ca2268cd0b887e794d",
+      "rawEstimatedTokens": 288,
+      "compressedEstimatedTokens": 288,
+      "savedEstimatedTokens": 0,
+      "compressionRatio": 1,
+      "commandRunEvidenceId": "CMD-1794050390586-660bd199",
+      "source": "override",
+      "detail": "provided by CLI/config override for build\nOutput kept raw: 34 lines, 288 estimated tokens\n[stdout]\n\n> yiming-smart-home@0.1.0 build\n> next build\n\n▲ Next.js 16.4.5 (Turbopack)\n✓ Running next.config.ts took 25ms\n\n  Creating an optimized production build ...\n[stderr]\n\n> Build error occurred\nError: Turbopack build failed with 1 error:\n./src/lib/db.ts:2:1\nError: Module not found: Can't resolve '@/generated/prisma/client'\n  \u001b[90m1 |\u001b[0m \u001b[36mimport\u001b[0m { \u001b[33mPrismaPg\u001b[0m } \u001b[36mfrom\u001b[0m \u001b[32m\"@prisma/adapter-pg\"\u001b[0m;\n\u001b[31m\u001b[1m>\u001b[0m \u001b[90m2 |\u001b[0m \u001b[36mimport\u001b[0m { \u001b[33mPrismaClient\u001b[0m } \u001b[36mfrom\u001b[0m \u001b[32m\"@/generated/prisma/client\"\u001b[0m;\n  \u001b[90m  |\u001b[0m \u001b[31m\u001b[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\u001b[0m\n  \u001b[90m3 |\u001b[0m \u001b[36mimport\u001b[0m { getEnvironment } \u001b[36mfrom\u001b[0m \u001b[32m\"./env\"\u001b[0m;\n  \u001b[90m4 |\u001b[0m\n  \u001b[90m5 |\u001b[0m \u001b[36mconst\u001b[0m globalForPrisma = globalThis \u001b[36mas\u001b[0m unknown \u001b[36mas\u001b[0m { prisma?: \u001b[33mPrismaClient\u001b[0m };\n\nImport map: aliased to relative './src/generated/prisma/client' inside of [project]/\n\n\nImport trace:\n  App Route:\n    ./src/lib/db.ts\n    ./src/app/api/health/route.ts\n\nhttps://nextjs.org/docs/messages/module-not-found\n\n\n    at <unknown> (https://nextjs.org/docs/messages/module-not-found)\nEstimated tokens: 288 -> 288 (saved 0)\nCommand run evidence: CMD-1794050390586-660bd199"
+    }
+  ],
+  "blockers": [
+    "Build failed: \n> Build error occurred\nError: Turbopack build failed with 1 error:\n./src/lib/db.ts:2:1\nError: Module not found: Can't resolve '@/generated/prisma/client'\n  \u001b[90m1 |\u001b[0m \u001b[36mimport\u001b[0m { \u001b[33mPrismaPg\u001b[0m } \u001b[36mfrom\u001b[0m \u001b[32m\"@prisma/adapter-pg\"\u001b[0m;\n\u001b[31m\u001b[1m>\u001b[0m \u001b[90m2 |\u001b[0m \u001b[36mimport\u001b[0m { \u001b[33mPrismaClient\u001b[0m } \u001b[36mfrom\u001b[0m \u001b[32m\"@/generated/prisma/client\"\u001b[0m;\n  \u001b[90m  |\u001b[0m \u001b[31m\u001b[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\u001b[0m\n  \u001b[90m3 |\u001b[0m \u001b[36mimport\u001b[0m { getEnvironment } \u001b[36mfrom\u001b[0m \u001b[32m\"./env\"\u001b[0m;\n  \u001b[90m4 |\u001b[0m\n  \u001b[90m5 |\u001b[0m \u001b[36mconst\u001b[0m globalForPrisma = globalThis \u001b[36mas\u001b[0m unknown \u001b[36mas\u001b[0m { prisma?: \u001b[33mPrismaClient\u001b[0m };\n\nImport map: aliased to relative './src/generated/prisma/client' inside of [project]/\n\n\nImport trace:\n  App Route:\n    ./src/lib/db.ts\n    ./src/app/api/health/route.ts\n\nhttps://nextjs.org/docs/messages/module-not-found\n\n\n    at <unknown> (https://nextjs.org/docs/messages/module-not-found)"
+  ],
+  "durationMs": 3006,
+  "createdAt": 1794050390587
+}

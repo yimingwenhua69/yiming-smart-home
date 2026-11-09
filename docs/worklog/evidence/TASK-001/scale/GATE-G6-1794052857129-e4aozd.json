@@ -1,0 +1,36 @@
+{
+  "id": "GATE-G6-1794052857129-e4aozd",
+  "gate": "G6",
+  "status": "FAILED",
+  "passed": false,
+  "evidence": "Coverage command: provided by CLI/config override for coverage\n       | \nℹ   api        |        |          |         | \nℹ    health    |        |          |         | \nℹ     route.ts | 100.00 |   100.00 |  100.00 | \nℹ  lib         |        |          |         | \nℹ   db.ts      |  92.31 |    92.31 |  100.00 | 13\nℹ   env.ts     | 100.00 |   100.00 |  100.00 | \nℹ -------------------------------------------------------------\nℹ all files    |  97.14 |    97.50 |  100.00 | \nℹ -------------------------------------------------------------\nℹ end of coverage report",
+  "evidenceItems": [
+    {
+      "id": "EVID-1794052857129-wok9nr",
+      "kind": "command",
+      "label": "Coverage command",
+      "passed": false,
+      "command": "npm run test:coverage",
+      "exitCode": 0,
+      "durationMs": 736,
+      "cwd": "/workspace/yiming-smart-home",
+      "startedAt": 1794052856391,
+      "endedAt": 1794052857127,
+      "stdoutTail": "       | \nℹ   api        |        |          |         | \nℹ    health    |        |          |         | \nℹ     route.ts | 100.00 |   100.00 |  100.00 | \nℹ  lib         |        |          |         | \nℹ   db.ts      |  92.31 |    92.31 |  100.00 | 13\nℹ   env.ts     | 100.00 |   100.00 |  100.00 | \nℹ -------------------------------------------------------------\nℹ all files    |  97.14 |    97.50 |  100.00 | \nℹ -------------------------------------------------------------\nℹ end of coverage report",
+      "stderrTail": "",
+      "outputHash": "8b975ffcfd78d6aed2d22759af47901db132c814e8fce55ebb48bde7ef8cbcc6",
+      "rawEstimatedTokens": 386,
+      "compressedEstimatedTokens": 386,
+      "savedEstimatedTokens": 0,
+      "compressionRatio": 1,
+      "commandRunEvidenceId": "CMD-1794052857128-dfd28e5c",
+      "source": "override",
+      "detail": "provided by CLI/config override for coverage\n       | \nℹ   api        |        |          |         | \nℹ    health    |        |          |         | \nℹ     route.ts | 100.00 |   100.00 |  100.00 | \nℹ  lib         |        |          |         | \nℹ   db.ts      |  92.31 |    92.31 |  100.00 | 13\nℹ   env.ts     | 100.00 |   100.00 |  100.00 | \nℹ -------------------------------------------------------------\nℹ all files    |  97.14 |    97.50 |  100.00 | \nℹ -------------------------------------------------------------\nℹ end of coverage report"
+    }
+  ],
+  "blockers": [
+    "Coverage percentage could not be parsed"
+  ],
+  "durationMs": 738,
+  "createdAt": 1794052857129
+}

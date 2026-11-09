@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "defaultProfile": "default",
+  "profiles": {
+    "default": {
+      "commands": {},
+      "services": [
+        "yiming-smart-home"
+      ]
+    },
+    "productSmoke": {
+      "commands": {
+        "smoke": "powershell -ExecutionPolicy Bypass -File scripts/qa/product-smoke.ps1"
+      },
+      "services": [
+        "yiming-smart-home"
+      ]
+    }
+  },
+  "services": [
+    {
+      "name": "yiming-smart-home",
+      "path": ".",
+      "type": "node",
+      "required": true
+    }
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "tmp",
+    "vendor"
+  ],
+  "policy": {
+    "mode": "minimal",
+    "optionalToolsWarnOnly": true,
+    "artifactGate": "off",
+    "artifactGateLevels": [
+      "M",
+      "L",
+      "CRITICAL"
+    ],
+    "engineeringStandardsGate": "warn",
+    "productSmokeGate": "warn",
+    "ecosystemReadinessGate": "warn",
+    "ecosystemReadinessPacks": [
+      "full"
+    ],
+    "ecosystemReadinessSkillScope": "required"
+  }
+}

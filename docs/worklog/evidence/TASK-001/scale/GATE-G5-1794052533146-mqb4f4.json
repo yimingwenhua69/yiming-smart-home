@@ -1,0 +1,34 @@
+{
+  "id": "GATE-G5-1794052533146-mqb4f4",
+  "gate": "G5",
+  "status": "PASSED",
+  "passed": true,
+  "evidence": "Test command: provided by CLI/config override for test\nOutput kept raw: 18 lines, 133 estimated tokens\n> yiming-smart-home@0.1.0 test\n> tsx --test tests/*.test.ts\n\n✔ accepts PostgreSQL connection strings (2.467553ms)\n✔ rejects missing configuration (1.081938ms)\n✔ rejects invalid URLs and other database protocols (0.627164ms)\n✔ health executes a real PostgreSQL query and reuses the client (104.876493ms)\n✔ health hides invalid environment configuration (1.201498ms)\n✔ health returns 503 when PostgreSQL is unavailable (26.865927ms)\nℹ tests 6\nℹ suites 0\nℹ pass 6\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 471.445056\nEstimated tokens: 133 -> 133 (saved 0)\nCommand run evidence: CMD-1794052533145-43f05416",
+  "evidenceItems": [
+    {
+      "id": "EVID-1794052533146-sidjjg",
+      "kind": "command",
+      "label": "Test command",
+      "passed": true,
+      "command": "npm test",
+      "exitCode": 0,
+      "durationMs": 680,
+      "cwd": "/workspace/yiming-smart-home",
+      "startedAt": 1794052532465,
+      "endedAt": 1794052533145,
+      "stdoutTail": "t\n> tsx --test tests/*.test.ts\n\n✔ accepts PostgreSQL connection strings (2.467553ms)\n✔ rejects missing configuration (1.081938ms)\n✔ rejects invalid URLs and other database protocols (0.627164ms)\n✔ health executes a real PostgreSQL query and reuses the client (104.876493ms)\n✔ health hides invalid environment configuration (1.201498ms)\n✔ health returns 503 when PostgreSQL is unavailable (26.865927ms)\nℹ tests 6\nℹ suites 0\nℹ pass 6\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 471.445056",
+      "stderrTail": "",
+      "outputHash": "5bfd0da48917385eb82ccd1b465fa9569d799c7a0af5c61d73166f1669846f9b",
+      "rawEstimatedTokens": 133,
+      "compressedEstimatedTokens": 133,
+      "savedEstimatedTokens": 0,
+      "compressionRatio": 1,
+      "commandRunEvidenceId": "CMD-1794052533145-43f05416",
+      "source": "override",
+      "detail": "provided by CLI/config override for test\nOutput kept raw: 18 lines, 133 estimated tokens\n> yiming-smart-home@0.1.0 test\n> tsx --test tests/*.test.ts\n\n✔ accepts PostgreSQL connection strings (2.467553ms)\n✔ rejects missing configuration (1.081938ms)\n✔ rejects invalid URLs and other database protocols (0.627164ms)\n✔ health executes a real PostgreSQL query and reuses the client (104.876493ms)\n✔ health hides invalid environment configuration (1.201498ms)\n✔ health returns 503 when PostgreSQL is unavailable (26.865927ms)\nℹ tests 6\nℹ suites 0\nℹ pass 6\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 471.445056\nEstimated tokens: 133 -> 133 (saved 0)\nCommand run evidence: CMD-1794052533145-43f05416"
+    }
+  ],
+  "blockers": [],
+  "durationMs": 681,
+  "createdAt": 1794052533146
+}
