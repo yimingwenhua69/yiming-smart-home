@@ -41,6 +41,18 @@ const compatibilityLabel = {
   unverified: "待核实"
 } as const;
 
+const organizationLabels = {
+  "hardware-manufacturer": "硬件制造商",
+  "brand-owner": "品牌运营方",
+  "ecosystem-provider": "生态服务商",
+  "iot-platform-provider": "IoT 平台服务商"
+} as const;
+const brandLabels = {
+  "hardware-brand": "硬件品牌",
+  "ecosystem-brand": "生态品牌",
+  "platform-brand": "平台品牌"
+} as const;
+
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const product = getProductBySlug(slug);
@@ -79,6 +91,8 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             <dl className="spec-list">
               <dt>品牌</dt><dd>{brand?.name ?? "待核实"}</dd>
               <dt>制造商</dt><dd>{manufacturer?.name ?? "待核实"}</dd>
+              <dt>品牌类型</dt><dd>{brand ? brandLabels[brand.brandType] : "待核实"}</dd>
+              <dt>组织角色</dt><dd>{manufacturer ? organizationLabels[manufacturer.organizationType] : "待核实"}</dd>
               <dt>产品型号</dt><dd>{models.map((item) => item.modelCode ?? "型号代码未公开").join(" / ")}</dd>
               <dt>硬件版本</dt><dd>{revisions.length ? revisions.map((revision) => revision.revisionCode).join(" / ") : "尚无独立核验记录"}</dd>
               <dt>品类</dt><dd>{category?.name ?? "待分类"}</dd>
