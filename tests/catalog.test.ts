@@ -25,7 +25,6 @@ test("every product links to an existing manufacturer, brand, category and model
 test("device model protocol, platform, capability and source relations must resolve", () => {
   const protocolIds = new Set<string>(protocols.map((item) => item.id));
   const capabilityIds = new Set<string>(capabilities.map((item) => item.id));
-  const platformIds = new Set<string>(["apple-home", "google-home", "alexa", "home-assistant", "harmony-home"]);
   const sourceIds = new Set<string>(sources.map((item) => item.id));
   for (const model of deviceModels) {
     for (const id of model.protocolIds) assert.ok(protocolIds.has(id), model.id + " protocol missing: " + id);
@@ -40,6 +39,9 @@ test("device model protocol, platform, capability and source relations must reso
       assert.ok(sourceIds.has(mapping.sourceId), model.id + " integration source missing: " + mapping.sourceId);
     }
     for (const spec of productSpecifications.filter((item) => item.deviceModelId === model.id)) assert.ok(sourceIds.has(spec.sourceId), model.id + " spec source missing: " + spec.sourceId);
+    for (const record of compatibilityRecords.filter((item) => item.deviceModelId === model.id)) assert.ok(sourceIds.has(record.sourceId), model.id + " compatibility source missing: " + record.sourceId);
+    for (const revision of hardwareRevisions.filter((item) => item.deviceModelId === model.id)) for (const sourceId of revision.sourceIds) assert.ok(sourceIds.has(sourceId), model.id + " revision source missing: " + sourceId);
+    for (const verification of deviceVerifications.filter((item) => item.deviceModelId === model.id)) for (const sourceId of verification.sourceIds) assert.ok(sourceIds.has(sourceId), model.id + " verification source missing: " + sourceId);
   }
 });
 
