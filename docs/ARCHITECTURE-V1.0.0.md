@@ -54,7 +54,7 @@
 - Source / Evidence：保留发布方、原始 URL、证据等级、适用区域和核验日期。
 - MediaAsset / ThreeDAsset / PhotometricProfile：图片、3D 和光度文件独立登记并执行权利审核。
 
-当前目录盘点：5 个制造商、5 个品牌、7 个分类、7 个协议、5 个平台、16 个能力、25 个产品、25 个设备型号、131 条独立规格、4 条官方平台兼容记录、1 个集成系统、14 条 SDK 型号映射、35 个来源。硬件版本与本工作室实测记录当前为 0；图片、3D、IES/LDT 资产当前为 0。
+当前目录盘点：5 个制造商、5 个品牌、7 个分类、7 个协议、5 个平台、16 个能力、25 个产品、25 个设备型号、131 条独立规格、5 条兼容 / 集成路径记录、2 个集成系统、14 条 SDK 型号映射、35 个来源。硬件版本与本工作室实测记录当前为 0；图片、3D、IES/LDT 资产当前为 0。
 
 Product 通过 modelIds 关联 DeviceModel；DeviceModel 通过 specificationIds、hardwareRevisionIds、compatibilityRecordIds 和 verificationIds 关联独立子实体。所有参数和兼容记录均保留来源关联。空记录不代表“不支持”或“已通过测试”。
 
