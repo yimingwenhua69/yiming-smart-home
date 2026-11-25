@@ -111,7 +111,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           const targetName = record.targetType === "platform"
             ? platforms.find((item) => item.id === record.targetId)?.name ?? record.targetId
             : integrationSystems.find((item) => item.id === record.targetId)?.name ?? record.targetId;
-          return <div className="source-item" key={record.id}><div><strong>{targetName} · {compatibilityLabel[record.status]}</strong><p>{record.features.join("、") || "未列明具体功能"}<br />{record.notes}<br />{record.evidenceLevel} · {record.checkedAt}</p></div><span>{record.targetType === "platform" ? "平台兼容" : "集成路径"}</span></div>;
+          return <div className="source-item" key={record.id}><div><strong>{targetName} · {compatibilityLabel[record.status]}</strong><p>{record.methodId ? "接入方式：" + (integrationMethods.find((method) => method.id === record.methodId)?.name ?? record.methodId) + "。 " : ""}{record.features.join("、") || "未列明具体功能"}<br />{record.notes}<br />{record.evidenceLevel} · {record.checkedAt}</p></div><span>{record.targetType === "platform" ? "平台兼容" : "集成路径"}</span></div>;
         })}</div> : <div className="panel"><p>尚无可独立引用的第三方平台兼容记录。设备可能存在网关桥接或私有集成路径，但在取得对应官方兼容清单或可复现测试前不作推断。</p></div>}
 
         <div className="section-heading" style={{ marginTop: 24 }}><h2>厂商 SDK / 集成设备映射</h2><p>内部映射 ID 仅用于对应集成程序，不等同于零售 SKU 或通用协议 modelId。</p></div>
