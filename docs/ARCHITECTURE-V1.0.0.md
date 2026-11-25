@@ -43,8 +43,9 @@
 ## 核心数据实体
 
 目标数据域：
-- Manufacturer / Brand
-- Product / DeviceModel / HardwareRevision
+- Manufacturer / Brand（独立实体，品牌归属制造商）
+- Product / DeviceModel（独立实体，通过稳定 ID 关联）
+- HardwareRevision（独立硬件版本实体，后续补充）
 - ProductSpecification / Capability
 - Protocol / Platform / Integration
 - CompatibilityRecord / DeviceVerification
@@ -53,7 +54,7 @@
 - Scene / AutomationSpecification
 - EngineeringGuide / KnowledgeArticle
 
-当前首批产品数据仍在单个 Product 记录中保存型号、规格和来源，尚未完成 Product 与 DeviceModel 的完全拆分。这是 1.0.0 后续数据迁移任务，禁止把现状描述为完整规范化模型。
+当前首批目录已将 Manufacturer、Brand、Product 和 DeviceModel 拆分为独立实体；Product 通过 modelIds 关联 DeviceModel，品牌通过 manufacturerId 关联制造商。硬件版本目前以 DeviceModel.hardwareRevision 可空字段预留，尚未拆成独立 HardwareRevision 实体；规格仍以内嵌、带 sourceId 的记录保存。
 
 ## 证据规则
 
