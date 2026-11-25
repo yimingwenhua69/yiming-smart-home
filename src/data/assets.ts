@@ -102,7 +102,7 @@ export function validateAssetRegistry() {
     if (!knownModels.has(asset.deviceModelId)) errors.push(asset.id + " references unknown device model " + asset.deviceModelId);
     if (!knownSources.has(asset.sourceId)) errors.push(asset.id + " references unknown source " + asset.sourceId);
     if (!asset.sourceUrl.startsWith("https://")) errors.push(asset.id + " source URL must use HTTPS");
-    if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(asset.checkedAt)) errors.push(asset.id + " checkedAt must be an ISO date");
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(asset.checkedAt)) errors.push(asset.id + " checkedAt must be an ISO date");
     if (asset.localPath && !asset.localPath.startsWith("/")) errors.push(asset.id + " localPath must be a site-root path");
     if ((asset.rightsStatus === "cleared" || asset.rightsStatus === "open-license") && !asset.license) errors.push(asset.id + " must record the license");
     if (asset.lifecycle === "current" && asset.rightsStatus !== "cleared" && asset.rightsStatus !== "open-license") errors.push(asset.id + " cannot be current without cleared rights");
