@@ -58,7 +58,18 @@ const protocolSchema = z.object({ id, name: z.string().min(1), family: z.string(
 const platformSchema = z.object({ id, name: z.string(), owner: z.string(), summary: z.string(), link: httpsUrl, integration: z.string(), cautions: z.array(z.string()) });
 const capabilitySchema = z.object({ id, name: z.string(), valueType: z.string() });
 
-export function validateCatalog() {
+export const catalogRegistry = {
+  sources, integrationSystems, manufacturers, brands, categories, products, deviceModels,
+  hardwareRevisions, productSpecifications, compatibilityRecords, deviceVerifications,
+  protocols, platforms, capabilities
+};
+
+export function validateCatalog(registry: typeof catalogRegistry = catalogRegistry) {
+  const {
+    sources, integrationSystems, manufacturers, brands, categories, products, deviceModels,
+    hardwareRevisions, productSpecifications, compatibilityRecords, deviceVerifications,
+    protocols, platforms, capabilities
+  } = registry;
   const errors: string[] = [];
   const ids = new Map<string,Set<string>>();
   const checkCollection=(name:string,items:readonly {id:string}[],schema:z.ZodType)=>{
