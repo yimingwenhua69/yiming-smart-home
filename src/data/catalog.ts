@@ -204,6 +204,28 @@ export const sources: CatalogSource[] = [
     notes: "用于核实官网当前列出的产品名称与产品分类；目录出现不等同于确认每一 SKU 的实时库存或完整技术参数。官网注明产品适用中国大陆地区。"
   },
   {
+    id: "xiaomi-smart-screen-10",
+    publisher: "小米科技有限责任公司",
+    title: "Xiaomi 智能家庭屏 10 官方产品参数页",
+    url: "https://www.mi.com/smart-screen/specs",
+    sourceType: "official-product-catalog",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方页面确认 Xiaomi 智能家庭屏 10 产品名称与产品页面存在；当前可读取页面未暴露准确硬件型号、通信协议和详细参数，因此本条目只登记官方目录事实。"
+  },
+  {
+    id: "xiaomi-multimode-gateway2",
+    publisher: "小米科技有限责任公司",
+    title: "小米智能多模网关 2 官方众筹产品页",
+    url: "https://m.mi.com/crowdfunding/proddetail/1000468",
+    sourceType: "official-product-catalog",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方众筹页列出蓝牙、蓝牙 Mesh、Zigbee、双频 Wi-Fi 和有线网口；众筹已结束，当前销售状态与具体零售 SKU 尚未核实。"
+  },
+  {
     id: "huawei-wholehome-cn",
     publisher: "华为终端有限公司",
     title: "华为鸿蒙智家官网",
@@ -612,7 +634,8 @@ export const protocols = [
   { id: "zwave", name: "Z-Wave", family: "低功耗 sub-GHz mesh", summary: "用于智能家居控制与传感的低功耗无线协议生态。", transport: "地区相关 sub-GHz 频段", topology: "Mesh 网络", sourceIds: [], cautions: ["不同地区频段版本不可混用。", "购买前必须核实中国大陆可用性、频段与认证。"] },
   { id: "knx", name: "KNX", family: "有线 / 无线楼宇控制标准", summary: "成熟的建筑控制生态，常用于照明、遮阳、暖通与场景控制。", transport: "TP、IP、RF、PL 等介质", topology: "总线线路与区域耦合拓扑，具体依工程设计", sourceIds: ["knx-association"], cautions: ["总线供电、拓扑、线缆、设备数量与调试需按 KNX 规范设计。"] },
   { id: "wifi", name: "Wi-Fi", family: "IP 无线网络", summary: "基于 IEEE 802.11 的无线局域网，常用于摄像机、家电、网关与高带宽设备。", transport: "IEEE 802.11 / IP", topology: "Infrastructure WLAN", sourceIds: [], cautions: ["需规划 2.4GHz / 5GHz、AP 覆盖、漫游、隔离与并发容量。", "Wi-Fi 接入不等于开放本地 API 或支持跨平台控制。"] },
-  { id: "ble", name: "Bluetooth LE", family: "短距离低功耗无线", summary: "常用于近场配网、低功耗传感和设备控制。", transport: "2.4GHz BLE", topology: "点对点、广播或 Mesh（取决于具体协议栈）", sourceIds: [], cautions: ["BLE 与 Bluetooth Mesh 是不同层次的技术概念。", "必须核实设备是否开放标准服务或仅使用私有 GATT。"] }
+  { id: "ble", name: "Bluetooth LE", family: "短距离低功耗无线", summary: "常用于近场配网、低功耗传感和设备控制。", transport: "2.4GHz BLE", topology: "点对点、广播或 Mesh（取决于具体协议栈）", sourceIds: [], cautions: ["BLE 与 Bluetooth Mesh 是不同层次的技术概念。", "必须核实设备是否开放标准服务或仅使用私有 GATT。"] },
+  { id: "bluetooth-mesh", name: "Bluetooth Mesh", family: "低功耗无线 mesh 网络", summary: "基于 Bluetooth Low Energy 承载的多对多 mesh 网络技术，常见于照明和智能家居设备组网。", transport: "Bluetooth Low Energy", topology: "Managed flooding mesh", sourceIds: ["xiaomi-multimode-gateway2"], cautions: ["Bluetooth Mesh 不等于普通 BLE 点对点连接。", "同一蓝牙芯片不代表设备一定实现 Bluetooth Mesh Profile。"] }
 ] as const;
 
 export const platforms = [
@@ -643,6 +666,9 @@ export const capabilities = [
 ] as const;
 
 const productModelSeeds: ProductModelSeed[] = [
+  { id: "xiaomi-multimode-gateway2", slug: "xiaomi-smart-multi-mode-gateway-2", name: "小米智能多模网关 2", model: null, manufacturerId: "xiaomi", brandId: "mi-home", categoryId: "gateway", summary: "小米官方众筹页列出的多协议智能网关，支持蓝牙、蓝牙 Mesh、Zigbee、双频 Wi-Fi 和有线网口；当前销售状态待核实。", protocolIds: ["wifi", "zigbee", "bluetooth-mesh"], capabilityIds: [], sourceIds: ["xiaomi-multimode-gateway2"], evidenceLevel: "official", verificationStatus: "needs-model-verification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "子设备协议", value: "蓝牙、蓝牙 Mesh、Zigbee", sourceId: "xiaomi-multimode-gateway2" }, { name: "无线网络", value: "双频 Wi-Fi", sourceId: "xiaomi-multimode-gateway2" }, { name: "有线网络", value: "有线网口", sourceId: "xiaomi-multimode-gateway2" }], limitations: ["来源为官方众筹页面，活动已结束；不能据此确认当前仍在售。", "官方页面未在本轮核实零售型号代码、完整射频参数、最大子设备数量或 Matter / Apple Home 兼容性。", "众筹页产品介绍不等同于本工作室实测。"] },
+  { id: "xiaomi-smart-screen-10", slug: "xiaomi-smart-home-screen-10", name: "Xiaomi 智能家庭屏 10", model: null, manufacturerId: "xiaomi", brandId: "mi-home", categoryId: "switch", summary: "小米官网列出的智能家庭屏产品，可作为智能家居交互屏档案入口；当前只确认官方产品名称。", protocolIds: [], capabilityIds: [], sourceIds: ["xiaomi-smart-screen-10"], evidenceLevel: "official", verificationStatus: "official-listing", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["当前可读取的官方参数页未暴露准确硬件型号、无线协议、网关角色和第三方平台兼容细节。", "不得仅凭家庭屏产品名称推断其具备 Zigbee、Thread、Matter 或 BLE 网关功能。"] },
+
   { id: "aqara-m3", slug: "aqara-hub-m3", name: "方舟智慧中枢 M3", model: "ZHWG24LM", manufacturerId: "aqara", brandId: "aqara", categoryId: "gateway", summary: "Aqara 官方参数页确认的家庭中枢网关，支持 Wi-Fi、Zigbee 与 Thread 等无线连接。", protocolIds: ["wifi", "zigbee", "thread"], capabilityIds: [], sourceIds: ["aqara-catalog-cn", "aqara-m3-spec"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "ZHWG24LM", sourceId: "aqara-m3-spec" }, { name: "产品尺寸", value: "105 × 105 × 36.5 mm", sourceId: "aqara-m3-spec" }, { name: "电源输入", value: "5 V ⎓ 2 A", sourceId: "aqara-m3-spec" }, { name: "PoE 输入", value: "48 V ⎓ 0.27 A", sourceId: "aqara-m3-spec" }, { name: "工作温度", value: "−10–50 °C", sourceId: "aqara-m3-spec" }, { name: "工作湿度", value: "0–95% RH，无冷凝", sourceId: "aqara-m3-spec" }, { name: "无线协议", value: "Wi-Fi IEEE 802.11 a/b/g/n/ac 2.4/5 GHz；Zigbee / Thread IEEE 802.15.4；Bluetooth 5.1", sourceId: "aqara-m3-spec" }], limitations: ["官方参数页列示数据；未据此推断该中枢对所有第三方设备开放全部能力。", "不同功能可能要求其他 Aqara 网关、设备固件或特定软件版本。"] },
   { id: "aqara-m200", compatibilityRecords: [{ targetType: "platform", targetId: "apple-home", status: "supported", evidenceLevel: "official", sourceId: "aqara-m200-support", features: ["HomeKit 二维码接入", "Matter 二维码接入"], checkedAt: "2026-11-26", notes: "官方支持页明确列出 Apple Home 接入方式；HomeKit 与 Matter 接入的功能存在差异。" }],  slug: "aqara-hub-m200", name: "网关 M200", model: "M200", manufacturerId: "aqara", brandId: "aqara", categoryId: "gateway", summary: "Aqara 官方支持资料确认的 Matter 控制器与 Thread 边界路由器，可连接 Zigbee 和 Thread 子设备。", protocolIds: ["wifi", "zigbee", "thread", "matter"], capabilityIds: [], sourceIds: ["aqara-catalog-cn", "aqara-m200-support"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "网络连接", value: "PoE 有线；双频 Wi-Fi 6（2.4GHz / 5GHz），WPA3", sourceId: "aqara-m200-support" }, { name: "中枢角色", value: "Matter 控制器、Thread 边界路由器", sourceId: "aqara-m200-support" }, { name: "子设备协议", value: "Zigbee、Thread", sourceId: "aqara-m200-support" }, { name: "Apple Home 接入", value: "支持 HomeKit 二维码与 Matter 二维码两种方式", sourceId: "aqara-m200-support" }, { name: "实验室连接测试", value: "40 个 Zigbee + 40 个 Thread 子设备同时连接（厂商实验室数据）", sourceId: "aqara-m200-support" }], limitations: ["HomeKit 与 Matter 二维码接入的功能存在差异：官方支持页说明空调模式仅在 Matter 接入第三方生态时可用；Matter 接入目前不支持 Security 功能。", "40 + 40 子设备数据为厂商实验室测试，不应视为所有现场网络条件下的性能保证。", "本记录尚未核实 M200 的独立零售硬件 SKU 代码，M200 为官方产品名称。"] },
   { id: "aqara-fp1e", compatibilityRecords: [{ targetType: "integration", targetId: "aqara-matter-bridge", status: "partial", evidenceLevel: "official", sourceId: "aqara-fp1e-support", features: ["经兼容 Aqara 网关桥接 Matter 后接入第三方生态"], checkedAt: "2026-11-26", notes: "该路径依赖兼容 Aqara 网关与固件；不能推断为 FP1E 原生 Matter 设备或全平台功能等价。" }],integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.sensor_occupy.agl1", sourceId: "aqara-open-platform-device-list" }],  slug: "aqara-fp1e", name: "AI 智能存在传感器 FP1E", model: "RTCZCGQ13LM", manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "采用 Zigbee 无线连接的 AI 存在传感器；第三方生态接入需通过支持的 Aqara 网关桥接。", protocolIds: ["zigbee"], capabilityIds: ["occupancy"], sourceIds: ["aqara-catalog-cn", "aqara-fp1e-spec", "aqara-fp1e-support"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "RTCZCGQ13LM", sourceId: "aqara-fp1e-spec" }, { name: "产品尺寸", value: "57 × 50 × 37 mm", sourceId: "aqara-fp1e-spec" }, { name: "无线连接", value: "Zigbee", sourceId: "aqara-fp1e-spec" }, { name: "额定输入", value: "5 V / 1 A", sourceId: "aqara-fp1e-spec" }, { name: "电源接口", value: "USB-A", sourceId: "aqara-fp1e-spec" }, { name: "工作温度", value: "−10–40 °C", sourceId: "aqara-fp1e-spec" }, { name: "工作湿度", value: "0–95% RH，无冷凝", sourceId: "aqara-fp1e-spec" }], limitations: ["需要支持 Zigbee 3.0 的 Aqara 网关完成添加。", "第三方生态支持路径为经 Aqara 网关桥接 Matter；不代表 FP1E 可直接独立加入所有第三方平台。", "兼容网关型号和固件以官方支持页为准。"] },
