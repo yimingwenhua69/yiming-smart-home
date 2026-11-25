@@ -110,7 +110,7 @@ export const integrationSystems: IntegrationSystem[] = [
     name: "Tuya Cloud Development API",
     kind: "platform-api",
     owner: "Tuya Developer Platform",
-    documentationUrl: "https://developer.tuya.com/cn/docs/im-project-services/Cloud-self-development",
+    documentationUrl: "https://developer.tuya.com/cn/docs/im-project-services/Cloud-self-development?id=Kb3o4z4ll4v9d",
     notes: "提供账号、设备、应用和控制能力的云端 API 路径；需要授权和云服务，不应描述为本地 LAN API。"
   }
 ];
@@ -275,7 +275,7 @@ export const sources: CatalogSource[] = [
     id: "tuya-cloud-self-development",
     publisher: "Tuya Developer Platform",
     title: "涂鸦云对接自助开发文档",
-    url: "https://developer.tuya.com/cn/docs/im-project-services/Cloud-self-development",
+    url: "https://developer.tuya.com/cn/docs/im-project-services/Cloud-self-development?id=Kb3o4z4ll4v9d",
     sourceType: "official-specification",
     evidenceLevel: "official",
     checkedAt: "2026-11-26",
@@ -286,7 +286,7 @@ export const sources: CatalogSource[] = [
     id: "tuya-smart-app-pairing",
     publisher: "Tuya Developer Platform",
     title: "Smart App SDK 设备配网官方文档",
-    url: "https://developer.tuya.com/cn/docs/app-development/network-pairing",
+    url: "https://developer.tuya.com/cn/docs/app-development/network-pairing?id=Kas9qmmog5ctw",
     sourceType: "official-specification",
     evidenceLevel: "official",
     checkedAt: "2026-11-26",
