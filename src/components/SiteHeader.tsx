@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const links = [
   { href: "/products/", label: "产品库" },
+  { href: "/manufacturers/", label: "厂商品牌" },
   { href: "/protocols/", label: "协议生态" },
   { href: "/platforms/", label: "平台集成" },
   { href: "/lighting/", label: "灯光技术" },
