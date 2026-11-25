@@ -20,16 +20,16 @@
 ## 技术栈
 
 - Next.js 16 App Router、React 19、TypeScript strict、Tailwind CSS 4。
-- 公开知识页面使用静态数据与静态路由预生成；产品详情通过 \`generateStaticParams\` 预生成。
+- 公开知识页面使用静态数据与静态路由预生成；产品详情通过 `generateStaticParams` 预生成。
 - 客户端交互限于搜索、分类筛选、收藏、产品对比和灯光初步估算。
-- 产品目录位于 \`src/data/catalog.ts\`；知识内容位于 \`src/data/knowledge.ts\`。
-- \`src/lib/catalog-schema.ts\` 使用 Zod 校验数据结构和实体关系。
+- 产品目录位于 `src/data/catalog.ts`；知识内容位于 `src/data/knowledge.ts`。
+- `src/lib/catalog-schema.ts` 使用 Zod 校验数据结构和实体关系。
 - PostgreSQL / Prisma 保留给历史健康检查和后续可选服务，不参与公开产品页、搜索、筛选或对比。
 - 旧版数据库设备 API 返回 410，不再公开过去的通用占位设备数据。
 
 ## 部署决策
 
-当前没有配置或发布生产部署。Next.js 项目仍保留动态 \`/api/health\` Route Handler，因此不能直接宣称已支持纯静态导出或仅靠 Cloudflare Static Assets 完成部署。
+当前没有配置或发布生产部署。Next.js 项目仍保留动态 `/api/health` Route Handler，因此不能直接宣称已支持纯静态导出或仅靠 Cloudflare Static Assets 完成部署。
 
 首选候选为 Cloudflare Workers + OpenNext 适配器；上线前必须完成：
 - 固定并验证 OpenNext / Wrangler 版本与 lockfile。
@@ -42,19 +42,21 @@
 
 ## 核心数据实体
 
-目标数据域：
-- Manufacturer / Brand（独立实体，品牌归属制造商）
-- Product / DeviceModel（独立实体，通过稳定 ID 关联）
-- HardwareRevision（独立硬件版本实体，后续补充）
-- ProductSpecification / Capability
-- Protocol / Platform / Integration
-- CompatibilityRecord / DeviceVerification
-- Source / Evidence
-- MediaAsset / ThreeDAsset / PhotometricProfile
-- Scene / AutomationSpecification
-- EngineeringGuide / KnowledgeArticle
+当前数据实体已拆分为：
 
-当前首批目录已将 Manufacturer、Brand、Product 和 DeviceModel 拆分为独立实体；Product 通过 modelIds 关联 DeviceModel，品牌通过 manufacturerId 关联制造商。硬件版本目前以 DeviceModel.hardwareRevision 可空字段预留，尚未拆成独立 HardwareRevision 实体；规格仍以内嵌、带 sourceId 的记录保存。
+- Manufacturer / Brand：品牌归属制造商，二者独立登记。
+- Product / DeviceModel：产品与准确设备型号分开，使用稳定 ID 关联。
+- HardwareRevision：硬件版本独立实体；当前记录数为 0，未确认的版本不虚构。
+- ProductSpecification：每条参数独立记录，绑定准确设备型号、来源、证据等级与核验日期。
+- CompatibilityRecord：平台兼容和集成路径独立记录；不根据协议名称推断兼容。
+- DeviceVerification：实验室 / 现场实测独立记录；没有执行的测试保持为空。
+- IntegrationSystem / IntegrationModelMapping：平台或厂商 SDK 与其内部设备标识分开记录。
+- Source / Evidence：保留发布方、原始 URL、证据等级、适用区域和核验日期。
+- MediaAsset / ThreeDAsset / PhotometricProfile：图片、3D 和光度文件独立登记并执行权利审核。
+
+当前目录盘点：5 个制造商、5 个品牌、7 个分类、7 个协议、5 个平台、15 个能力、25 个产品、25 个设备型号、65 条独立规格、4 条官方平台兼容记录、1 个集成系统、14 条 SDK 型号映射、23 个来源。硬件版本与本工作室实测记录当前为 0；图片、3D、IES/LDT 资产当前为 0。
+
+Product 通过 modelIds 关联 DeviceModel；DeviceModel 通过 specificationIds、hardwareRevisionIds、compatibilityRecordIds 和 verificationIds 关联独立子实体。所有参数和兼容记录均保留来源关联。空记录不代表“不支持”或“已通过测试”。
 
 ## 证据规则
 
