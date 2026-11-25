@@ -436,6 +436,138 @@ export const sources: CatalogSource[] = [
     checkedAt: "2026-11-26",
     region: "GLOBAL",
     notes: "DALI-2、D4i 与照明控制标准官方来源。"
+  },
+  {
+    id: "aqara-motion-t1-spec",
+    publisher: "Aqara / 深圳绿米联创科技有限公司",
+    title: "Aqara 人体传感器 T1 产品参数",
+    url: "https://www.aqara.cn/d17_spec",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方参数页列出型号 RTCGQ12LM、Zigbee 3.0、CR2450、7 m 探测距离和 170° 探测角度。"
+  },
+  {
+    id: "aqara-motion-e1-spec",
+    publisher: "Aqara / 深圳绿米联创科技有限公司",
+    title: "Aqara 人体传感器 E1 产品参数",
+    url: "https://www.aqara.cn/Motion-Sensor-E1_spec.html",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方参数页列出型号 RTCGO15LM、Zigbee 3.0、CR2450、7 m 探测距离和 170° 探测角度。"
+  },
+  {
+    id: "aqara-door-window-e1-spec",
+    publisher: "Aqara / 深圳绿米联创科技有限公司",
+    title: "Aqara 门窗传感器 E1 产品参数",
+    url: "https://www.aqara.cn/cn/Door%20and%20Window%20Sensor%20E1_spec",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方参数页列出型号 MCCGQ14LM、Zigbee 3.0、CR1632、41×22×11 mm 和最大 22 mm 感应距离。"
+  },
+  {
+    id: "aqara-door-window-p1-spec",
+    publisher: "Aqara / 深圳绿米联创科技有限公司",
+    title: "Aqara 门窗传感器 P1 产品参数",
+    url: "https://www.aqara.cn/cn/aqara-door-and-windows-sensor-p1_spec",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方参数页列出型号 MCCGQ13LM、Zigbee 3.0、CR123A、主体与副体尺寸及环境参数。"
+  },
+  {
+    id: "aqara-door-window-p1-support",
+    publisher: "Aqara / 深圳绿米联创科技有限公司",
+    title: "Aqara 门窗传感器 P1 产品支持",
+    url: "https://aqara.cn/cn/aqara-door-and-windows-sensor-p1_support",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方支持页说明 Zigbee 3.0 网关要求、安装距离 10/20/30 mm 档位和误差条件。"
+  },
+  {
+    id: "aqara-temperature-humidity-t1-spec",
+    publisher: "Aqara / 深圳绿米联创科技有限公司",
+    title: "Aqara 温湿度传感器 T1 产品参数",
+    url: "https://www.aqara.cn/d20_spec",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方参数页列出型号 WSDCGQ12LM、Zigbee 3.0、温湿度与气压测量范围和精度。"
+  },
+  {
+    id: "aqara-temperature-humidity-t1-support",
+    publisher: "Aqara / 深圳绿米联创科技有限公司",
+    title: "Aqara 温湿度传感器 T1 产品支持",
+    url: "https://www.aqara.cn/d20_support",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方支持页说明网关连接要求、上报周期与工作环境；其温度上限与参数页存在差异，需保留来源差异。"
+  },
+  {
+    id: "aqara-water-leak-t1-spec",
+    publisher: "Aqara / 深圳绿米联创科技有限公司",
+    title: "Aqara 水浸传感器 T1 产品参数",
+    url: "https://www.aqara.cn/d19_spec",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方参数页列出型号 SJCGQ12LM、Zigbee 3.0、CR2032 和环境参数。"
+  },
+  {
+    id: "aqara-water-leak-t1-support",
+    publisher: "Aqara / 深圳绿米联创科技有限公司",
+    title: "Aqara 水浸传感器 T1 产品支持",
+    url: "https://www.aqara.cn/d19_support",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方支持页列出 IP68 防护、0.5 mm 水位触发及约两年电池寿命的条件说明。"
+  },
+  {
+    id: "aqara-light-sensor-t1-spec",
+    publisher: "Aqara / 深圳绿米联创科技有限公司",
+    title: "Aqara 光照传感器 T1 产品参数",
+    url: "https://www.aqara.cn/cn/d16_spec",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方参数页列出型号 GZCGQ11LM、Zigbee 3.0、0–80000 lux 检测范围和按光源条件区分的精度。"
+  },
+  {
+    id: "aqara-vibration-t1-spec",
+    publisher: "Aqara / 深圳绿米联创科技有限公司",
+    title: "Aqara 动静贴 T1 产品参数",
+    url: "https://www.aqara.cn/d30_spec",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方参数页列出型号 DJT12LM、Zigbee、CR2032、36×36×9 mm 和环境参数。"
+  },
+  {
+    id: "aqara-vibration-t1-support",
+    publisher: "Aqara / 深圳绿米联创科技有限公司",
+    title: "Aqara 动静贴 T1 产品支持",
+    url: "https://aqara.cn/cn/d30_support",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方支持页说明可在 App 调节灵敏度，持续移动事件上报间隔可配置，并列出设备离线与重置注意事项。"
   }
 ];
 
@@ -498,7 +630,8 @@ export const capabilities = [
   { id: "curtain-position", name: "窗帘位置", valueType: "percentage" },
   { id: "scene", name: "场景触发", valueType: "scene" },
   { id: "alarm", name: "安全报警", valueType: "boolean" },
-  { id: "air-quality", name: "空气质量", valueType: "number" }
+  { id: "air-quality", name: "空气质量", valueType: "number" },
+  { id: "vibration", name: "振动 / 移动事件", valueType: "boolean" }
 ] as const;
 
 const productModelSeeds: ProductModelSeed[] = [
@@ -516,16 +649,16 @@ const productModelSeeds: ProductModelSeed[] = [
   { id: "orvibo-w10", slug: "orvibo-curtain-motor-w10", name: "直流超静音窗帘电机", model: "W10", manufacturerId: "orvibo", brandId: "orvibo", categoryId: "curtain", summary: "欧瑞博官方安装参数页面列出 W10 电机及其额定参数。", protocolIds: ["wifi"], capabilityIds: ["curtain-position"], sourceIds: ["orvibo-curtain-install"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "产品规格", value: "40 × 40 × 320 mm", sourceId: "orvibo-curtain-install" }, { name: "额定功率", value: "36 W", sourceId: "orvibo-curtain-install" }, { name: "额定输入", value: "100–240 V~，50/60 Hz", sourceId: "orvibo-curtain-install" }, { name: "额定电流", value: "1.3 A", sourceId: "orvibo-curtain-install" }, { name: "额定扭矩", value: "1.0 N·m", sourceId: "orvibo-curtain-install" }, { name: "额定转速", value: "118 rpm", sourceId: "orvibo-curtain-install" }, { name: "工作温度", value: "−0–50 °C（原文标注）", sourceId: "orvibo-curtain-install" }, { name: "无线频率", value: "Wi-Fi 2.4 GHz", sourceId: "orvibo-curtain-install" }, { name: "质保", value: "二年（官网页面标注）", sourceId: "orvibo-curtain-install" }], limitations: ["以上为厂商页面列示的理论参数，不代表本工作室实测。安装前需核对窗帘重量、轨道长度、供电、行程和控制方案。"] },
   { id: "orvibo-w13-w14", slug: "orvibo-curtain-track-w13-w14", name: "免测量可伸缩导轨", model: "W13 / W14", manufacturerId: "orvibo", brandId: "orvibo", categoryId: "accessory", summary: "欧瑞博官方安装参数页面列出的窗帘伸缩导轨。", protocolIds: [], capabilityIds: [], sourceIds: ["orvibo-curtain-install"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "可调长度", value: "W13：1.7–3 m；W14：2.2–4 m", sourceId: "orvibo-curtain-install" }, { name: "负载", value: "20 kg，单边 10 kg", sourceId: "orvibo-curtain-install" }, { name: "轨道壁厚", value: "1.3 mm", sourceId: "orvibo-curtain-install" }, { name: "导轨宽度", value: "63.2 mm", sourceId: "orvibo-curtain-install" }], limitations: ["厂商页面理论参数；适配电机、安装跨度和窗帘类型需现场复核。"] },
   { id: "orvibo-mixpad-c", slug: "orvibo-mixpad-c", name: "MixPad C 超级智能开关", model: "MixPad C", manufacturerId: "orvibo", brandId: "orvibo", categoryId: "switch", summary: "欧瑞博官方参数页面列出的 MixPad C 超级智能开关。", protocolIds: ["wifi"], capabilityIds: ["on-off", "scene"], sourceIds: ["orvibo-curtain-install"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "处理器", value: "四核心 ARM Cortex-A35", sourceId: "orvibo-curtain-install" }, { name: "显示屏", value: "4 英寸，480 × 480", sourceId: "orvibo-curtain-install" }, { name: "供电", value: "220 V 零火线供电", sourceId: "orvibo-curtain-install" }, { name: "无线", value: "Wi-Fi、蓝牙（页面未明确蓝牙版本）", sourceId: "orvibo-curtain-install" }], limitations: ["官网页面未列明无线协议版本、开放 API、Matter 认证及跨平台兼容情况；不得自行推断。"] },
-  { id: "aqara-motion-sensor-t1", slug: "aqara-motion-sensor-t1", name: "人体传感器 T1", model: null, manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 当前产品目录列出的 T1 人体移动传感器；SDK 支持清单提供其设备映射 ID。", integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.motion.agl02", sourceId: "aqara-open-platform-device-list" }], protocolIds: [], capabilityIds: ["occupancy"], sourceIds: ["aqara-catalog-cn", "aqara-open-platform-device-list"], evidenceLevel: "official", verificationStatus: "needs-model-verification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["lumi.motion.agl02 是 Aqara SDK 设备映射 ID，不是零售 SKU 或通用 Zigbee modelId。", "零售型号代码、无线参数、供电、感应角度和平台兼容仍待对应说明书核实。"] },
-  { id: "aqara-motion-sensor-e1", slug: "aqara-motion-sensor-e1", name: "人体传感器 E1", model: null, manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 产品目录列出的人体移动传感器 E1；SDK 清单提供设备映射 ID。", integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.motion.acn001", sourceId: "aqara-open-platform-device-list" }], protocolIds: [], capabilityIds: ["occupancy"], sourceIds: ["aqara-catalog-cn", "aqara-open-platform-device-list"], evidenceLevel: "official", verificationStatus: "needs-model-verification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["SDK 映射 ID 不是零售型号代码；具体硬件版本和无线参数待核实。"] },
-  { id: "aqara-door-window-sensor-e1", slug: "aqara-door-window-sensor-e1", name: "门窗传感器 E1", model: null, manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 产品目录列出的门窗传感器 E1；SDK 清单提供设备映射 ID。", integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.magnet.acn001", sourceId: "aqara-open-platform-device-list" }], protocolIds: [], capabilityIds: ["contact"], sourceIds: ["aqara-catalog-cn", "aqara-open-platform-device-list"], evidenceLevel: "official", verificationStatus: "needs-model-verification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["SDK 映射 ID 不是零售型号代码；无线参数、供电、间距和平台兼容待核实。"] },
-  { id: "aqara-door-window-sensor-p1", slug: "aqara-door-window-sensor-p1", name: "门窗传感器 P1", model: null, manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 产品目录列出的门窗传感器 P1；SDK 清单提供设备映射 ID。", integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.magnet.ac01", sourceId: "aqara-open-platform-device-list" }], protocolIds: [], capabilityIds: ["contact"], sourceIds: ["aqara-catalog-cn", "aqara-open-platform-device-list"], evidenceLevel: "official", verificationStatus: "needs-model-verification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["SDK 映射 ID 不是零售型号代码；不能与 Aqara 人体传感器 P1 的型号或参数混淆。"] },
-  { id: "aqara-temperature-humidity-t1", slug: "aqara-temperature-humidity-sensor-t1", name: "温湿度传感器 T1", model: null, manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 产品目录列出的温湿度传感器 T1；SDK 清单提供设备映射 ID。", integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.sensor_ht.agl02", sourceId: "aqara-open-platform-device-list" }], protocolIds: [], capabilityIds: ["temperature", "humidity"], sourceIds: ["aqara-catalog-cn", "aqara-open-platform-device-list"], evidenceLevel: "official", verificationStatus: "needs-model-verification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["SDK 映射 ID 不是零售型号代码；测量精度、刷新周期、供电和无线参数待核实。"] },
-  { id: "aqara-water-leak-t1", slug: "aqara-water-leak-sensor-t1", name: "水浸传感器 T1", model: null, manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 产品目录列出的水浸传感器 T1；SDK 清单提供设备映射 ID。", integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.flood.agl02", sourceId: "aqara-open-platform-device-list" }], protocolIds: [], capabilityIds: ["alarm"], sourceIds: ["aqara-catalog-cn", "aqara-open-platform-device-list"], evidenceLevel: "official", verificationStatus: "needs-model-verification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["SDK 映射 ID 不是零售型号代码；防护等级、探针方式、供电和报警策略待说明书核实。"] },
-  { id: "aqara-light-sensor-t1", slug: "aqara-light-sensor-t1", name: "光照传感器 T1", model: null, manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 产品目录列出的光照传感器 T1；SDK 清单提供设备映射 ID。", integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.sen_ill.agl01", sourceId: "aqara-open-platform-device-list" }], protocolIds: [], capabilityIds: ["illuminance"], sourceIds: ["aqara-catalog-cn", "aqara-open-platform-device-list"], evidenceLevel: "official", verificationStatus: "needs-model-verification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["SDK 映射 ID 不是零售型号代码；照度范围、精度、刷新周期和供电待核实。"] },
+  { id: "aqara-motion-sensor-t1", slug: "aqara-motion-sensor-t1", name: "人体传感器 T1", model: "RTCGQ12LM", manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 官方参数页确认的 Zigbee 3.0 人体移动传感器；SDK 内部映射另行记录。", integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.motion.agl02", sourceId: "aqara-open-platform-device-list" }], protocolIds: ["zigbee"], capabilityIds: ["occupancy"], sourceIds: ["aqara-catalog-cn", "aqara-motion-t1-spec", "aqara-open-platform-device-list"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "RTCGQ12LM", sourceId: "aqara-motion-t1-spec" }, { name: "无线连接", value: "Zigbee 3.0", sourceId: "aqara-motion-t1-spec" }, { name: "产品尺寸", value: "30 × 30 × 33 mm", sourceId: "aqara-motion-t1-spec" }, { name: "探测距离", value: "最大 7 m", sourceId: "aqara-motion-t1-spec" }, { name: "探测角度", value: "170°", sourceId: "aqara-motion-t1-spec" }, { name: "电池型号", value: "CR2450", sourceId: "aqara-motion-t1-spec" }, { name: "工作温度", value: "−10–45 °C", sourceId: "aqara-motion-t1-spec" }, { name: "工作湿度", value: "0–95% RH，无冷凝", sourceId: "aqara-motion-t1-spec" }], limitations: ["需搭配兼容的 Zigbee 3.0 网关使用；本条目未记录所有网关的固件兼容矩阵。", "探测距离与角度为厂商参数，安装高度、环境热源和遮挡会影响现场效果。"] },
+  { id: "aqara-motion-sensor-e1", slug: "aqara-motion-sensor-e1", name: "人体传感器 E1", model: "RTCGO15LM", manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 官方参数页确认的 Zigbee 3.0 人体移动传感器 E1。", integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.motion.acn001", sourceId: "aqara-open-platform-device-list" }], protocolIds: ["zigbee"], capabilityIds: ["occupancy"], sourceIds: ["aqara-catalog-cn", "aqara-motion-e1-spec", "aqara-open-platform-device-list"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "RTCGO15LM", sourceId: "aqara-motion-e1-spec" }, { name: "无线连接", value: "Zigbee 3.0", sourceId: "aqara-motion-e1-spec" }, { name: "产品尺寸", value: "30 × 30 × 33 mm", sourceId: "aqara-motion-e1-spec" }, { name: "探测距离", value: "最大 7 m", sourceId: "aqara-motion-e1-spec" }, { name: "探测角度", value: "170°", sourceId: "aqara-motion-e1-spec" }, { name: "电池型号", value: "CR2450", sourceId: "aqara-motion-e1-spec" }, { name: "工作温度", value: "−10–45 °C", sourceId: "aqara-motion-e1-spec" }, { name: "工作湿度", value: "0–95% RH，无冷凝", sourceId: "aqara-motion-e1-spec" }, { name: "执行标准", value: "GB 4943.1-2011", sourceId: "aqara-motion-e1-spec" }], limitations: ["需搭配兼容的 Zigbee 3.0 网关使用。", "探测距离与角度为厂商参数，现场表现受安装位置和环境影响。"] },
+  { id: "aqara-door-window-sensor-e1", slug: "aqara-door-window-sensor-e1", name: "门窗传感器 E1", model: "MCCGQ14LM", manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 官方参数页确认的 Zigbee 3.0 门窗开合状态传感器。", integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.magnet.acn001", sourceId: "aqara-open-platform-device-list" }], protocolIds: ["zigbee"], capabilityIds: ["contact"], sourceIds: ["aqara-catalog-cn", "aqara-door-window-e1-spec", "aqara-open-platform-device-list"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "MCCGQ14LM", sourceId: "aqara-door-window-e1-spec" }, { name: "无线连接", value: "Zigbee 3.0", sourceId: "aqara-door-window-e1-spec" }, { name: "产品尺寸", value: "41 × 22 × 11 mm", sourceId: "aqara-door-window-e1-spec" }, { name: "电池型号", value: "CR1632", sourceId: "aqara-door-window-e1-spec" }, { name: "最大感应距离", value: "22 mm", sourceId: "aqara-door-window-e1-spec" }, { name: "工作温度", value: "−10–50 °C", sourceId: "aqara-door-window-e1-spec" }, { name: "工作湿度", value: "0–95% RH，无冷凝", sourceId: "aqara-door-window-e1-spec" }], limitations: ["安装间距需结合门窗材质、主体与磁铁对齐情况现场验证。", "需搭配兼容的 Zigbee 3.0 网关使用。"] },
+  { id: "aqara-door-window-sensor-p1", slug: "aqara-door-window-sensor-p1", name: "门窗传感器 P1", model: "MCCGQ13LM", manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 官方参数页确认的 Zigbee 3.0 门窗传感器 P1；安装间距可在 App 中切换。", integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.magnet.ac01", sourceId: "aqara-open-platform-device-list" }], protocolIds: ["zigbee"], capabilityIds: ["contact"], sourceIds: ["aqara-catalog-cn", "aqara-door-window-p1-spec", "aqara-door-window-p1-support", "aqara-open-platform-device-list"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "MCCGQ13LM", sourceId: "aqara-door-window-p1-spec" }, { name: "无线连接", value: "Zigbee 3.0", sourceId: "aqara-door-window-p1-spec" }, { name: "主体尺寸", value: "77 × 22 × 22 mm", sourceId: "aqara-door-window-p1-spec" }, { name: "副体尺寸", value: "11.5 × 7.3 × 36 mm", sourceId: "aqara-door-window-p1-spec" }, { name: "净重", value: "47 g", sourceId: "aqara-door-window-p1-spec" }, { name: "电池型号", value: "CR123A", sourceId: "aqara-door-window-p1-spec" }, { name: "工作温度", value: "−10–50 °C", sourceId: "aqara-door-window-p1-spec" }, { name: "工作湿度", value: "≤95% RH，无冷凝", sourceId: "aqara-door-window-p1-spec" }, { name: "可调安装距离", value: "小于 10 / 20 / 30 mm，默认小于 20 mm；厂商说明存在约 ±2 mm 误差", sourceId: "aqara-door-window-p1-support" }], limitations: ["必须搭配兼容 Zigbee 3.0 网关使用。", "金属门窗、磁铁方向和主体副体未对齐会影响感应，安装距离应现场测试。"] },
+  { id: "aqara-temperature-humidity-t1", slug: "aqara-temperature-humidity-sensor-t1", name: "温湿度传感器 T1", model: "WSDCGQ12LM", manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 官方参数页确认的 Zigbee 3.0 温湿度与气压传感器；支持页对温度工作范围给出不同描述。", integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.sensor_ht.agl02", sourceId: "aqara-open-platform-device-list" }], protocolIds: ["zigbee"], capabilityIds: ["temperature", "humidity"], sourceIds: ["aqara-catalog-cn", "aqara-temperature-humidity-t1-spec", "aqara-temperature-humidity-t1-support", "aqara-open-platform-device-list"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "WSDCGQ12LM", sourceId: "aqara-temperature-humidity-t1-spec" }, { name: "无线连接", value: "Zigbee 3.0", sourceId: "aqara-temperature-humidity-t1-spec" }, { name: "产品尺寸", value: "36 × 36 × 9 mm", sourceId: "aqara-temperature-humidity-t1-spec" }, { name: "温度检测范围", value: "−20–60 °C（参数页）", sourceId: "aqara-temperature-humidity-t1-spec" }, { name: "温度检测精度", value: "±0.3 °C", sourceId: "aqara-temperature-humidity-t1-spec" }, { name: "湿度检测范围", value: "0–100% RH", sourceId: "aqara-temperature-humidity-t1-spec" }, { name: "湿度检测精度", value: "±3%", sourceId: "aqara-temperature-humidity-t1-spec" }, { name: "气压检测范围", value: "30–110 kPa", sourceId: "aqara-temperature-humidity-t1-spec" }, { name: "气压检测精度", value: "±120 Pa", sourceId: "aqara-temperature-humidity-t1-spec" }, { name: "数据上报", value: "无明显变化时约 1 小时上报一次；温度变化超过 0.5 °C、湿度变化超过 6% 或气压变化达到 25 Pa 时立即上报", sourceId: "aqara-temperature-humidity-t1-support" }], limitations: ["官方参数页给出温度范围 −20–60 °C，支持页说明正常工作环境为 −20–50 °C；两者口径不同，未确认前保留原始来源差异。", "传感器需通过网关接入 App，不能直接连接手机。"] },
+  { id: "aqara-water-leak-t1", slug: "aqara-water-leak-sensor-t1", name: "水浸传感器 T1", model: "SJCGQ12LM", manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 官方参数与支持页确认的 Zigbee 3.0 水浸传感器，支持 IP68 防护和水位触发报警。", integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.flood.agl02", sourceId: "aqara-open-platform-device-list" }], protocolIds: ["zigbee"], capabilityIds: ["alarm"], sourceIds: ["aqara-catalog-cn", "aqara-water-leak-t1-spec", "aqara-water-leak-t1-support", "aqara-open-platform-device-list"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "SJCGQ12LM", sourceId: "aqara-water-leak-t1-spec" }, { name: "无线连接", value: "Zigbee 3.0", sourceId: "aqara-water-leak-t1-spec" }, { name: "产品尺寸", value: "50 × 50 × 15 mm", sourceId: "aqara-water-leak-t1-spec" }, { name: "电池型号", value: "CR2032", sourceId: "aqara-water-leak-t1-spec" }, { name: "工作温度", value: "−10–55 °C", sourceId: "aqara-water-leak-t1-spec" }, { name: "工作湿度", value: "0–100% RH", sourceId: "aqara-water-leak-t1-spec" }, { name: "防护等级", value: "IP68（厂商支持页）", sourceId: "aqara-water-leak-t1-support" }, { name: "报警触发水位", value: "约 0.5 mm", sourceId: "aqara-water-leak-t1-support" }, { name: "电池续航", value: "正常情况下约 2 年；实际时长视使用情况而定", sourceId: "aqara-water-leak-t1-support" }], limitations: ["IP68 与报警水位为厂商支持页声明，不代表可长期浸泡或替代专业漏水保护工程。", "需搭配兼容 Zigbee 3.0 网关使用；电池续航受上报频率和环境影响。"] },
+  { id: "aqara-light-sensor-t1", slug: "aqara-light-sensor-t1", name: "光照传感器 T1", model: "GZCGQ11LM", manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 官方参数页确认的 Zigbee 3.0 照度传感器，量程覆盖 0–80000 lux。", integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.sen_ill.agl01", sourceId: "aqara-open-platform-device-list" }], protocolIds: ["zigbee"], capabilityIds: ["illuminance"], sourceIds: ["aqara-catalog-cn", "aqara-light-sensor-t1-spec", "aqara-open-platform-device-list"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "GZCGQ11LM", sourceId: "aqara-light-sensor-t1-spec" }, { name: "无线连接", value: "Zigbee 3.0", sourceId: "aqara-light-sensor-t1-spec" }, { name: "检测范围", value: "0–80000 lux", sourceId: "aqara-light-sensor-t1-spec" }, { name: "检测精度", value: "±2%（2854 K 普通白炽灯校准）；其他可见光光源 ±5%", sourceId: "aqara-light-sensor-t1-spec" }, { name: "电池型号", value: "CR2450", sourceId: "aqara-light-sensor-t1-spec" }, { name: "工作温度", value: "−10–50 °C", sourceId: "aqara-light-sensor-t1-spec" }, { name: "工作湿度", value: "0–95% RH，无冷凝", sourceId: "aqara-light-sensor-t1-spec" }], limitations: ["精度标注依赖光源光谱与校准条件，不能将单一精度值用于所有光源。", "需搭配兼容 Zigbee 3.0 网关使用。"] },
   { id: "aqara-gas-detector", slug: "aqara-natural-gas-detector", name: "天然气报警器", model: null, manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 产品目录列出的天然气报警器；SDK 清单提供设备映射 ID。", integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.sensor_gas.acn02", sourceId: "aqara-open-platform-device-list" }], protocolIds: [], capabilityIds: ["alarm"], sourceIds: ["aqara-catalog-cn", "aqara-open-platform-device-list"], evidenceLevel: "official", verificationStatus: "needs-model-verification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["燃气报警属于安全关键设备；报警认证、燃气类型、安装位置和联动策略必须按具体型号说明书及当地法规核实。", "SDK 映射 ID 不是零售型号代码。"] },
   { id: "aqara-smoke-detector", slug: "aqara-smoke-detector", name: "烟雾报警器", model: null, manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 产品目录列出的烟雾报警器；SDK 清单提供设备映射 ID。", integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.sensor_smoke.acn03", sourceId: "aqara-open-platform-device-list" }], protocolIds: [], capabilityIds: ["alarm"], sourceIds: ["aqara-catalog-cn", "aqara-open-platform-device-list"], evidenceLevel: "official", verificationStatus: "needs-model-verification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["消防安全设备必须核对准确型号的认证、报警方式、安装和维护要求；智能联动不能代替法定消防系统。", "SDK 映射 ID 不是零售型号代码。"] },
-  { id: "aqara-vibration-sensor-t1", slug: "aqara-vibration-sensor-t1", name: "动静贴 T1", model: null, manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 产品目录列出的动静贴 T1；SDK 清单提供设备映射 ID。", integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.vibration.agl01", sourceId: "aqara-open-platform-device-list" }], protocolIds: [], capabilityIds: [], sourceIds: ["aqara-catalog-cn", "aqara-open-platform-device-list"], evidenceLevel: "official", verificationStatus: "needs-model-verification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["SDK 映射 ID 不是零售型号代码；振动阈值、采样、供电和可配置事件待核实。"] },
+  { id: "aqara-vibration-sensor-t1", slug: "aqara-vibration-sensor-t1", name: "动静贴 T1", model: "DJT12LM", manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 官方参数与支持页确认的 Zigbee 动静传感器，可检测振动、移动和敲击类事件。", integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.vibration.agl01", sourceId: "aqara-open-platform-device-list" }], protocolIds: ["zigbee"], capabilityIds: ["vibration"], sourceIds: ["aqara-catalog-cn", "aqara-vibration-t1-spec", "aqara-vibration-t1-support", "aqara-open-platform-device-list"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "DJT12LM", sourceId: "aqara-vibration-t1-spec" }, { name: "无线连接", value: "Zigbee（官方参数页未标注版本）", sourceId: "aqara-vibration-t1-spec" }, { name: "产品尺寸", value: "36 × 36 × 9 mm", sourceId: "aqara-vibration-t1-spec" }, { name: "电池型号", value: "CR2032", sourceId: "aqara-vibration-t1-spec" }, { name: "工作温度", value: "−10–50 °C", sourceId: "aqara-vibration-t1-spec" }, { name: "工作湿度", value: "0–95% RH，无冷凝", sourceId: "aqara-vibration-t1-spec" }, { name: "灵敏度", value: "支持在 App 中调节（厂商支持页）", sourceId: "aqara-vibration-t1-support" }], limitations: ["官方参数页只写 Zigbee，未在本轮证实为 Zigbee 3.0，不擅自补全版本。", "不同材质对振动的吸收程度不同，灵敏度和触发阈值需在实际安装表面调试。"] },
   { id: "orvibo-s5", slug: "orvibo-smart-spotlight-s5", name: "智能射灯 S5", model: "S5", manufacturerId: "orvibo", brandId: "orvibo", categoryId: "lighting", summary: "欧瑞博官网产品中心仍列出的智能射灯产品；详情页公开光束角与调角范围，但页面注明参数为特定实验室理论值。", protocolIds: [], capabilityIds: ["brightness"], sourceIds: ["orvibo-catalog-cn", "orvibo-s5"], evidenceLevel: "official", verificationStatus: "needs-model-verification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "光束角", value: "24° / 36°（官网产品介绍）", sourceId: "orvibo-s5" }, { name: "调角范围", value: "0°、5°、10°、15°、20°、25° 档位", sourceId: "orvibo-s5" }, { name: "调光技术", value: "官网宣传 Mix-Light 万分级调光技术；未提供本条目可核验的量化曲线", sourceId: "orvibo-s5" }], limitations: ["官网详情页版权页脚为 2014–2023，且声明数据为欧瑞博内部实验室特定环境下的理论值。", "产品中心当前仍列出 S5，但本轮未核实当前销售 SKU、光源规格、色温、显色、功率、调光协议、IES/LDT 文件或灯具版本。", "产品页中的图片和视频被厂商明确标注为示意，本站不复用其素材。"] }
 ];
 
