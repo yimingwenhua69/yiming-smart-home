@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { brands, capabilities, categories, deviceModels, manufacturers, products, protocols, sources } from "../src/data/catalog";
+import { brands, capabilities, categories, deviceModels, integrationSystems, manufacturers, products, protocols, sources } from "../src/data/catalog";
 import { validateCatalog } from "../src/lib/catalog-schema";
 import { mediaAssets, photometricProfiles, threeDAssets, validateAssetRegistry } from "../src/data/assets";
 
 test("catalog entity identifiers are unique", () => {
-  for (const collection of [sources, manufacturers, brands, categories, products, deviceModels, protocols, capabilities]) {
+  for (const collection of [sources, manufacturers, brands, categories, products, deviceModels, protocols, capabilities, integrationSystems]) {
     const ids = collection.map((item) => item.id);
     assert.equal(new Set(ids).size, ids.length, "duplicate identifier found");
   }
@@ -32,6 +32,10 @@ test("device model protocol, platform, capability and source relations must reso
     for (const id of model.capabilityIds) assert.ok(capabilityIds.has(id), model.id + " capability missing: " + id);
     for (const id of model.platformIds) assert.ok(platformIds.has(id), model.id + " platform missing: " + id);
     for (const id of model.sourceIds) assert.ok(sourceIds.has(id), model.id + " source missing: " + id);
+    for (const mapping of model.integrationModels) {
+      assert.ok(integrationSystems.some((integration) => integration.id === mapping.integrationId), model.id + " integration missing: " + mapping.integrationId);
+      assert.ok(sourceIds.has(mapping.sourceId), model.id + " integration source missing: " + mapping.sourceId);
+    }
     for (const spec of model.specifications) assert.ok(sourceIds.has(spec.sourceId), model.id + " spec source missing: " + spec.sourceId);
   }
 });
