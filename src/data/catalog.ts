@@ -618,6 +618,22 @@ export function getDeviceModelById(id: string) {
   return deviceModels.find((model) => model.id === id);
 }
 
+export function getHardwareRevisionsForDeviceModel(deviceModelId: string) {
+  return hardwareRevisions.filter((revision) => revision.deviceModelId === deviceModelId);
+}
+
+export function getProductSpecificationsForDeviceModel(deviceModelId: string) {
+  return productSpecifications.filter((specification) => specification.deviceModelId === deviceModelId);
+}
+
+export function getCompatibilityRecordsForDeviceModel(deviceModelId: string) {
+  return compatibilityRecords.filter((record) => record.deviceModelId === deviceModelId);
+}
+
+export function getDeviceVerificationsForDeviceModel(deviceModelId: string) {
+  return deviceVerifications.filter((verification) => verification.deviceModelId === deviceModelId);
+}
+
 export function getManufacturerById(id: string) {
   return manufacturers.find((manufacturer) => manufacturer.id === id);
 }
