@@ -36,7 +36,7 @@ const specificationSchema = z.object({
 });
 const compatibilitySchema = z.object({
   id, deviceModelId: id, targetType: z.enum(["platform","integration"]), targetId: id,
-  status: z.enum(["supported","partial","unsupported","unverified"]), evidenceLevel: evidence,
+  status: z.enum(["supported","partial","unsupported","unverified"]), methodId: id.nullable(), evidenceLevel: evidence,
   sourceId: id, features: z.array(z.string()), checkedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/), notes: z.string()
 });
 const verificationSchema = z.object({
@@ -67,7 +67,7 @@ export const catalogRegistry = {
 
 export function validateCatalog(registry: typeof catalogRegistry = catalogRegistry) {
   const {
-    sources, integrationSystems, manufacturers, brands, categories, products, deviceModels,
+    sources, integrationSystems, integrationMethods, manufacturers, brands, categories, products, deviceModels,
     hardwareRevisions, productSpecifications, compatibilityRecords, deviceVerifications,
     protocols, platforms, capabilities
   } = registry;
