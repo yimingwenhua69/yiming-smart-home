@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { brands, capabilities, categories, deviceModels, manufacturers, products, protocols, sources } from "../src/data/catalog";
 import { validateCatalog } from "../src/lib/catalog-schema";
+import { mediaAssets, photometricProfiles, threeDAssets, validateAssetRegistry } from "../src/data/assets";
 
 test("catalog entity identifiers are unique", () => {
   for (const collection of [sources, manufacturers, brands, categories, products, deviceModels, protocols, capabilities]) {
@@ -54,4 +55,14 @@ test("Zod catalog schema and all foreign-key relations pass", () => {
   const result = validateCatalog();
   assert.deepEqual(result.errors, []);
   assert.equal(result.valid, true);
+});
+
+
+test("media, 3D and photometric asset registry enforces model and rights provenance", () => {
+  const result = validateAssetRegistry();
+  assert.deepEqual(result.errors, []);
+  assert.equal(result.valid, true);
+  assert.equal(mediaAssets.length, 0);
+  assert.equal(threeDAssets.length, 0);
+  assert.equal(photometricProfiles.length, 0);
 });
