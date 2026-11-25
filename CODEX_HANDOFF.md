@@ -62,10 +62,10 @@
 
 已建立 Next.js 16 + React 19 + TypeScript + Tailwind 的中文知识库首轮页面：品牌首页、产品库与详情、厂商目录、协议、平台、灯光、场景、工程、搜索、产品对比、收藏和流明法初步估算器。产品数据在 `src/data/catalog.ts`，知识内容在 `src/data/knowledge.ts`，Zod 校验在 `src/lib/catalog-schema.ts`。
 
-当前数据为 5 个制造商、6 个品牌、7 个分类、8 个协议、5 个平台、16 个能力、27 个产品、27 个设备型号、134 条独立规格、5 条兼容 / 集成路径记录、2 个集成系统、14 条 Aqara SDK 映射和 37 个来源。产品条目区分官方目录、官方规格和兼容证据；未知参数不填，不展示未授权图片或未经型号核验的 3D 模型。
+当前数据为 5 个制造商、6 个品牌、7 个分类、8 个协议、6 个平台、16 个能力、27 个产品、27 个设备型号、134 条独立规格、6 条兼容 / 集成路径记录、4 个集成系统、7 种集成方法、14 条 Aqara SDK 映射和 40 个来源。产品条目区分官方目录、官方规格和兼容证据；未知参数不填，不展示未授权图片或未经型号核验的 3D 模型。
 
 旧示例设备 API 已返回 410，旧 Prisma seed 已变成 no-op，避免再次公开虚构通用设备。公开知识页面不查询 PostgreSQL；旧健康接口仍需数据库连接。
 
 CI 工作流已添加；当前 HEAD 0e4a191f9bac2b868ccfd35c11d66d1270025a0f 的 Prisma schema、lint、typecheck、tests、coverage、production build 和 Playwright 浏览器测试全部通过（GitHub Actions run 45708859850）。当前未配置生产部署。
 
-后续必须完成：补充真实 HardwareRevision 和 DeviceVerification 记录；继续采集 Tuya 与更多 Xiaomi 型号级资料；取得准确型号且授权清晰的图片、GLB / CAD / 扫描模型和 IES/LDT 文件；扩展全文知识正文索引；验证 Cloudflare OpenNext 适配、预览部署、域名、缓存、回滚与生产视觉验收。没有授权或证据时，保持缺失状态，不得伪造。
+后续必须完成：补充真实 HardwareRevision 和 DeviceVerification 记录；继续采集 Tuya OEM 与更多 Xiaomi 型号级资料；取得准确型号且授权清晰的图片、GLB / CAD / 扫描模型和 IES/LDT 文件；扩展全文知识正文索引；验证 Cloudflare OpenNext 适配、预览部署、域名、缓存、回滚与生产视觉验收。没有授权或证据时，保持缺失状态，不得伪造。
