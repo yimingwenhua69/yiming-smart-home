@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { brands, capabilities, categories, deviceModels, integrationSystems, manufacturers, platforms, products, protocols, sources } from "@/data/catalog";
+import { brands, capabilities, categories, compatibilityRecords, deviceModels, deviceVerifications, hardwareRevisions, integrationSystems, manufacturers, platforms, productSpecifications, products, protocols, sources } from "@/data/catalog";
 
 const id = z.string().trim().min(1);
 const httpsUrl = z.string().url().refine((value)=>value.startsWith("https://"),"URL must use HTTPS");
@@ -23,14 +23,36 @@ const productSchema = z.object({
 });
 const integrationSystemSchema = z.object({ id, name: z.string().min(1), kind: z.enum(["manufacturer-sdk","open-source-integration","platform-api"]), owner: z.string().min(1), documentationUrl: httpsUrl, notes: z.string() });
 const integrationMappingSchema = z.object({ integrationId: id, modelId: id, sourceId: id });
+const hardwareRevisionSchema = z.object({
+  id, deviceModelId: id, revisionCode: id, region: z.enum(["CN","GLOBAL"]),
+  sourceIds: z.array(id).min(1), evidenceLevel: evidence,
+  checkedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/), notes: z.string()
+});
+const specificationSchema = z.object({
+  id, deviceModelId: id, name: z.string().min(1), value: z.string().min(1),
+  unit: z.string().nullable(), sourceId: id, evidenceLevel: evidence,
+  checkedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/), notes: z.string()
+});
+const compatibilitySchema = z.object({
+  id, deviceModelId: id, targetType: z.enum(["platform","integration"]), targetId: id,
+  status: z.enum(["supported","partial","unsupported","unverified"]), evidenceLevel: evidence,
+  sourceId: id, features: z.array(z.string()), checkedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/), notes: z.string()
+});
+const verificationSchema = z.object({
+  id, deviceModelId: id, verificationType: z.enum(["pairing","functional","network","performance","field-installation"]),
+  result: z.enum(["pass","fail","partial","not-tested"]), evidenceLevel: z.enum(["lab-tested","field-tested"]),
+  testedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/), hardwareRevisionId: id.nullable(),
+  firmwareVersion: z.string().nullable(), environment: z.string(), steps: z.array(z.string()),
+  observations: z.array(z.string()), sourceIds: z.array(id).min(1)
+});
 const deviceModelSchema = z.object({
-  id, productId: id, modelCode: z.string().nullable(), hardwareRevision: z.string().nullable(), integrationModels: z.array(integrationMappingSchema),
-  protocolIds: z.array(id), platformIds: z.array(id), capabilityIds: z.array(id), sourceIds: z.array(id).min(1),
+  id, productId: id, modelCode: z.string().nullable(), hardwareRevisionIds: z.array(id),
+  integrationModels: z.array(integrationMappingSchema), protocolIds: z.array(id),
+  capabilityIds: z.array(id), sourceIds: z.array(id).min(1), specificationIds: z.array(id),
+  compatibilityRecordIds: z.array(id), verificationIds: z.array(id),
   evidenceLevel: evidence, verificationStatus: z.enum(["official-listing","official-specification","needs-model-verification"]),
   lastVerified: z.string().regex(/^\d{4}-\d{2}-\d{2}$/), region: z.literal("CN"),
-  price: z.null(), image: z.null(), threeDAsset: z.null(),
-  specifications: z.array(z.object({name:z.string().min(1),value:z.string().min(1),sourceId:id})),
-  limitations: z.array(z.string().min(1))
+  price: z.null(), image: z.null(), threeDAsset: z.null(), limitations: z.array(z.string().min(1))
 });
 const protocolSchema = z.object({ id, name: z.string().min(1), family: z.string(), summary: z.string(), transport: z.string(), topology: z.string(), sourceIds: z.array(id), cautions: z.array(z.string()) });
 const platformSchema = z.object({ id, name: z.string(), owner: z.string(), summary: z.string(), link: httpsUrl, integration: z.string(), cautions: z.array(z.string()) });
