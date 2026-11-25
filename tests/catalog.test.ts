@@ -1,40 +1,45 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { capabilities, categories, manufacturers, products, protocols, sources } from "../src/data/catalog";
+import { brands, capabilities, categories, deviceModels, manufacturers, products, protocols, sources } from "../src/data/catalog";
 import { validateCatalog } from "../src/lib/catalog-schema";
 
 test("catalog entity identifiers are unique", () => {
-  for (const collection of [sources, manufacturers, categories, products, protocols, capabilities]) {
+  for (const collection of [sources, manufacturers, brands, categories, products, deviceModels, protocols, capabilities]) {
     const ids = collection.map((item) => item.id);
     assert.equal(new Set(ids).size, ids.length, "duplicate identifier found");
   }
 });
 
-test("every product links to an existing manufacturer, category and source", () => {
+test("every product links to an existing manufacturer, brand, category and model", () => {
   for (const product of products) {
     assert.ok(manufacturers.some((item) => item.id === product.manufacturerId), product.id + " manufacturer missing");
+    assert.ok(brands.some((item) => item.id === product.brandId), product.id + " brand missing");
+    assert.equal(brands.find((item) => item.id === product.brandId)?.manufacturerId, product.manufacturerId);
     assert.ok(categories.some((item) => item.id === product.categoryId), product.id + " category missing");
-    assert.ok(product.sourceIds.length > 0, product.id + " must have at least one source");
-    for (const sourceId of product.sourceIds) assert.ok(sources.some((source) => source.id === sourceId), product.id + " source missing: " + sourceId);
+    assert.ok(product.modelIds.length > 0, product.id + " must have a model record");
+    for (const modelId of product.modelIds) assert.ok(deviceModels.some((model) => model.id === modelId && model.productId === product.id));
   }
 });
 
-test("product protocol, platform and capability relations must resolve", () => {
+test("device model protocol, platform, capability and source relations must resolve", () => {
   const protocolIds = new Set<string>(protocols.map((item) => item.id));
   const capabilityIds = new Set<string>(capabilities.map((item) => item.id));
   const platformIds = new Set<string>(["apple-home", "google-home", "alexa", "home-assistant", "harmony-home"]);
-  for (const product of products) {
-    for (const id of product.protocolIds) assert.ok(protocolIds.has(id), product.id + " protocol missing: " + id);
-    for (const id of product.capabilityIds) assert.ok(capabilityIds.has(id), product.id + " capability missing: " + id);
-    for (const id of product.platformIds) assert.ok(platformIds.has(id), product.id + " platform missing: " + id);
+  const sourceIds = new Set<string>(sources.map((item) => item.id));
+  for (const model of deviceModels) {
+    for (const id of model.protocolIds) assert.ok(protocolIds.has(id), model.id + " protocol missing: " + id);
+    for (const id of model.capabilityIds) assert.ok(capabilityIds.has(id), model.id + " capability missing: " + id);
+    for (const id of model.platformIds) assert.ok(platformIds.has(id), model.id + " platform missing: " + id);
+    for (const id of model.sourceIds) assert.ok(sourceIds.has(id), model.id + " source missing: " + id);
+    for (const spec of model.specifications) assert.ok(sourceIds.has(spec.sourceId), model.id + " spec source missing: " + spec.sourceId);
   }
 });
 
-test("public product records never contain guessed prices or unverified media", () => {
-  for (const product of products) {
-    assert.equal(product.price, null, product.id + " must not publish an unverified static price");
-    assert.equal(product.image, null, product.id + " must not publish an unlicensed image");
-    assert.equal(product.threeDAsset, null, product.id + " must not publish an unverified 3D asset");
+test("public device models never contain guessed prices or unverified media", () => {
+  for (const model of deviceModels) {
+    assert.equal(model.price, null, model.id + " must not publish an unverified static price");
+    assert.equal(model.image, null, model.id + " must not publish an unlicensed image");
+    assert.equal(model.threeDAsset, null, model.id + " must not publish an unverified 3D asset");
   }
 });
 
