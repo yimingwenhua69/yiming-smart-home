@@ -136,7 +136,8 @@ test("catalog validator catches broken foreign keys and child-parent mismatches"
       ...catalogRegistry.products,
       { ...baseProduct, id: "broken-product", manufacturerId: "missing-manufacturer", brandId: "missing-brand", categoryId: "missing-category", modelIds: ["missing-model"] },
       { ...baseProduct, id: "brand-owner-mismatch", manufacturerId: "huawei", brandId: catalogRegistry.brands[0].id },
-      { ...baseProduct, id: "wrong-model-parent", modelIds: [baseModel.id] }
+      { ...baseProduct, id: "wrong-model-parent", modelIds: [baseModel.id] },
+      { ...baseProduct, id: "broken-model-parent", modelIds: ["broken-device-model"] }
     ],
     deviceModels: [...catalogRegistry.deviceModels, brokenModel],
     hardwareRevisions: [
