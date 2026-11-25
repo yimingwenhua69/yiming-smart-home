@@ -68,3 +68,6 @@ Current catalog: 14 product records and 18 source records. Product pages no long
 Outstanding gaps: normalized Product / DeviceModel / HardwareRevision separation, current licensed product images, verified 3D assets, accurate IES/LDT files and photometric simulation, broader manufacturer research, full-text indexing of all knowledge content, OpenNext deployment validation, and production visual acceptance.
 
 No claim is made that local PowerShell commands, npm tests, builds, SCALE gates, browser tests, deployment, or real-device tests were executed by this remote repository update.
+
+
+Current catalog after model-level research: 15 product records, 15 device-model records, 5 brands, and 23 sources. Added official Aqara M200, FP2 and Door/Window Sensor T1 support/spec references and an Orvibo S5 record explicitly marked for model verification because its detail page is historical and uses lab-theory data.
