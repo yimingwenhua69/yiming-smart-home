@@ -110,6 +110,72 @@ export const sources: CatalogSource[] = [
     notes: "页面同时列出 MixPad C 超级智能开关、W10 直流超静音窗帘电机及 W13/W14 导轨参数。页面声明相关数据为特定实验室环境理论值。"
   },
   {
+    id: "aqara-m3-spec",
+    publisher: "Aqara / 深圳绿米联创科技有限公司",
+    title: "方舟智慧中枢 M3 产品参数",
+    url: "https://www.aqara.cn/cn/Hub-m3_spec",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方参数页列出型号 ZHWG24LM、尺寸、供电、环境范围和无线协议。"
+  },
+  {
+    id: "aqara-fp1e-spec",
+    publisher: "Aqara / 深圳绿米联创科技有限公司",
+    title: "AI 智能存在传感器 FP1E 产品参数",
+    url: "https://www.aqara.cn/Aqara-AI-Presence-Detector-FP1E_spec",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方参数页列出型号 RTCZCGQ13LM、尺寸、Zigbee 无线连接、供电和环境参数。"
+  },
+  {
+    id: "aqara-fp1e-support",
+    publisher: "Aqara / 深圳绿米联创科技有限公司",
+    title: "AI 智能存在传感器 FP1E 官方支持问答",
+    url: "https://www.aqara.cn/cn/Aqara-AI-Presence-Detector-FP1E_support",
+    sourceType: "official-compatibility",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方支持页说明 Zigbee 3.0 网关要求及经 Aqara 网关桥接 Matter 后接入第三方生态的范围。"
+  },
+  {
+    id: "aqara-p1-spec",
+    publisher: "Aqara / 深圳绿米联创科技有限公司",
+    title: "人体传感器 P1 产品参数",
+    url: "https://www.aqara.cn/cn/Motion-Sensor-P1_spec",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方参数页列出型号 RTCGQ14LM、尺寸、重量、电池类型、Zigbee 3.0 和环境参数。"
+  },
+  {
+    id: "huawei-ai-sensor-air",
+    publisher: "华为终端有限公司",
+    title: "华为鸿蒙智家 AI 超感传感器 Air 产品介绍",
+    url: "https://consumer.huawei.com/cn/wholehome/smart-sensing/",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方产品页介绍红外、毫米波和光感融合、安装方式及场景能力；页面脚注对实验室响应数据、遮挡和环境影响作出限定。"
+  },
+  {
+    id: "orvibo-s5",
+    publisher: "深圳市欧瑞博科技股份有限公司",
+    title: "欧瑞博智能射灯 S5 产品介绍",
+    url: "https://global.orvibo.com/cn/product/s5.html",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "CN",
+    notes: "官方历史产品页列出 24°/36° 光束角和 5° 档位调角信息；当前销售状态与页面参数版本仍需厂商再次确认。"
+  },
+  {
     id: "zigbee2mqtt-supported",
     publisher: "Koenkk / Zigbee2MQTT contributors",
     title: "Zigbee2MQTT Supported Devices",
@@ -243,19 +309,20 @@ export const capabilities = [
 ] as const;
 
 export const products: Product[] = [
-  { id: "aqara-m3", slug: "aqara-hub-m3", name: "方舟智慧中枢 M3", model: "M3", manufacturerId: "aqara", brand: "Aqara", categoryId: "gateway", summary: "Aqara 中国大陆产品中心列出的智能网关产品。", protocolIds: [], platformIds: [], capabilityIds: [], sourceIds: ["aqara-catalog-cn"], evidenceLevel: "official", verificationStatus: "official-listing", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["本轮仅核实官网产品目录条目；未将未核实的无线协议、平台兼容性、接口和本地自动化能力写成参数。"] },
+  { id: "aqara-m3", slug: "aqara-hub-m3", name: "方舟智慧中枢 M3", model: "ZHWG24LM", manufacturerId: "aqara", brand: "Aqara", categoryId: "gateway", summary: "Aqara 官方参数页确认的家庭中枢网关，支持 Wi-Fi、Zigbee 与 Thread 等无线连接。", protocolIds: ["wifi", "zigbee", "thread"], platformIds: [], capabilityIds: [], sourceIds: ["aqara-catalog-cn", "aqara-m3-spec"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "ZHWG24LM", sourceId: "aqara-m3-spec" }, { name: "产品尺寸", value: "105 × 105 × 36.5 mm", sourceId: "aqara-m3-spec" }, { name: "电源输入", value: "5 V ⎓ 2 A", sourceId: "aqara-m3-spec" }, { name: "PoE 输入", value: "48 V ⎓ 0.27 A", sourceId: "aqara-m3-spec" }, { name: "工作温度", value: "−10–50 °C", sourceId: "aqara-m3-spec" }, { name: "工作湿度", value: "0–95% RH，无冷凝", sourceId: "aqara-m3-spec" }, { name: "无线协议", value: "Wi-Fi IEEE 802.11 a/b/g/n/ac 2.4/5 GHz；Zigbee / Thread IEEE 802.15.4；Bluetooth 5.1", sourceId: "aqara-m3-spec" }], limitations: ["官方参数页列示数据；未据此推断该中枢对所有第三方设备开放全部能力。", "不同功能可能要求其他 Aqara 网关、设备固件或特定软件版本。"] },
   { id: "aqara-m200", slug: "aqara-hub-m200", name: "网关 M200", model: "M200", manufacturerId: "aqara", brand: "Aqara", categoryId: "gateway", summary: "Aqara 中国大陆产品中心列出的智能网关产品。", protocolIds: [], platformIds: [], capabilityIds: [], sourceIds: ["aqara-catalog-cn"], evidenceLevel: "official", verificationStatus: "official-listing", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["目录页未在本轮核实完整协议矩阵和具体硬件版本。"] },
-  { id: "aqara-fp1e", slug: "aqara-fp1e", name: "AI 智能存在传感器 FP1E", model: "FP1E", manufacturerId: "aqara", brand: "Aqara", categoryId: "sensor", summary: "Aqara 官网当前产品目录列出的 AI 存在传感器。", protocolIds: [], platformIds: [], capabilityIds: ["occupancy"], sourceIds: ["aqara-catalog-cn"], evidenceLevel: "official", verificationStatus: "official-listing", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["当前记录仅表示官网目录条目；未将存在检测分区、毫米波参数或网关兼容性推断为已核实规格。"] },
+  { id: "aqara-fp1e", slug: "aqara-fp1e", name: "AI 智能存在传感器 FP1E", model: "RTCZCGQ13LM", manufacturerId: "aqara", brand: "Aqara", categoryId: "sensor", summary: "采用 Zigbee 无线连接的 AI 存在传感器；第三方生态接入需通过支持的 Aqara 网关桥接。", protocolIds: ["zigbee"], platformIds: ["apple-home", "google-home", "alexa", "home-assistant"], capabilityIds: ["occupancy"], sourceIds: ["aqara-catalog-cn", "aqara-fp1e-spec", "aqara-fp1e-support"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "RTCZCGQ13LM", sourceId: "aqara-fp1e-spec" }, { name: "产品尺寸", value: "57 × 50 × 37 mm", sourceId: "aqara-fp1e-spec" }, { name: "无线连接", value: "Zigbee", sourceId: "aqara-fp1e-spec" }, { name: "额定输入", value: "5 V / 1 A", sourceId: "aqara-fp1e-spec" }, { name: "电源接口", value: "USB-A", sourceId: "aqara-fp1e-spec" }, { name: "工作温度", value: "−10–40 °C", sourceId: "aqara-fp1e-spec" }, { name: "工作湿度", value: "0–95% RH，无冷凝", sourceId: "aqara-fp1e-spec" }], limitations: ["需要支持 Zigbee 3.0 的 Aqara 网关完成添加。", "第三方生态支持路径为经 Aqara 网关桥接 Matter；不代表 FP1E 可直接独立加入所有第三方平台。", "兼容网关型号和固件以官方支持页为准。"] },
   { id: "aqara-fp310", slug: "aqara-fp310", name: "AI 多维人在传感器 FP310", model: "FP310", manufacturerId: "aqara", brand: "Aqara", categoryId: "sensor", summary: "Aqara 官网当前产品目录列出的免布线长续航人体感知产品。", protocolIds: [], platformIds: [], capabilityIds: ["occupancy"], sourceIds: ["aqara-catalog-cn"], evidenceLevel: "official", verificationStatus: "official-listing", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["官网目录宣传语不作为量化续航、感知距离或协议参数。"] },
   { id: "aqara-fp400", slug: "aqara-fp400", name: "AI 空间传感器 FP400", model: "FP400", manufacturerId: "aqara", brand: "Aqara", categoryId: "sensor", summary: "Aqara 官网当前产品目录列出的空间感知产品。", protocolIds: [], platformIds: [], capabilityIds: ["occupancy"], sourceIds: ["aqara-catalog-cn"], evidenceLevel: "official", verificationStatus: "official-listing", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["未核实精确感知区域、算法能力、供电与平台映射。"] },
   { id: "aqara-fp2", slug: "aqara-fp2", name: "Aqara 场景传感器 FP2", model: "FP2", manufacturerId: "aqara", brand: "Aqara", categoryId: "sensor", summary: "Aqara 官网当前产品目录列出的多目标、多姿态场景感知产品。", protocolIds: [], platformIds: [], capabilityIds: ["occupancy", "scene"], sourceIds: ["aqara-catalog-cn"], evidenceLevel: "official", verificationStatus: "official-listing", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["具体区域数量、安装高度、遮挡表现与各平台开放功能需按说明书及固件版本核实。"] },
-  { id: "aqara-p1", slug: "aqara-motion-sensor-p1", name: "人体传感器 P1", model: "P1", manufacturerId: "aqara", brand: "Aqara", categoryId: "sensor", summary: "Aqara 官网当前产品目录列出的人体移动传感器。", protocolIds: [], platformIds: [], capabilityIds: ["occupancy"], sourceIds: ["aqara-catalog-cn"], evidenceLevel: "official", verificationStatus: "official-listing", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["目录宣传续航不作为实测值；协议、感知角度和平台兼容性尚待具体型号资料核对。"] },
+  { id: "aqara-p1", slug: "aqara-motion-sensor-p1", name: "人体传感器 P1", model: "RTCGQ14LM", manufacturerId: "aqara", brand: "Aqara", categoryId: "sensor", summary: "Aqara 官方参数页确认的 Zigbee 3.0 人体移动传感器。", protocolIds: ["zigbee"], platformIds: [], capabilityIds: ["occupancy"], sourceIds: ["aqara-catalog-cn", "aqara-p1-spec"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "RTCGQ14LM", sourceId: "aqara-p1-spec" }, { name: "产品尺寸", value: "Φ33.1 × 41.6 mm（不含支架）", sourceId: "aqara-p1-spec" }, { name: "净重", value: "33 g（不含支架）", sourceId: "aqara-p1-spec" }, { name: "电池类型", value: "CR2450", sourceId: "aqara-p1-spec" }, { name: "无线连接", value: "Zigbee 3.0", sourceId: "aqara-p1-spec" }, { name: "工作温度", value: "−10–55 °C", sourceId: "aqara-p1-spec" }, { name: "工作湿度", value: "≤95% RH（无凝结）", sourceId: "aqara-p1-spec" }], limitations: ["传感器安装位置、遮挡、宠物活动和环境温度会影响实际触发效果；需要现场验证。"] },
   { id: "aqara-door-window-t1", slug: "aqara-door-window-sensor-t1", name: "门窗传感器 T1", model: "T1", manufacturerId: "aqara", brand: "Aqara", categoryId: "sensor", summary: "Aqara 官网当前产品目录列出的门窗开合状态传感器。", protocolIds: [], platformIds: [], capabilityIds: ["contact"], sourceIds: ["aqara-catalog-cn"], evidenceLevel: "official", verificationStatus: "official-listing", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["未在目录页核实无线协议、供电规格和具体平台兼容版本。"] },
   { id: "huawei-ai-sensor-ber-se10", slug: "huawei-ai-sensor-ber-se10", name: "华为鸿蒙智家 AI 超感传感器", model: "BER-SE10", manufacturerId: "huawei", brand: "华为鸿蒙智家", categoryId: "sensor", summary: "华为官方融合感知支持清单明确列出的传感器型号。", protocolIds: [], platformIds: ["harmony-home"], capabilityIds: ["occupancy"], sourceIds: ["huawei-wholehome-cn", "huawei-sensor-compatibility"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "BER-SE10", sourceId: "huawei-sensor-compatibility" }], limitations: ["官方清单确认该型号属于融合感知支持产品；具体主机兼容范围、软件版本与安装要求须一并核对官方清单。"] },
   { id: "huawei-ai-sensor-ber-se00", slug: "huawei-ai-sensor-ber-se00", name: "华为全屋智能 AI 超感传感器", model: "BER-SE00", manufacturerId: "huawei", brand: "华为全屋智能", categoryId: "sensor", summary: "华为官方融合感知支持清单明确列出的上一命名体系传感器型号。", protocolIds: [], platformIds: ["harmony-home"], capabilityIds: ["occupancy"], sourceIds: ["huawei-sensor-compatibility"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "BER-SE00", sourceId: "huawei-sensor-compatibility" }], limitations: ["不能仅凭型号相近推断 BER-SE00 与 BER-SE10 的硬件、固件或功能完全一致。"] },
+  { id: "huawei-ai-sensor-air", slug: "huawei-ai-sensor-air", name: "华为鸿蒙智家 AI 超感传感器 Air", model: null, manufacturerId: "huawei", brand: "华为鸿蒙智家", categoryId: "sensor", summary: "华为官方产品页介绍的红外、毫米波与光感融合传感器，面向空间存在感知与场景联动。", protocolIds: [], platformIds: ["harmony-home"], capabilityIds: ["occupancy", "illuminance"], sourceIds: ["huawei-wholehome-cn", "huawei-ai-sensor-air"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "感知方式", value: "红外、毫米波、光感三感融合", sourceId: "huawei-ai-sensor-air" }, { name: "安装孔径", value: "支持标准 75 mm 孔径内嵌安装（需预埋件并提前预留开孔、布线）", sourceId: "huawei-ai-sensor-air" }, { name: "响应时延宣传值", value: "0.6 秒（华为实验室数据；实际受主机、网络、灯具和联动链路影响）", sourceId: "huawei-ai-sensor-air" }], limitations: ["当前官方产品介绍页未在本轮确认完整产品型号代码。", "感知效果受环境温度、遮挡、人体姿态、吊顶高度和家具遮挡影响。", "官方页面明确响应时延来自实验室，不能作为所有现场的保证值。"] },
   { id: "orvibo-w10", slug: "orvibo-curtain-motor-w10", name: "直流超静音窗帘电机", model: "W10", manufacturerId: "orvibo", brand: "欧瑞博", categoryId: "curtain", summary: "欧瑞博官方安装参数页面列出 W10 电机及其额定参数。", protocolIds: ["wifi"], platformIds: [], capabilityIds: ["curtain-position"], sourceIds: ["orvibo-curtain-install"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "产品规格", value: "40 × 40 × 320 mm", sourceId: "orvibo-curtain-install" }, { name: "额定功率", value: "36 W", sourceId: "orvibo-curtain-install" }, { name: "额定输入", value: "100–240 V~，50/60 Hz", sourceId: "orvibo-curtain-install" }, { name: "额定电流", value: "1.3 A", sourceId: "orvibo-curtain-install" }, { name: "额定扭矩", value: "1.0 N·m", sourceId: "orvibo-curtain-install" }, { name: "额定转速", value: "118 rpm", sourceId: "orvibo-curtain-install" }, { name: "工作温度", value: "−0–50 °C（原文标注）", sourceId: "orvibo-curtain-install" }, { name: "无线频率", value: "Wi-Fi 2.4 GHz", sourceId: "orvibo-curtain-install" }, { name: "质保", value: "二年（官网页面标注）", sourceId: "orvibo-curtain-install" }], limitations: ["以上为厂商页面列示的理论参数，不代表本工作室实测。安装前需核对窗帘重量、轨道长度、供电、行程和控制方案。"] },
   { id: "orvibo-w13-w14", slug: "orvibo-curtain-track-w13-w14", name: "免测量可伸缩导轨", model: "W13 / W14", manufacturerId: "orvibo", brand: "欧瑞博", categoryId: "accessory", summary: "欧瑞博官方安装参数页面列出的窗帘伸缩导轨。", protocolIds: [], platformIds: [], capabilityIds: [], sourceIds: ["orvibo-curtain-install"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "可调长度", value: "W13：1.7–3 m；W14：2.2–4 m", sourceId: "orvibo-curtain-install" }, { name: "负载", value: "20 kg，单边 10 kg", sourceId: "orvibo-curtain-install" }, { name: "轨道壁厚", value: "1.3 mm", sourceId: "orvibo-curtain-install" }, { name: "导轨宽度", value: "63.2 mm", sourceId: "orvibo-curtain-install" }], limitations: ["厂商页面理论参数；适配电机、安装跨度和窗帘类型需现场复核。"] },
-  { id: "orvibo-mixpad-c", slug: "orvibo-mixpad-c", name: "MixPad C 超级智能开关", model: "MixPad C", manufacturerId: "orvibo", brand: "欧瑞博", categoryId: "switch", summary: "欧瑞博官方参数页面列出的 MixPad C 超级智能开关。", protocolIds: ["wifi", "ble"], platformIds: [], capabilityIds: ["on-off", "scene"], sourceIds: ["orvibo-curtain-install"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "处理器", value: "四核心 ARM Cortex-A35", sourceId: "orvibo-curtain-install" }, { name: "显示屏", value: "4 英寸，480 × 480", sourceId: "orvibo-curtain-install" }, { name: "供电", value: "220 V 零火线供电", sourceId: "orvibo-curtain-install" }, { name: "无线", value: "Wi-Fi、蓝牙（页面未明确蓝牙版本）", sourceId: "orvibo-curtain-install" }], limitations: ["官网页面未列明无线协议版本、开放 API、Matter 认证及跨平台兼容情况；不得自行推断。"] }
+  { id: "orvibo-mixpad-c", slug: "orvibo-mixpad-c", name: "MixPad C 超级智能开关", model: "MixPad C", manufacturerId: "orvibo", brand: "欧瑞博", categoryId: "switch", summary: "欧瑞博官方参数页面列出的 MixPad C 超级智能开关。", protocolIds: ["wifi"], platformIds: [], capabilityIds: ["on-off", "scene"], sourceIds: ["orvibo-curtain-install"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "处理器", value: "四核心 ARM Cortex-A35", sourceId: "orvibo-curtain-install" }, { name: "显示屏", value: "4 英寸，480 × 480", sourceId: "orvibo-curtain-install" }, { name: "供电", value: "220 V 零火线供电", sourceId: "orvibo-curtain-install" }, { name: "无线", value: "Wi-Fi、蓝牙（页面未明确蓝牙版本）", sourceId: "orvibo-curtain-install" }], limitations: ["官网页面未列明无线协议版本、开放 API、Matter 认证及跨平台兼容情况；不得自行推断。"] }
 ];
 
 export const knowledgeDomains = [
