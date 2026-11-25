@@ -9,6 +9,8 @@ export type MediaAsset = {
   kind: "image" | "video" | "diagram";
   altText: string;
   caption: string;
+  width: number;
+  height: number;
   sourceId: string;
   sourceUrl: string;
   publisher: string;
@@ -106,6 +108,7 @@ export function validateAssetRegistry() {
     if (!asset.sourceUrl.startsWith("https://")) errors.push(asset.id + " source URL must use HTTPS");
     if ("kind" in asset && asset.kind === "image" && !asset.altText.trim()) errors.push(asset.id + " image altText is required");
     if ("kind" in asset && asset.kind === "image" && !asset.caption.trim()) errors.push(asset.id + " image caption is required");
+    if ("kind" in asset && asset.kind === "image" && (!Number.isInteger(asset.width) || asset.width <= 0 || !Number.isInteger(asset.height) || asset.height <= 0)) errors.push(asset.id + " image dimensions must be positive integers");
     if (!/^\d{4}-\d{2}-\d{2}$/.test(asset.checkedAt)) errors.push(asset.id + " checkedAt must be an ISO date");
     if (asset.localPath && !asset.localPath.startsWith("/")) errors.push(asset.id + " localPath must be a site-root path");
     if ((asset.rightsStatus === "cleared" || asset.rightsStatus === "open-license") && !asset.license) errors.push(asset.id + " must record the license");
