@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageFrame } from "@/components/PageFrame";
@@ -113,7 +114,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
       <section className="content-section">
         <div className="section-heading"><h2>真实产品媒体与工程资产</h2><p>仅显示型号匹配、来源可追溯且展示权利已核验的本地资产；未授权的官网图片不会被热链或复制。</p></div>
-        {verifiedImages.length ? <div className="media-gallery">{verifiedImages.map((asset) => <figure className="media-figure" key={asset.id}><img src={asset.localPath} alt={asset.altText} loading="lazy" /><figcaption><strong>{asset.caption}</strong><span>{asset.publisher} · {asset.license} · {asset.checkedAt}</span></figcaption></figure>)}</div> : <div className="panel"><h2>暂无已核验产品图片</h2><p>当前没有同时满足准确型号、来源、版权 / 许可和本地文件校验的图片。资料未通过审核前不会用相似型号图片代替。</p></div>}
+        {verifiedImages.length ? <div className="media-gallery">{verifiedImages.map((asset) => <figure className="media-figure" key={asset.id}><Image src={asset.localPath} alt={asset.altText} width={asset.width} height={asset.height} unoptimized /><figcaption><strong>{asset.caption}</strong><span>{asset.publisher} · {asset.license} · {asset.checkedAt}</span></figcaption></figure>)}</div> : <div className="panel"><h2>暂无已核验产品图片</h2><p>当前没有同时满足准确型号、来源、版权 / 许可和本地文件校验的图片。资料未通过审核前不会用相似型号图片代替。</p></div>}
         <div className="product-detail" style={{ marginTop: 18 }}>
           <div className="panel"><h2>3D 模型</h2>{verifiedThreeD ? <><p>{verifiedThreeD.format.toUpperCase()} · {verifiedThreeD.provenance} · {verifiedThreeD.license}</p><p>{verifiedThreeD.accuracyNotes}</p><a href={verifiedThreeD.localPath} target="_blank" rel="noreferrer">打开已核验 3D 模型文件 ↗</a></> : <p>暂无与该准确型号匹配且权利已核验的 GLB / CAD / 扫描模型。</p>}</div>
           <div className="panel"><h2>光度文件</h2>{photometric ? <><p>{photometric.format.toUpperCase()} · {photometric.luminaireVariant} · {photometric.opticalVersion}</p><p>{photometric.notes}</p><a href={photometric.localPath} target="_blank" rel="noreferrer">打开已核验光度文件 ↗</a></> : <p>暂无与该准确灯具型号、光学版本匹配的 IES / LDT 文件；不以通用配光文件替代。</p>}</div>
