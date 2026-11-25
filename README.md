@@ -1,64 +1,82 @@
-# 奕明智能家居
+# YIMING STUDIO · 奕明智能家居知识库
 
-Next.js App Router、React、TypeScript、Tailwind CSS、PostgreSQL、Prisma 7 和 Zod。当前为 TASK-001 / P2 骨架，不进入 P3。
+当前开发版本：**1.0.0**  
+技术栈：Next.js 16 · React 19 · TypeScript · Tailwind CSS 4 · Prisma 7 · PostgreSQL · Zod
+
+## 项目目标
+
+面向中国市场的智能家居产品、协议生态、平台集成、灯光技术、空间场景和工程资料知识库。
+
+不包含：登录、商城、支付、留资、客户隐私采集和真实设备控制。
+
+产品信息只发布有来源的记录。未知型号、参数、兼容性、图片和 3D 资产保持未确认，不用虚构内容补齐。
+
+## 页面结构
+
+- \`/\`：YIMING STUDIO 品牌首页
+- \`/products/\`：产品全景矩阵、搜索、分类筛选、收藏和最多三款产品对比
+- \`/products/[slug]/\`：静态预生成的产品详情、参数、限制和来源
+- \`/manufacturers/\`：厂商与品牌入口
+- \`/protocols/\`：Matter、Thread、Zigbee、Z-Wave、KNX、Wi-Fi、Bluetooth LE
+- \`/platforms/\`：Apple Home、Google Home、Alexa、Home Assistant、华为鸿蒙智家
+- \`/lighting/\`：照明设计、显色、眩光、调光、IES/LDT 与初步光通量估算
+- \`/scenes/\`：客厅、卧室、玄关、餐厨场景逻辑
+- \`/engineering/\`：预埋布线、网络、调试、验收与交付
+- \`/search/\`：全站知识搜索
+
+旧 \`/devices/\` 与 \`/knowledge/[slug]/\` 路由保留跳转。旧 \`/api/devices\` 端点返回 410，不再暴露无来源的示例设备记录。
 
 ## 本地开发
 
-使用 Node.js 24；依赖版本由 package-lock.json 固定。
+需要 Node.js 24 和 npm。
 
-```bash
-export npm_config_cache=/workspace/.npm-cache
-export XDG_DATA_HOME="$PWD/.local/share"
-export XDG_CONFIG_HOME="$PWD/.local/config"
-export XDG_CACHE_HOME=/workspace/.cache
+\`\`\`bash
 npm ci
-# 仅首次创建；已有 .env 时保留原配置
- test -f .env || cp .env.example .env
-npx prisma dev --name yiming --port 51213 --db-port 51214 --shadow-db-port 51215 --detach
+# 首次创建本地配置；保留已有 .env，不要覆盖
+if (!(Test-Path .env)) { Copy-Item .env.example .env }
 npm run db:generate
-npm run dev -- --hostname 127.0.0.1
-```
+npm run dev
+\`\`\`
 
-示例连接串仅供本地 Prisma dev。不要用于部署；不要提交 .env 或数据库文件。
-Prisma 引擎下载要求允许 `binaries.prisma.sh`；保持 TLS 和校验文件验证开启。
+PowerShell 用户可直接执行上面的命令。不要提交 \`.env\`、数据库文件、密钥或 \`node_modules\`。
 
-## 验证
+公开产品与知识页面不访问数据库。当前 \`/api/health\` 仍通过 Prisma 对 PostgreSQL 执行 \`SELECT 1\`；正常返回 200，数据库不可用或配置错误返回 503。旧 Prisma 设备 seed 已改为 no-op，防止再次生成通用虚构产品。
 
-```bash
+## 验证命令
+
+\`\`\`bash
+npm run db:validate
 npm run lint
+npm run typecheck
 npm test
 npm run test:coverage
 npm run build
-npm run typecheck
+npx playwright install chromium
 npm run test:e2e
-curl --fail http://127.0.0.1:3000/api/health
-```
+\`\`\`
 
-Playwright 默认使用 `/usr/bin/chromium`；其他环境通过 `CHROMIUM_PATH` 指定 Chromium 可执行文件。
-健康接口会通过 Prisma 执行 `SELECT 1`；正常返回 HTTP 200 和 `{"status":"ok","database":"connected"}`，配置错误或数据库不可用时返回 HTTP 503，不泄露连接串或异常细节。不会自动执行数据库迁移。
+Playwright 默认使用其管理的 Chromium；如需指定本机浏览器，可设置 \`CHROMIUM_PATH\`。
 
-测试需要已启动的本地 PostgreSQL 和生成后的 Prisma 客户端。覆盖率命令覆盖 `src/lib/**` 与 `src/app/api/**`，并要求行、分支、函数覆盖率至少 80%；不计生成代码或首页组件，首页另有浏览器测试。当前验证结果与阻塞见 [TASK-001 记录](docs/worklog/TASK-001.md)。
+CI 工作流：\`.github/workflows/ci.yml\`。GitHub Actions 的实际状态是发布验收依据；仅提交工作流不代表检查已经通过。
 
-## 当前范围
+## 目录约定
 
-提供中文响应式首页、数据库客户端和健康接口源码。首页为 P2 最小展示骨架，尚未对照原始参考页面进行视觉验收，也未实现业务表单或设备控制。Prisma schema 中 Inquiry 仅为待确认的骨架模型，本轮未建表或迁移。
+- \`src/data/catalog.ts\`：厂商、分类、产品、协议、平台、能力与来源登记
+- \`src/data/knowledge.ts\`：协议、灯光、场景和工程知识
+- \`src/lib/catalog-schema.ts\`：Zod 数据结构与关系校验
+- \`src/app/\`：Next.js 路由
+- \`src/components/\`：站点组件、搜索、产品对比、灯光估算
+- \`docs/\`：架构、素材真实性、来源和阶段记录
+- \`tests/\`：目录校验、API 测试和浏览器测试
 
-## 生产健康接口复验
+## 资料真实性与资产原则
 
-构建完成后，在两个终端分别启动 `npm run start -- --hostname 127.0.0.1 --port 3100`，以及 `DATABASE_URL=postgresql://invalid:invalid@127.0.0.1:1/unavailable npm run start -- --hostname 127.0.0.1 --port 3101`，然后执行 `node scripts/qa/health-smoke.mjs`。第二个实例仅用于验证数据库不可用时的 503 响应，不修改正常数据库。验证完停止这两个测试实例。
+- 官方目录条目不代表全部规格已经确认。
+- 型号、协议、兼容性和参数必须绑定来源。
+- 不发布无授权的厂商图片、视频或 3D 模型。
+- 当前没有通过验证的本地产品图片或 3D 资产，因此产品详情如实显示缺失状态。
+- 灯光估算器采用流明法，仅用于初步估算；精确照度分析需要准确 IES/LDT 和完整空间输入。
 
-## 开发工具依赖与代码索引
+## 部署状态
 
-TypeScript ESLint 8.72.1 的 minimatch 间接依赖受到 GHSA-g3hv-75wg-m249 影响。package.json 仅对该版本的 typescript-estree 设置 minimatch 11.0.1 覆盖；保留 Next.js / ESLint 主版本及其他 minimatch 依赖。升级 typescript-eslint 时重新评估并移除此临时覆盖。`npm run check:lint-deps` 实测项目服务的包含/排除匹配。
-
-覆盖率保留 Node 原生报告，同时从其 test:coverage 事件生成 SCALE 0.58 可识别的汇总，数值取行、分支、函数覆盖率的最小值。不更改测试结果、80% 阈值或退出码。
-
-可选代码分析工具仅在工作区安装，不修改环境设置或全局 agent 配置：
-
-```bash
-bash scripts/qa/code-intelligence.sh
-export PATH="/workspace/.tools/codegraph/node_modules/.bin:/workspace/.tools/bin:$PATH"
-npm_config_cache=/workspace/.npm-cache npx -y @hongmaple0820/scale-engine@0.58.0 codegraph status --dir . --json
-```
-
-需要 npm 与 uv；安装固定版本 CodeGraph 1.6.2、graphifyy 0.9.103（官方发行名，命令为 graphify）。Graphify 只执行本地代码 AST 分析，不调用模型；不提供文档/图片语义分析。索引目录可重新生成，不提交数据库或图缓存。
+尚未发布生产环境。Cloudflare Workers + OpenNext 为候选方案，需完成适配器兼容验证、预览部署、域名、回滚和实际浏览器验收后才能确定。
