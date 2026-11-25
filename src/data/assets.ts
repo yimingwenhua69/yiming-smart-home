@@ -25,6 +25,7 @@ export type ThreeDAsset = {
   id: string;
   deviceModelId: string;
   format: "glb" | "gltf" | "step" | "obj";
+  sourceId: string;
   sourceUrl: string;
   publisher: string;
   provenance: "manufacturer-cad" | "physical-scan" | "verified-reconstruction";
@@ -40,6 +41,7 @@ export type PhotometricProfile = {
   id: string;
   deviceModelId: string;
   format: "ies" | "ldt";
+  sourceId: string;
   sourceUrl: string;
   publisher: string;
   luminaireVariant: string;
