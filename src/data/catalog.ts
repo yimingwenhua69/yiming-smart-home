@@ -170,7 +170,6 @@ type ProductModelSeed = {
   integrationModels?: IntegrationModelMapping[];
   compatibilityRecords?: CompatibilitySeed[];
   protocolIds: string[];
-  platformIds: string[];
   capabilityIds: string[];
   sourceIds: string[];
   evidenceLevel: EvidenceLevel;
