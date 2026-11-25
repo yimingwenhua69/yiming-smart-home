@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { brands, compatibilityRecords, deviceModels, integrationSystems, manufacturers, products, protocols, knowledgeDomains } from "@/data/catalog";
+import { brands, compatibilityRecords, deviceModels, integrationMethods, integrationSystems, manufacturers, products, protocols, knowledgeDomains } from "@/data/catalog";
 import { engineeringGuides, lightingGuides, protocolGuides, sceneGuides } from "@/data/knowledge";
 type SearchRecord = { id:string; title:string; description:string; type:string; href:string; terms:string };
 const records: SearchRecord[] = [
-  ...products.map((item)=>({id:item.id,title:item.name,description:item.summary,type:"产品",href:"/products/"+item.slug+"/",terms:[brands.find((brand)=>brand.id===item.brandId)?.name??"",...deviceModels.filter((model)=>model.productId===item.id).flatMap((model)=>[model.modelCode??"",...model.protocolIds,...model.integrationModels.flatMap((mapping)=>[mapping.modelId,integrationSystems.find((integration)=>integration.id===mapping.integrationId)?.name??mapping.integrationId]),...compatibilityRecords.filter((record)=>record.deviceModelId===model.id).flatMap((record)=>[record.targetId,...record.features])])].join(" ")})),
+  ...products.map((item)=>({id:item.id,title:item.name,description:item.summary,type:"产品",href:"/products/"+item.slug+"/",terms:[brands.find((brand)=>brand.id===item.brandId)?.name??"",...deviceModels.filter((model)=>model.productId===item.id).flatMap((model)=>[model.modelCode??"",...model.protocolIds,...model.integrationModels.flatMap((mapping)=>[mapping.modelId,integrationSystems.find((integration)=>integration.id===mapping.integrationId)?.name??mapping.integrationId]),...compatibilityRecords.filter((record)=>record.deviceModelId===model.id).flatMap((record)=>[record.targetId,...record.features,record.methodId?integrationMethods.find((method)=>method.id===record.methodId)?.name??record.methodId:""])])].join(" ")})),
   ...manufacturers.map((item)=>({id:item.id,title:item.englishName+" / "+item.name,description:item.note,type:"厂商",href:"/manufacturers/#"+item.id,terms:item.website+" "+item.country})),
   ...brands.map((item)=>({id:item.id,title:item.name,description:item.note,type:"品牌",href:"/manufacturers/#"+item.id,terms:item.website})),
   ...protocols.map((item)=>({id:item.id,title:item.name,description:item.summary,type:"协议",href:"/protocols/#"+item.id,terms:item.family+" "+item.transport})),
