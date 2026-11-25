@@ -32,26 +32,24 @@ const capabilitySchema = z.object({ id, name: z.string(), valueType: z.string() 
 
 export function validateCatalog() {
   const errors: string[] = [];
-  const collections = [
-    ["source",sources,sourceSchema],
-    ["manufacturer",manufacturers,manufacturerSchema],
-    ["category",categories,categorySchema],
-    ["product",products,productSchema],
-    ["protocol",protocols,protocolSchema],
-    ["platform",platforms,platformSchema],
-    ["capability",capabilities,capabilitySchema]
-  ] as const;
   const ids = new Map<string,Set<string>>();
-  for (const [name,items,schema] of collections) {
+  const checkCollection=(name:string,items:readonly {id:string}[],schema:z.ZodType)=>{
     const seen=new Set<string>();
-    for (const item of items) {
+    for(const item of items){
       const parsed=schema.safeParse(item);
       if(!parsed.success) errors.push(name+" "+item.id+": "+parsed.error.issues.map((issue)=>issue.path.join(".")+" "+issue.message).join("; "));
       if(seen.has(item.id)) errors.push("duplicate "+name+" id: "+item.id);
       seen.add(item.id);
     }
     ids.set(name,seen);
-  }
+  };
+  checkCollection("source",sources,sourceSchema);
+  checkCollection("manufacturer",manufacturers,manufacturerSchema);
+  checkCollection("category",categories,categorySchema);
+  checkCollection("product",products,productSchema);
+  checkCollection("protocol",protocols,protocolSchema);
+  checkCollection("platform",platforms,platformSchema);
+  checkCollection("capability",capabilities,capabilitySchema);
   const sourceIds=ids.get("source")??new Set<string>();
   const manufacturerIds=ids.get("manufacturer")??new Set<string>();
   const categoryIds=ids.get("category")??new Set<string>();
