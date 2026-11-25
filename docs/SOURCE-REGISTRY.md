@@ -28,6 +28,18 @@ This registry records sources to research. A source listing does not by itself p
 | Aqara FP1E | https://www.aqara.cn/Aqara-AI-Presence-Detector-FP1E_spec | RTCZCGQ13LM, Zigbee and official power / environmental parameters |
 | Aqara Motion Sensor P1 | https://www.aqara.cn/cn/Motion-Sensor-P1_spec | RTCGQ14LM, Zigbee 3.0, CR2450 and official dimensions |
 | Aqara SDK supported device list | https://opendoc.aqara.cn/docs/SDK%E5%BC%80%E5%8F%91/Android%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%91/%E9%85%8D%E7%BD%91SDK%E6%94%AF%E6%8C%81%E8%AE%BE%E5%A4%87%E6%B8%85%E5%8D%95.html | Aqara SDK internal model identifiers; not retail SKU or generic Zigbee model IDs |
+| Aqara Motion Sensor T1 | https://www.aqara.cn/d17_spec | RTCGQ12LM, Zigbee 3.0, CR2450, 7 m, 170° |
+| Aqara Motion Sensor E1 | https://www.aqara.cn/Motion-Sensor-E1_spec.html | RTCGO15LM, Zigbee 3.0, CR2450, 7 m, 170° |
+| Aqara Door & Window Sensor E1 | https://www.aqara.cn/cn/Door%20and%20Window%20Sensor%20E1_spec | MCCGQ14LM, Zigbee 3.0, CR1632, 22 mm gap |
+| Aqara Door & Window Sensor P1 | https://www.aqara.cn/cn/aqara-door-and-windows-sensor-p1_spec | MCCGQ13LM, Zigbee 3.0, CR123A, dimensions and environment range |
+| Aqara Door & Window Sensor P1 support | https://aqara.cn/cn/aqara-door-and-windows-sensor-p1_support | Installation gap profiles, Zigbee gateway requirement and alignment cautions |
+| Aqara Temperature & Humidity Sensor T1 | https://www.aqara.cn/d20_spec | WSDCGQ12LM, temperature / humidity / pressure ranges and accuracy |
+| Aqara Temperature & Humidity Sensor T1 support | https://www.aqara.cn/d20_support | Gateway pairing, reporting interval and environmental notes; temperature-range wording differs from spec page |
+| Aqara Water Leak Sensor T1 | https://www.aqara.cn/d19_spec | SJCGQ12LM, Zigbee 3.0, CR2032 and environment range |
+| Aqara Water Leak Sensor T1 support | https://www.aqara.cn/d19_support | IP68, 0.5 mm trigger level and conditional battery-life statement |
+| Aqara Light Sensor T1 | https://www.aqara.cn/cn/d16_spec | GZCGQ11LM, Zigbee 3.0, 0–80000 lux and light-source-dependent accuracy |
+| Aqara Vibration Sensor T1 | https://www.aqara.cn/d30_spec | DJT12LM, Zigbee, CR2032 and dimensions |
+| Aqara Vibration Sensor T1 support | https://aqara.cn/cn/d30_support | App sensitivity adjustment and vibration / movement event behavior |
 | ORVIBO S5 | https://global.orvibo.com/cn/product/s5.html | 24° / 36° beam angles and 0°–25° adjustment; historical detail page, theoretical lab data and illustrative imagery only |
 
 ## Open compatibility and engineering sources
