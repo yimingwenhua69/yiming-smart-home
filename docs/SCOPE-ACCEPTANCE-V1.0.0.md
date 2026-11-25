@@ -34,17 +34,18 @@
 - 厂商：5
 - 产品分类：7
 - 协议：8
-- 平台：5
+- 平台：6（Apple Home、Google Home、Amazon Alexa、Home Assistant、华为鸿蒙智家、涂鸦智能 / Smart Life）
 - 能力定义：16
 - 知识领域：6
 - 品牌：6（Aqara、米家、Xiaomi、华为全屋智能、欧瑞博、涂鸦智能）
 - 产品档案：27
 - 设备型号记录：27（通过 productId 关联 Product；目录证据与规格证据分别标记）
 - 独立规格记录：134（每项关联准确 DeviceModel 和来源）
-- 兼容 / 集成路径记录：5（Aqara M200、FP1E 网关 Matter 桥接、华为鸿蒙智家传感器；未确认平台保持空白）
-- 集成系统：2（Aqara SDK、Aqara 网关 Matter 桥接）
+- 兼容 / 集成路径记录：6（Aqara M200、FP1E 网关 Matter 桥接、华为鸿蒙智家传感器；未确认平台保持空白）
+- 集成系统：4（Aqara SDK / Matter 桥接、TuyaOS Link SDK、Tuya Cloud API）
+- 集成方法：7（原生、Matter、LAN API、Cloud API、MQTT、Webhook、第三方桥接）
 - SDK 型号映射：14（Aqara SDK 内部 modelId，明确不等同零售 SKU）
-- 来源：37（官方目录、官方规格、官方兼容清单、标准与社区数据库）
+- 来源：40（官方目录、官方规格、官方兼容清单、标准与社区数据库）
 - 硬件版本记录：0（结构已建立，暂无独立核验的版本数据）
 - 本工作室实测记录：0（未进行的实测不伪造）
 - 图片 / 3D / IES-LDT 资产：0（审核结构已建立，未通过授权和型号核验的资产不发布）
