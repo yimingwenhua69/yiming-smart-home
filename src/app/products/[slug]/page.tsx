@@ -113,6 +113,12 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             : integrationSystems.find((item) => item.id === record.targetId)?.name ?? record.targetId;
           return <div className="source-item" key={record.id}><div><strong>{targetName} · {compatibilityLabel[record.status]}</strong><p>{record.features.join("、") || "未列明具体功能"}<br />{record.notes}<br />{record.evidenceLevel} · {record.checkedAt}</p></div><span>{record.targetType === "platform" ? "平台兼容" : "集成路径"}</span></div>;
         })}</div> : <div className="panel"><p>尚无可独立引用的第三方平台兼容记录。设备可能存在网关桥接或私有集成路径，但在取得对应官方兼容清单或可复现测试前不作推断。</p></div>}
+
+        <div className="section-heading" style={{ marginTop: 24 }}><h2>厂商 SDK / 集成设备映射</h2><p>内部映射 ID 仅用于对应集成程序，不等同于零售 SKU 或通用协议 modelId。</p></div>
+        {model.integrationModels.length ? <div className="source-list">{model.integrationModels.map((mapping) => {
+          const integration = integrationSystems.find((item) => item.id === mapping.integrationId);
+          return <div className="source-item" key={mapping.integrationId + mapping.modelId}><div><strong>{integration?.name ?? mapping.integrationId}</strong><p>{mapping.modelId}<br />{integration?.notes}</p></div><span>{getSourceById(mapping.sourceId)?.title ?? "来源待核实"}</span></div>;
+        })}</div> : <div className="panel"><p>当前没有已核实的厂商 SDK 或第三方集成内部设备映射。</p></div>}
       </section>
 
       <section className="content-section">
