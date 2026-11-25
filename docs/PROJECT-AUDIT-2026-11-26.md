@@ -63,14 +63,14 @@ The branch now contains the first public knowledge-base implementation. See:
 - \`docs/worklog/V1.0.0-TASK-001.md\`
 - \`docs/ARCHITECTURE-V1.0.0.md\`
 
-Current catalog: 14 product records and 18 source records. Product pages no longer query PostgreSQL. Generic seed records are retired; the old API returns 410. CI has been added but has not yet been verified by an actual Actions run at the time of this update.
+Historical main-branch snapshot: 14 product records and 18 source records. The active 1.0.0 branch has since expanded and normalized the catalog. Product pages no longer query PostgreSQL. Generic seed records are retired; the old API returns 410. CI has been added but has not yet been verified by an actual Actions run at the time of this update.
 
-Outstanding gaps: normalized Product / DeviceModel / HardwareRevision separation, current licensed product images, verified 3D assets, accurate IES/LDT files and photometric simulation, broader manufacturer research, full-text indexing of all knowledge content, OpenNext deployment validation, and production visual acceptance.
+Outstanding gaps after normalization: real hardware revision and studio verification records, licensed product images, verified 3D assets, accurate IES/LDT files and photometric simulation, broader manufacturer research, full-text indexing of all knowledge content, OpenNext deployment validation, and production visual acceptance.
 
 No claim is made that local PowerShell commands, npm tests, builds, SCALE gates, browser tests, deployment, or real-device tests were executed by this remote repository update.
 
 
-Current catalog after model-level research: 15 product records, 15 device-model records, 5 brands, and 23 sources. Added official Aqara M200, FP2 and Door/Window Sensor T1 support/spec references and an Orvibo S5 record explicitly marked for model verification because its detail page is historical and uses lab-theory data.
+Historical interim 1.0.0 snapshot: 15 product records, 15 device-model records, 5 brands, and 23 sources. See the latest continuation below for current counts. Added official Aqara M200, FP2 and Door/Window Sensor T1 support/spec references and an Orvibo S5 record explicitly marked for model verification because its detail page is historical and uses lab-theory data.
 
 ## Latest 1.0.0 continuation (2026-11-26)
 
