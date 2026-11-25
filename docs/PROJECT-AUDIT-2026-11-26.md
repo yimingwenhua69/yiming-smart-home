@@ -12,8 +12,8 @@ Working branch: codex/yiming-smart-home-v1.0.0
 - Data stack in the current branch: Prisma 7.10.1 + PostgreSQL + pg adapter + Zod.
 - Main's latest inspected commit is P3 TASK-002 device knowledge base (2026-11-09).
 - The current public repository README and handoff notes contain stale P2 descriptions; the latest commit history and source files take precedence.
-- The current product seed contains 25 generic, unbranded placeholder entries such as “智能吸顶灯” and “智能网关”. They do not identify an exact manufacturer, brand, product model, official product page or evidence source. They are not acceptable as public product records.
-- The current product API and device pages depend on PostgreSQL at request time.
+- The original product seed contained 25 generic, unbranded placeholder entries such as “智能吸顶灯” and “智能网关”. They did not identify an exact manufacturer, brand, product model, official product page or evidence source. The 1.0.0 branch now retires that seed and returns HTTP 410 from the old device API.
+- The public 1.0.0 product and knowledge pages now read version-controlled catalog data; the old device API has been retired. PostgreSQL remains only for the legacy health endpoint.
 - The current home page uses CSS shapes as a decorative illustration; it is not a real photographed smart-home scene.
 - Current product details are limited to generic description, protocol, price note, install condition and selection points. There is no complete manufacturer/model/specification/source/verification/media/3D model structure.
 - Existing favorite state is localStorage-only. It does not require an account and can be retained as an optional browser feature.
@@ -40,7 +40,7 @@ Convert the public read-only knowledge base to static generation:
 - No runtime PostgreSQL requirement for public browsing.
 - Cloudflare Workers Static Assets as the zero-cost-first deployment target.
 
-Do not publish unverified product data or images to meet a numerical quota. The 25-product requirement is a release gate, not permission to fabricate.
+Do not publish unverified product data or images to meet a numerical quota. Product quantity is not a release target; evidence quality takes precedence.
 
 ## Immediate remediation
 
@@ -54,3 +54,17 @@ Do not publish unverified product data or images to meet a numerical quota. The 
 ## Audit limitation
 
 This audit is based on the GitHub main branch source files and commit metadata available on 2026-11-26. No claim is made that the user's Windows working directory has been read or modified. Local-only files not pushed to this repository remain outside this audit.
+
+
+## 1.0.0 branch implementation update (2026-11-26)
+
+The branch now contains the first public knowledge-base implementation. See:
+- \`docs/SCOPE-ACCEPTANCE-V1.0.0.md\`
+- \`docs/worklog/V1.0.0-TASK-001.md\`
+- \`docs/ARCHITECTURE-V1.0.0.md\`
+
+Current catalog: 14 product records and 18 source records. Product pages no longer query PostgreSQL. Generic seed records are retired; the old API returns 410. CI has been added but has not yet been verified by an actual Actions run at the time of this update.
+
+Outstanding gaps: normalized Product / DeviceModel / HardwareRevision separation, current licensed product images, verified 3D assets, accurate IES/LDT files and photometric simulation, broader manufacturer research, full-text indexing of all knowledge content, OpenNext deployment validation, and production visual acceptance.
+
+No claim is made that local PowerShell commands, npm tests, builds, SCALE gates, browser tests, deployment, or real-device tests were executed by this remote repository update.
