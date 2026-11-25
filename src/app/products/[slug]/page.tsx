@@ -2,7 +2,23 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageFrame } from "@/components/PageFrame";
-import { capabilities, getBrandById, getCategoryById, getDeviceModelsForProduct, getManufacturerById, getProductBySlug, getSourceById, platforms, products, protocols } from "@/data/catalog";
+import {
+  capabilities,
+  getBrandById,
+  getCategoryById,
+  getCompatibilityRecordsForDeviceModel,
+  getDeviceModelsForProduct,
+  getDeviceVerificationsForDeviceModel,
+  getHardwareRevisionsForDeviceModel,
+  getManufacturerById,
+  getProductBySlug,
+  getProductSpecificationsForDeviceModel,
+  getSourceById,
+  integrationSystems,
+  platforms,
+  products,
+  protocols
+} from "@/data/catalog";
 import { getMediaAssetsForModel, getVerifiedImagesForModel, getVerifiedPhotometricProfile, getVerifiedThreeDAsset } from "@/data/assets";
 
 export const dynamicParams = false;
@@ -17,6 +33,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return product ? { title: product.name, description: product.summary } : { title: "产品未找到" };
 }
 
+const compatibilityLabel = {
+  supported: "官方支持",
+  partial: "部分支持",
+  unsupported: "不支持",
+  unverified: "待核实"
+} as const;
+
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const product = getProductBySlug(slug);
@@ -24,15 +47,28 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const models = getDeviceModelsForProduct(product.id);
   const model = models[0];
   if (!model) notFound();
+
   const manufacturer = getManufacturerById(product.manufacturerId);
   const brand = getBrandById(product.brandId);
   const category = getCategoryById(product.categoryId);
-  const sourceIds = Array.from(new Set(models.flatMap((item) => item.sourceIds)));
-  const productSources = sourceIds.map(getSourceById).filter((source) => source !== undefined);
+  const specifications = getProductSpecificationsForDeviceModel(model.id);
+  const compatibility = getCompatibilityRecordsForDeviceModel(model.id);
+  const revisions = getHardwareRevisionsForDeviceModel(model.id);
+  const verifications = getDeviceVerificationsForDeviceModel(model.id);
   const media = getMediaAssetsForModel(model.id);
   const verifiedImages = getVerifiedImagesForModel(model.id);
   const verifiedThreeD = getVerifiedThreeDAsset(model.id);
   const photometric = getVerifiedPhotometricProfile(model.id);
+
+  const sourceIds = Array.from(new Set([
+    ...models.flatMap((item) => item.sourceIds),
+    ...specifications.map((item) => item.sourceId),
+    ...compatibility.map((item) => item.sourceId),
+    ...revisions.flatMap((item) => item.sourceIds),
+    ...verifications.flatMap((item) => item.sourceIds)
+  ]));
+  const productSources = sourceIds.map(getSourceById).filter((source) => source !== undefined);
+
   return (
     <PageFrame eyebrow="PRODUCT / DEVICE MODEL / SOURCE VERIFIED" title={product.name} description={product.summary}>
       <section className="content-section">
@@ -43,7 +79,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               <dt>品牌</dt><dd>{brand?.name ?? "待核实"}</dd>
               <dt>制造商</dt><dd>{manufacturer?.name ?? "待核实"}</dd>
               <dt>产品型号</dt><dd>{models.map((item) => item.modelCode ?? "型号代码未公开").join(" / ")}</dd>
-              <dt>硬件版本</dt><dd>{model.hardwareRevision ?? "未单独核实"}</dd>
+              <dt>硬件版本</dt><dd>{revisions.length ? revisions.map((revision) => revision.revisionCode).join(" / ") : "尚无独立核验记录"}</dd>
               <dt>品类</dt><dd>{category?.name ?? "待分类"}</dd>
               <dt>销售区域</dt><dd>{model.region === "CN" ? "中国大陆" : model.region}</dd>
               <dt>最近核验</dt><dd>{model.lastVerified}</dd>
@@ -59,21 +95,39 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           </div>
         </div>
       </section>
+
       <section className="content-section">
-        <div className="section-heading"><h2>技术参数</h2><p>只显示来源明确的参数；空字段不以行业常见值代填。</p></div>
-        {model.specifications.length ? <table className="data-table"><thead><tr><th>参数</th><th>官方资料记录</th><th>来源</th></tr></thead><tbody>{model.specifications.map((spec) => <tr key={spec.name}><td>{spec.name}</td><td>{spec.value}</td><td>{getSourceById(spec.sourceId)?.title ?? "来源待核实"}</td></tr>)}</tbody></table> : <div className="panel"><p>当前来源仅能确认产品目录条目，暂无可公开确认的完整技术规格。继续核对官方说明书、认证资料与具体硬件版本。</p></div>}
+        <div className="section-heading"><h2>技术参数</h2><p>规格已独立关联到设备型号，每项参数保留自己的来源和核验日期。</p></div>
+        {specifications.length ? <table className="data-table"><thead><tr><th>参数</th><th>官方资料记录</th><th>来源</th><th>核验日期</th></tr></thead><tbody>{specifications.map((spec) => <tr key={spec.id}><td>{spec.name}</td><td>{spec.value}{spec.unit ? " " + spec.unit : ""}</td><td>{getSourceById(spec.sourceId)?.title ?? "来源待核实"}</td><td>{spec.checkedAt}</td></tr>)}</tbody></table> : <div className="panel"><p>当前来源仅能确认产品目录条目，暂无可公开确认的完整技术规格。继续核对官方说明书、认证资料与具体硬件版本。</p></div>}
       </section>
+
       <section className="content-section">
-        <div className="section-heading"><h2>协议、平台与能力</h2><p>仅显示已有证据支持的关联，不通过产品名称推断协议和生态兼容。</p></div>
+        <div className="section-heading"><h2>协议、平台与集成</h2><p>平台兼容不从协议名称推断；只显示有来源支持的兼容记录。</p></div>
         <div className="product-detail">
           <div className="panel"><h2>协议</h2><p>{model.protocolIds.length ? model.protocolIds.map((id) => protocols.find((item) => item.id === id)?.name ?? id).join("、") : "未核实"}</p></div>
-          <div className="panel"><h2>平台与能力</h2><p>平台：{model.platformIds.length ? model.platformIds.map((id) => platforms.find((item) => item.id === id)?.name ?? id).join("、") : "未核实"}</p><p>能力：{model.capabilityIds.length ? model.capabilityIds.map((id) => capabilities.find((item) => item.id === id)?.name ?? id).join("、") : "未核实"}</p></div>
+          <div className="panel"><h2>设备能力</h2><p>{model.capabilityIds.length ? model.capabilityIds.map((id) => capabilities.find((item) => item.id === id)?.name ?? id).join("、") : "未核实"}</p></div>
+        </div>
+        {compatibility.length ? <div className="source-list">{compatibility.map((record) => {
+          const targetName = record.targetType === "platform"
+            ? platforms.find((item) => item.id === record.targetId)?.name ?? record.targetId
+            : integrationSystems.find((item) => item.id === record.targetId)?.name ?? record.targetId;
+          return <div className="source-item" key={record.id}><div><strong>{targetName} · {compatibilityLabel[record.status]}</strong><p>{record.features.join("、") || "未列明具体功能"}<br />{record.notes}<br />{record.evidenceLevel} · {record.checkedAt}</p></div><span>{record.targetType === "platform" ? "平台兼容" : "集成路径"}</span></div>;
+        })}</div> : <div className="panel"><p>尚无可独立引用的第三方平台兼容记录。设备可能存在网关桥接或私有集成路径，但在取得对应官方兼容清单或可复现测试前不作推断。</p></div>}
+      </section>
+
+      <section className="content-section">
+        <div className="section-heading"><h2>硬件版本与实测验证</h2><p>官方规格资料、硬件版本和本工作室实测是不同证据类型。</p></div>
+        <div className="product-detail">
+          <div className="panel"><h2>硬件版本</h2>{revisions.length ? <ul>{revisions.map((revision) => <li key={revision.id}>{revision.revisionCode} · {revision.region} · {revision.checkedAt}<p>{revision.notes}</p></li>)}</ul> : <p>尚无单独确认的硬件版本记录。</p>}</div>
+          <div className="panel"><h2>实测验证</h2>{verifications.length ? <ul>{verifications.map((verification) => <li key={verification.id}>{verification.verificationType} · {verification.result} · {verification.testedAt}<p>{verification.observations.join("；")}</p></li>)}</ul> : <p>本工作室尚未对该型号进行可公开复现的实验室或现场实测。厂商官方参数不等同于本工作室实测。</p>}</div>
         </div>
       </section>
+
       <section className="content-section">
         <div className="section-heading"><h2>安装与验证注意事项</h2></div>
         <div className="panel"><ul>{model.limitations.map((item) => <li key={item} style={{ marginBottom: 10, color: "var(--muted)", fontSize: 12, lineHeight: 1.9 }}>{item}</li>)}</ul></div>
       </section>
+
       <section className="content-section">
         <div className="section-heading"><h2>资料来源</h2><p>来源日期与发布方保留在记录中，后续可继续追加说明书、认证和现场验证记录。</p></div>
         <div className="source-list">{productSources.map((source) => <div className="source-item" key={source.id}><div><strong>{source.title}</strong><p>{source.publisher} · {source.evidenceLevel} · {source.checkedAt}<br />{source.notes}</p></div><a href={source.url} target="_blank" rel="noreferrer">打开来源 ↗</a></div>)}</div>
