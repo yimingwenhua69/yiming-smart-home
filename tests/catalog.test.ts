@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { brands, capabilities, categories, compatibilityRecords, deviceModels, deviceVerifications, hardwareRevisions, integrationSystems, manufacturers, productSpecifications, products, protocols, sources } from "../src/data/catalog";
+import { brands, capabilities, categories, compatibilityRecords, deviceModels, deviceVerifications, hardwareRevisions, integrationMethods, integrationSystems, manufacturers, productSpecifications, products, protocols, sources } from "../src/data/catalog";
 import { catalogRegistry, validateCatalog } from "../src/lib/catalog-schema";
 import { mediaAssets, photometricProfiles, threeDAssets, validateAssetRegistry } from "../src/data/assets";
 
 test("catalog entity identifiers are unique", () => {
-  for (const collection of [sources, manufacturers, brands, categories, products, deviceModels, protocols, capabilities, integrationSystems, hardwareRevisions, productSpecifications, compatibilityRecords, deviceVerifications]) {
+  for (const collection of [sources, manufacturers, brands, categories, products, deviceModels, protocols, capabilities, integrationSystems, integrationMethods, hardwareRevisions, productSpecifications, compatibilityRecords, deviceVerifications]) {
     const ids = collection.map((item) => item.id);
     assert.equal(new Set(ids).size, ids.length, "duplicate identifier found");
   }
@@ -152,8 +152,8 @@ test("catalog validator catches broken foreign keys and child-parent mismatches"
     ],
     compatibilityRecords: [
       ...catalogRegistry.compatibilityRecords,
-      { id: "compat-parent-mismatch", deviceModelId: baseModel.id, targetType: "platform", targetId: "missing-platform", status: "supported", evidenceLevel: "official", sourceId: validSourceId, features: [], checkedAt: "2026-11-26", notes: "" },
-      { id: "compat-missing-integration", deviceModelId: "missing-model", targetType: "integration", targetId: "missing-integration", status: "unverified", evidenceLevel: "documented", sourceId: "missing-source", features: [], checkedAt: "2026-11-26", notes: "" }
+      { id: "compat-parent-mismatch", deviceModelId: baseModel.id, targetType: "platform", targetId: "missing-platform", methodId: "missing-method", status: "supported", evidenceLevel: "official", sourceId: validSourceId, features: [], checkedAt: "2026-11-26", notes: "" },
+      { id: "compat-missing-integration", deviceModelId: "missing-model", targetType: "integration", targetId: "missing-integration", methodId: null, status: "unverified", evidenceLevel: "documented", sourceId: "missing-source", features: [], checkedAt: "2026-11-26", notes: "" }
     ],
     deviceVerifications: [
       ...catalogRegistry.deviceVerifications,
@@ -172,6 +172,6 @@ test("catalog validator catches broken foreign keys and child-parent mismatches"
     "references missing specification", "specification parent mismatch",
     "references missing compatibility record", "compatibility parent mismatch",
     "references missing verification", "verification parent mismatch",
-    "references missing device model", "references missing platform", "references missing integration"
+    "references missing device model", "references missing platform", "references missing integration", "references missing integration method"
   ]) assert.ok(result.errors.some((error) => error.includes(fragment)), "expected validation error: " + fragment);
 });
