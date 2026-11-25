@@ -112,6 +112,15 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       </section>
 
       <section className="content-section">
+        <div className="section-heading"><h2>真实产品媒体与工程资产</h2><p>仅显示型号匹配、来源可追溯且展示权利已核验的本地资产；未授权的官网图片不会被热链或复制。</p></div>
+        {verifiedImages.length ? <div className="media-gallery">{verifiedImages.map((asset) => <figure className="media-figure" key={asset.id}><img src={asset.localPath} alt={asset.altText} loading="lazy" /><figcaption><strong>{asset.caption}</strong><span>{asset.publisher} · {asset.license} · {asset.checkedAt}</span></figcaption></figure>)}</div> : <div className="panel"><h2>暂无已核验产品图片</h2><p>当前没有同时满足准确型号、来源、版权 / 许可和本地文件校验的图片。资料未通过审核前不会用相似型号图片代替。</p></div>}
+        <div className="product-detail" style={{ marginTop: 18 }}>
+          <div className="panel"><h2>3D 模型</h2>{verifiedThreeD ? <><p>{verifiedThreeD.format.toUpperCase()} · {verifiedThreeD.provenance} · {verifiedThreeD.license}</p><p>{verifiedThreeD.accuracyNotes}</p><a href={verifiedThreeD.localPath} target="_blank" rel="noreferrer">打开已核验 3D 模型文件 ↗</a></> : <p>暂无与该准确型号匹配且权利已核验的 GLB / CAD / 扫描模型。</p>}</div>
+          <div className="panel"><h2>光度文件</h2>{photometric ? <><p>{photometric.format.toUpperCase()} · {photometric.luminaireVariant} · {photometric.opticalVersion}</p><p>{photometric.notes}</p><a href={photometric.localPath} target="_blank" rel="noreferrer">打开已核验光度文件 ↗</a></> : <p>暂无与该准确灯具型号、光学版本匹配的 IES / LDT 文件；不以通用配光文件替代。</p>}</div>
+        </div>
+      </section>
+
+      <section className="content-section">
         <div className="section-heading"><h2>技术参数</h2><p>规格已独立关联到设备型号，每项参数保留自己的来源和核验日期。</p></div>
         {specifications.length ? <table className="data-table"><thead><tr><th>参数</th><th>官方资料记录</th><th>来源</th><th>核验日期</th></tr></thead><tbody>{specifications.map((spec) => <tr key={spec.id}><td>{spec.name}</td><td>{spec.value}{spec.unit ? " " + spec.unit : ""}</td><td>{getSourceById(spec.sourceId)?.title ?? "来源待核实"}</td><td>{spec.checkedAt}</td></tr>)}</tbody></table> : <div className="panel"><p>当前来源仅能确认产品目录条目，暂无可公开确认的完整技术规格。继续核对官方说明书、认证资料与具体硬件版本。</p></div>}
       </section>
