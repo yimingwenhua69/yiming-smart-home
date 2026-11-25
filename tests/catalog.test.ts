@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { brands, capabilities, categories, deviceModels, integrationSystems, manufacturers, products, protocols, sources } from "../src/data/catalog";
+import { brands, capabilities, categories, compatibilityRecords, deviceModels, deviceVerifications, hardwareRevisions, integrationSystems, manufacturers, productSpecifications, products, protocols, sources } from "../src/data/catalog";
 import { validateCatalog } from "../src/lib/catalog-schema";
 import { mediaAssets, photometricProfiles, threeDAssets, validateAssetRegistry } from "../src/data/assets";
 
 test("catalog entity identifiers are unique", () => {
-  for (const collection of [sources, manufacturers, brands, categories, products, deviceModels, protocols, capabilities, integrationSystems]) {
+  for (const collection of [sources, manufacturers, brands, categories, products, deviceModels, protocols, capabilities, integrationSystems, hardwareRevisions, productSpecifications, compatibilityRecords, deviceVerifications]) {
     const ids = collection.map((item) => item.id);
     assert.equal(new Set(ids).size, ids.length, "duplicate identifier found");
   }
@@ -29,14 +29,17 @@ test("device model protocol, platform, capability and source relations must reso
   const sourceIds = new Set<string>(sources.map((item) => item.id));
   for (const model of deviceModels) {
     for (const id of model.protocolIds) assert.ok(protocolIds.has(id), model.id + " protocol missing: " + id);
+    for (const id of model.specificationIds) assert.ok(productSpecifications.some((spec) => spec.id === id && spec.deviceModelId === model.id));
+    for (const id of model.compatibilityRecordIds) assert.ok(compatibilityRecords.some((record) => record.id === id && record.deviceModelId === model.id));
+    for (const id of model.hardwareRevisionIds) assert.ok(hardwareRevisions.some((revision) => revision.id === id && revision.deviceModelId === model.id));
+    for (const id of model.verificationIds) assert.ok(deviceVerifications.some((verification) => verification.id === id && verification.deviceModelId === model.id));
     for (const id of model.capabilityIds) assert.ok(capabilityIds.has(id), model.id + " capability missing: " + id);
-    for (const id of model.platformIds) assert.ok(platformIds.has(id), model.id + " platform missing: " + id);
     for (const id of model.sourceIds) assert.ok(sourceIds.has(id), model.id + " source missing: " + id);
     for (const mapping of model.integrationModels) {
       assert.ok(integrationSystems.some((integration) => integration.id === mapping.integrationId), model.id + " integration missing: " + mapping.integrationId);
       assert.ok(sourceIds.has(mapping.sourceId), model.id + " integration source missing: " + mapping.sourceId);
     }
-    for (const spec of model.specifications) assert.ok(sourceIds.has(spec.sourceId), model.id + " spec source missing: " + spec.sourceId);
+    for (const spec of productSpecifications.filter((item) => item.deviceModelId === model.id)) assert.ok(sourceIds.has(spec.sourceId), model.id + " spec source missing: " + spec.sourceId);
   }
 });
 
