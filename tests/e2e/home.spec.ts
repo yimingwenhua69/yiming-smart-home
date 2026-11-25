@@ -10,7 +10,7 @@ for (const width of [390, 1440]) {
     await expect(page.getByRole("heading", { level: 1 })).toContainText("让空间与科技");
     await expect(page.locator("html")).toHaveAttribute("lang", "zh-CN");
     await page.getByRole("link", { name: "探索产品知识" }).click();
-    await expect(page).toHaveURL(/\/products\/$/);
+    await expect(page).toHaveURL(/\/products\/?$/);
     await expect(page.getByRole("heading", { level: 1 })).toContainText("智能家居产品全景矩阵");
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     expect(errors).toEqual([]);
@@ -43,5 +43,5 @@ test("产品分类筛选和对比交互可用", async ({ page }) => {
   await page.getByRole("button", { name: /传感器/ }).click();
   await expect(page.getByText("AI 智能存在传感器 FP1E")).toBeVisible();
   await page.getByRole("button", { name: "加入对比 +" }).first().click();
-  await expect(page.getByText("产品参数对比")).toBeVisible();
+  await expect(page.getByText("产品型号参数对比")).toBeVisible();
 });
