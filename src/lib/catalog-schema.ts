@@ -13,9 +13,9 @@ const sourceSchema = z.object({
 });
 const manufacturerSchema = z.object({
   id, name: z.string().min(1), englishName: z.string().min(1), website: httpsUrl,
-  productCenter: httpsUrl, country: z.string().min(1), status: z.enum(["active","researching"]), note: z.string()
+  productCenter: httpsUrl, country: z.string().min(1), organizationType: z.enum(["hardware-manufacturer","brand-owner","ecosystem-provider","iot-platform-provider"]), status: z.enum(["active","researching"]), note: z.string()
 });
-const brandSchema = z.object({ id, name: z.string().min(1), manufacturerId: id, website: httpsUrl, note: z.string() });
+const brandSchema = z.object({ id, name: z.string().min(1), manufacturerId: id, brandType: z.enum(["hardware-brand","ecosystem-brand","platform-brand"]), website: httpsUrl, note: z.string() });
 const categorySchema = z.object({ id, name: z.string().min(1), description: z.string(), subcategories: z.array(z.string().min(1)) });
 const productSchema = z.object({
   id, slug: z.string().regex(/^[a-z0-9-]+$/), name: z.string().min(1),
