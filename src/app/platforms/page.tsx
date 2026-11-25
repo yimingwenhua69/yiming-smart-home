@@ -1,0 +1,11 @@
+import type { Metadata } from "next";
+import { PageFrame } from "@/components/PageFrame";
+import { integrationMethods, platforms, sources } from "@/data/catalog";
+export const metadata: Metadata = { title: "平台与集成", description: "比较 Apple Home、Google Home、Alexa、Home Assistant、华为鸿蒙智家与涂鸦智能平台接入方式。" };
+export default function PlatformsPage() {
+  return <PageFrame eyebrow="PLATFORMS / INTEGRATIONS" title="平台不是协议，接入也不是全功能互通。" description="一个设备可能同时出现在多个生态，但每个生态暴露的能力、状态、自动化和本地控制边界可能不同。">
+    <section className="content-section"><div className="section-heading"><h2>平台生态</h2><p>平台介绍用于理解生态边界；产品级兼容必须关联准确型号、认证或实测记录。</p></div><div className="knowledge-grid">{platforms.map((platform,index)=><article className="knowledge-card" key={platform.id}><div className="card-top"><span>{String(index+1).padStart(2,"0")}</span><span>{platform.owner}</span></div><h2>{platform.name}</h2><p>{platform.summary}</p><p>接入路径：{platform.integration}</p><p>{platform.cautions.join(" ")}</p><span className="card-arrow"><a href={platform.link} target="_blank" rel="noreferrer">↗</a></span></article>)}</div></section>
+    <section className="content-section"><div className="section-heading"><h2>集成方式矩阵</h2><p>对每条集成路径分别记录控制方向、依赖、权限、离线行为和维护责任。</p></div><div className="guide-grid">{integrationMethods.map((item)=><article className="guide-card" key={item.id}><div className="card-top"><span>{item.id.toUpperCase()}</span><span>INTEGRATION</span></div><h2>{item.name}</h2><p>{item.description}</p><p>{item.securityNotes}</p></article>)}</div></section>
+    <section className="content-section"><div className="notice">当前目录没有把某品牌的全部产品默认标记为 Apple Home、Google Home、Alexa 或 Home Assistant 兼容。兼容关系必须按准确型号、固件、地区和平台版本逐项建立。</div><div className="source-list" style={{marginTop:22}}>{sources.filter((source)=>source.id==="home-assistant-integrations"||source.id==="matter-csa"||source.id==="huawei-wholehome-cn"||source.id==="tuya-link-sdk-docs"||source.id==="tuya-cloud-self-development").map((source)=><div className="source-item" key={source.id}><div><strong>{source.title}</strong><p>{source.publisher} · {source.notes}</p></div><a href={source.url} target="_blank" rel="noreferrer">打开来源 ↗</a></div>)}</div></section>
+  </PageFrame>;
+}

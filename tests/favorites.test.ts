@@ -2,40 +2,34 @@ import assert from "node:assert/strict";
 import { afterEach, test } from "node:test";
 import { getFavoriteIds, subscribeFavorites, toggleFavorite } from "../src/lib/favorites";
 
-type WritableGlobal = { window?: unknown } & typeof globalThis;
+type WindowStub = { window?: unknown };
 
 function makeStorage(): Storage {
   const map = new Map<string, string>();
   return {
-    getItem: (k) => map.get(k) ?? null,
-    setItem: (k, v) => {
-      map.set(k, v);
-    },
-    removeItem: (k) => {
-      map.delete(k);
-    },
+    getItem: (key) => map.get(key) ?? null,
+    setItem: (key, value) => { map.set(key, value); },
+    removeItem: (key) => { map.delete(key); },
     clear: () => map.clear(),
-    key: (i) => Array.from(map.keys())[i] ?? null,
-    get length() {
-      return map.size;
-    },
+    key: (index) => Array.from(map.keys())[index] ?? null,
+    get length() { return map.size; }
   } as Storage;
 }
 
 function stubWindow() {
-  (globalThis as WritableGlobal).window = {
+  (globalThis as unknown as WindowStub).window = {
     localStorage: makeStorage(),
     addEventListener: () => {},
-    removeEventListener: () => {},
+    removeEventListener: () => {}
   };
 }
 
-const originalWindow = (globalThis as WritableGlobal).window;
+const originalWindow = (globalThis as unknown as WindowStub).window;
 
 afterEach(() => {
-  const g = globalThis as WritableGlobal;
-  if (originalWindow === undefined) delete g.window;
-  else g.window = originalWindow;
+  const globalStub = globalThis as unknown as WindowStub;
+  if (originalWindow === undefined) delete globalStub.window;
+  else globalStub.window = originalWindow;
 });
 
 test("favorites are empty without a browser", () => {
@@ -54,9 +48,7 @@ test("toggle adds and removes a favorite", () => {
 test("subscribe returns unsubscribe and notifies on toggle", () => {
   stubWindow();
   let calls = 0;
-  const unsubscribe = subscribeFavorites(() => {
-    calls += 1;
-  });
+  const unsubscribe = subscribeFavorites(() => { calls += 1; });
   toggleFavorite("dev-1");
   assert.equal(calls, 1);
   unsubscribe();

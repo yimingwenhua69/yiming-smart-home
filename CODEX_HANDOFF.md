@@ -54,3 +54,18 @@
 ## P2 门禁收尾（最新）
 
 以 docs/worklog/TASK-001.md 的“P2 剩余门禁处理”为准：8 项中危已通过限定父依赖版本的 minimatch override 清零；消费者匹配兼容性检查通过。CodeGraph 与 Graphify 本地代码索引可用，复现命令见 README。SCALE full preflight 的 G3/G0/G4/G5/G6/G7 均已新鲜执行通过；自审无缺陷但保留启发式建议，不声称独立审查或完整工具包安装完成。保持 P2，不自动进入 P3，不修改/发布环境。
+
+
+## YIMING STUDIO 1.0.0 接续状态（2026-11-26，当前有效）
+
+当前有效分支：`codex/yiming-smart-home-v1.0.0`。以该分支源码和 [V1.0.0 TASK-001](docs/worklog/V1.0.0-TASK-001.md) 为准。上方 P2 交接段落为历史记录，不代表当前 GitHub 状态。
+
+已建立 Next.js 16 + React 19 + TypeScript + Tailwind 的中文知识库首轮页面：品牌首页、产品库与详情、厂商目录、协议、平台、灯光、场景、工程、搜索、产品对比、收藏和流明法初步估算器。产品数据在 `src/data/catalog.ts`，知识内容在 `src/data/knowledge.ts`，Zod 校验在 `src/lib/catalog-schema.ts`。
+
+当前数据为 5 个组织实体、6 个品牌、7 个分类、8 个协议、6 个平台、16 个能力、27 个产品、27 个设备型号、134 条独立规格、6 条兼容 / 集成路径记录、4 个集成系统、7 种集成方法、14 条 Aqara SDK 映射和 40 个来源。组织与品牌分别有角色分类，避免将涂鸦平台服务商误认为 OEM 硬件制造商。产品条目区分官方目录、官方规格和兼容证据；未知参数不填，不展示未授权图片或未经型号核验的 3D 模型。
+
+旧示例设备 API 已返回 410，旧 Prisma seed 已变成 no-op，避免再次公开虚构通用设备。公开知识页面不查询 PostgreSQL；旧健康接口仍需数据库连接。
+
+CI 工作流已添加；当前 HEAD 61e96a7ad95922140d4d8ffaa5e9fa0c7b7a0564 的 Prisma schema、lint、typecheck、tests、coverage、production build 和 Playwright 浏览器测试全部通过（GitHub Actions run 45710699381）。当前未配置生产部署。
+
+后续必须完成：补充真实 HardwareRevision 和 DeviceVerification 记录；继续采集 Tuya OEM 与更多 Xiaomi 型号级资料；取得准确型号且授权清晰的图片、GLB / CAD / 扫描模型和 IES/LDT 文件；扩展全文知识正文索引；验证 Cloudflare OpenNext 适配、预览部署、域名、缓存、回滚与生产视觉验收。没有授权或证据时，保持缺失状态，不得伪造。

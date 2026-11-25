@@ -1,33 +1,43 @@
 import Link from "next/link";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
+import { categories, knowledgeDomains, manufacturers, products } from "@/data/catalog";
 
-const spaces = [
-  { name: "全屋灯光", description: "从清晨到夜晚，让光随生活变换。", number: "01" },
-  { name: "智能安防", description: "关注家的每一刻，安心触手可及。", number: "02" },
-  { name: "舒适环境", description: "让温度、空气与窗帘，融入日常节奏。", number: "03" },
+const scenes = [
+  { id: "living", name: "客厅", description: "会客、观影与日常休闲", href: "/scenes/#living" },
+  { id: "bedroom", name: "卧室", description: "睡眠、起夜与晨起", href: "/scenes/#bedroom" },
+  { id: "entrance", name: "玄关", description: "回家、离家与夜间通行", href: "/scenes/#entrance" },
+  { id: "dining", name: "餐厨", description: "烹饪、用餐与清洁", href: "/scenes/#dining" }
 ];
 
 export default function Home() {
-  return (
-    <>
-      <header className="site-header">
-        <Link className="brand" href="/">奕明<span>智能家居</span></Link>
-        <nav aria-label="主导航"><Link href="/devices">设备库</Link><a href="#solutions">智能生活</a><a href="#about">关于奕明</a></nav>
-      </header>
-      <main>
-        <section className="hero" aria-labelledby="hero-title">
-          <p className="eyebrow">YIMING · SMART HOME</p>
-          <h1 id="hero-title">让家，<br />更懂生活。</h1>
-          <p className="intro">以简单的连接，回应每一个日常。<br />探索灯光、安防与环境协同的全屋智能体验。</p>
-          <a className="button" href="#solutions">探索智能生活 <span aria-hidden="true">↗</span></a>
-          <div className="home-art" aria-hidden="true"><div className="window" /><div className="sun" /><div className="floor" /><div className="seat" /></div>
-        </section>
-        <section id="solutions" className="solutions" aria-labelledby="solutions-title">
-          <p className="eyebrow">为每一种日常</p><h2 id="solutions-title">从一个场景，走进智能生活。</h2>
-          <div className="cards">{spaces.map((space) => <article key={space.number}><span className="number">{space.number}</span><h3>{space.name}</h3><p>{space.description}</p></article>)}</div>
-        </section>
-        <section id="about" className="about"><p className="eyebrow">关于奕明</p><h2>科技融入生活，<br />舒适回归日常。</h2><p>我们关注人与空间的连接，探索更自然、更便捷的居家方式。</p></section>
-      </main>
-      <footer>奕明智能家居 · P2 项目骨架</footer>
-    </>
-  );
+  return <>
+    <SiteHeader />
+    <main>
+      <section className="home-hero">
+        <div className="home-copy">
+          <p className="eyebrow">SMART HOME · LIGHTING · SPACE</p>
+          <h1>让空间与科技<br /><span>自然地融为一体。</span></h1>
+          <p>从真实产品与可核验参数出发，理解智能家居系统、灯光设计和空间体验。先确认能不能装，再决定值不值得选。</p>
+          <div className="home-actions"><Link className="button-primary" href="/products/">探索产品知识 <span>↗</span></Link><Link className="button-secondary" href="/lighting/">进入灯光实验室 <span>↗</span></Link></div>
+          <div className="home-stats"><span><strong>{products.length}</strong>已建档产品</span><span><strong>{manufacturers.length}</strong>研究厂商</span><span><strong>{knowledgeDomains.length}</strong>知识领域</span></div>
+        </div>
+        <div className="home-visual" role="img" aria-label="空间光影概念示意，非真实项目摄影"><div className="visual-floor" /><div className="visual-seat" /><span className="visual-caption">SPATIAL LIGHTING CONCEPT · 示意</span></div>
+      </section>
+      <section className="content-section">
+        <div className="section-heading"><h2>先理解系统，再选择设备。</h2><p>不做商城式堆砌。以品类、协议、平台和工程约束组织信息，让每一次选型都有依据。</p></div>
+        <div className="knowledge-grid">{categories.map((category,index)=><Link className="knowledge-card" href={"/products/#"+category.id} key={category.id}><div className="card-top"><span>{String(index+1).padStart(2,"0")}</span><span>PRODUCT CATEGORY</span></div><h2>{category.name}</h2><p>{category.description}</p><span className="card-arrow">↗</span></Link>)}</div>
+      </section>
+      <section className="content-section">
+        <div className="section-heading"><h2>从空间场景出发。</h2><p>以真实生活任务组织照明、遮阳、传感和控制逻辑。当前空间图形为概念示意，不冒充已完成项目。</p></div>
+        <div className="scene-grid">{scenes.map((scene)=><Link href={scene.href} className="scene-card" key={scene.id}><div className="scene-visual"><span>{scene.name.toUpperCase()} · CONCEPT</span></div><div className="scene-copy"><h2>{scene.name}</h2><p>{scene.description}</p></div></Link>)}</div>
+      </section>
+      <section className="content-section">
+        <div className="section-heading"><h2>六大知识领域。</h2><p>从设备型号，到协议生态；从光学参数，到工程交付，形成可持续维护的专业资料体系。</p></div>
+        <div className="knowledge-grid">{knowledgeDomains.map((domain,index)=><Link className="knowledge-card" href={domain.href} key={domain.id}><div className="card-top"><span>{String(index+1).padStart(2,"0")}</span><span>{domain.english}</span></div><h2>{domain.title}</h2><p>{domain.description}</p><span className="card-arrow">↗</span></Link>)}</div>
+      </section>
+      <section className="content-section"><div className="notice">资料原则：产品型号、规格和兼容性必须绑定来源与核验日期。没有可靠来源的字段保持为空；没有授权的产品图片和 3D 模型不展示。产品价格不作为静态知识库参数。</div></section>
+    </main>
+    <SiteFooter />
+  </>;
 }
