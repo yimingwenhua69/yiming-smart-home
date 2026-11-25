@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { FavoriteButton } from "@/components/FavoriteButton";
-import { getBrandById, getManufacturerById, type DeviceModel, type Product, type ProductCategory } from "@/data/catalog";
+import { getBrandById, getManufacturerById, getProductSpecificationsForDeviceModel, type DeviceModel, type Product, type ProductCategory } from "@/data/catalog";
 
 export function ProductExplorer({ products, deviceModels, categories }: { products: Product[]; deviceModels: DeviceModel[]; categories: ProductCategory[] }) {
   const [query,setQuery]=useState("");
@@ -21,7 +21,8 @@ export function ProductExplorer({ products, deviceModels, categories }: { produc
   },[query,categoryId,products,deviceModels]);
   const compared=products.filter((product)=>compareIds.includes(product.id));
   const comparedModels=compared.map((product)=>modelsFor(product.id)[0]).filter((model):model is DeviceModel=>model!==undefined);
-  const specNames=Array.from(new Set(comparedModels.flatMap((model)=>model.specifications.map((spec)=>spec.name))));
+  const comparedSpecifications=comparedModels.flatMap((model)=>getProductSpecificationsForDeviceModel(model.id));
+  const specNames=Array.from(new Set(comparedSpecifications.map((spec)=>spec.name)));
   const toggleCompare=(id:string)=>{
     setCompareIds((current)=>current.includes(id)?current.filter((item)=>item!==id):current.length<3?[...current,id]:current);
   };
@@ -59,7 +60,7 @@ export function ProductExplorer({ products, deviceModels, categories }: { produc
         <tr><td>分类</td>{compared.map((product)=><td key={product.id}>{categories.find((item)=>item.id===product.categoryId)?.name??product.categoryId}</td>)}</tr>
         <tr><td>协议</td>{compared.map((product)=><td key={product.id}>{modelsFor(product.id).flatMap((model)=>model.protocolIds).join(" / ")||"未核实"}</td>)}</tr>
         <tr><td>证据状态</td>{compared.map((product)=><td key={product.id}>{modelsFor(product.id)[0]?.verificationStatus==="official-specification"?"官方规格":"官方目录"}</td>)}</tr>
-        {specNames.map((name)=><tr key={name}><td>{name}</td>{compared.map((product)=><td key={product.id}>{modelsFor(product.id).flatMap((model)=>model.specifications).find((spec)=>spec.name===name)?.value??"—"}</td>)}</tr>)}
+        {specNames.map((name)=><tr key={name}><td>{name}</td>{compared.map((product)=><td key={product.id}>{modelsFor(product.id).flatMap((model)=>getProductSpecificationsForDeviceModel(model.id)).find((spec)=>spec.name===name)?.value??"—"}</td>)}</tr>)}
       </tbody></table></div>
     </section>}
   </>;
