@@ -12,8 +12,8 @@ This registry records sources to research. A source listing does not by itself p
 | Xiaomi / 米家 | https://www.mi.com/smart-screen/specs | Xiaomi 智能家庭屏 10 official product listing; model code and radio details remain unverified |
 | Xiaomi 智能多模网关 2 | https://m.mi.com/crowdfunding/proddetail/1000468 | Official crowdfunding record lists Bluetooth, Bluetooth Mesh, Zigbee, dual-band Wi-Fi and Ethernet; campaign ended and current SKU availability is unverified |
 | TuyaOS Link SDK | https://developer.tuya.com/cn/link-sdk | Device / OS abstraction and secure MQTT / HTTP connection to Tuya Cloud |
-| Tuya Cloud self-development | https://developer.tuya.com/cn/docs/im-project-services/Cloud-self-development | OEM App, Smart Life App SDK, cloud API, device and account management |
-| Tuya Smart App SDK pairing | https://developer.tuya.com/cn/docs/app-development/network-pairing | Official Wi-Fi / Bluetooth / Zigbee device pairing flows; support depends on SDK and hardware |
+| Tuya Cloud self-development | https://developer.tuya.com/cn/docs/im-project-services/Cloud-self-development?id=Kb3o4z4ll4v9d | OEM App, Smart Life App SDK, cloud API, device and account management |
+| Tuya Smart App SDK pairing | https://developer.tuya.com/cn/docs/app-development/network-pairing?id=Kas9qmmog5ctw | Official Wi-Fi / Bluetooth / Zigbee device pairing flows; support depends on SDK and hardware |
 | Xiaomi / 米家 | https://www.mi.com/shop | Current product names, store listings and official detail pages; brand / OEM manufacturer relationships still require SKU-level verification |
 | Huawei 鸿蒙智家 | https://consumer.huawei.com/cn/wholehome/ | Smart hosts, panels, sensors, lighting and locks |
 | ORVIBO 欧瑞博 | https://www.orvibo.com/cn/product/productList.html | MixPad, switches, lighting, curtain motors, sensors |
