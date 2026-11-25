@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { capabilities, categories, manufacturers, platforms, products, protocols, sources } from "@/data/catalog";
+import { brands, capabilities, categories, deviceModels, manufacturers, platforms, products, protocols, sources } from "@/data/catalog";
 
 const id = z.string().trim().min(1);
-const httpsUrl = z.string().url().refine((value)=>value.startsWith("https://"),"source URL must use HTTPS");
+const httpsUrl = z.string().url().refine((value)=>value.startsWith("https://"),"URL must use HTTPS");
 const evidence = z.enum(["official","documented","community","lab-tested","field-tested"]);
 
 const sourceSchema = z.object({
@@ -15,10 +15,14 @@ const manufacturerSchema = z.object({
   id, name: z.string().min(1), englishName: z.string().min(1), website: httpsUrl,
   productCenter: httpsUrl, country: z.string().min(1), status: z.enum(["active","researching"]), note: z.string()
 });
+const brandSchema = z.object({ id, name: z.string().min(1), manufacturerId: id, website: httpsUrl, note: z.string() });
 const categorySchema = z.object({ id, name: z.string().min(1), description: z.string(), subcategories: z.array(z.string().min(1)) });
 const productSchema = z.object({
-  id, slug: z.string().regex(/^[a-z0-9-]+$/), name: z.string().min(1), model: z.string().nullable(),
-  manufacturerId: id, brand: z.string().min(1), categoryId: id, summary: z.string(),
+  id, slug: z.string().regex(/^[a-z0-9-]+$/), name: z.string().min(1),
+  manufacturerId: id, brandId: id, categoryId: id, summary: z.string(), modelIds: z.array(id).min(1)
+});
+const deviceModelSchema = z.object({
+  id, productId: id, modelCode: z.string().nullable(), hardwareRevision: z.string().nullable(),
   protocolIds: z.array(id), platformIds: z.array(id), capabilityIds: z.array(id), sourceIds: z.array(id).min(1),
   evidenceLevel: evidence, verificationStatus: z.enum(["official-listing","official-specification","needs-model-verification"]),
   lastVerified: z.string().regex(/^\d{4}-\d{2}-\d{2}$/), region: z.literal("CN"),
@@ -45,25 +49,42 @@ export function validateCatalog() {
   };
   checkCollection("source",sources,sourceSchema);
   checkCollection("manufacturer",manufacturers,manufacturerSchema);
+  checkCollection("brand",brands,brandSchema);
   checkCollection("category",categories,categorySchema);
   checkCollection("product",products,productSchema);
+  checkCollection("device-model",deviceModels,deviceModelSchema);
   checkCollection("protocol",protocols,protocolSchema);
   checkCollection("platform",platforms,platformSchema);
   checkCollection("capability",capabilities,capabilitySchema);
+
   const sourceIds=ids.get("source")??new Set<string>();
   const manufacturerIds=ids.get("manufacturer")??new Set<string>();
+  const brandIds=ids.get("brand")??new Set<string>();
   const categoryIds=ids.get("category")??new Set<string>();
+  const productIds=ids.get("product")??new Set<string>();
+  const modelIds=ids.get("device-model")??new Set<string>();
   const protocolIds=ids.get("protocol")??new Set<string>();
   const platformIds=ids.get("platform")??new Set<string>();
   const capabilityIds=ids.get("capability")??new Set<string>();
+
+  for(const brand of brands) if(!manufacturerIds.has(brand.manufacturerId)) errors.push(brand.id+" references missing manufacturer "+brand.manufacturerId);
   for(const product of products){
     if(!manufacturerIds.has(product.manufacturerId)) errors.push(product.id+" references missing manufacturer "+product.manufacturerId);
+    if(!brandIds.has(product.brandId)) errors.push(product.id+" references missing brand "+product.brandId);
+    else if(brands.find((brand)=>brand.id===product.brandId)?.manufacturerId!==product.manufacturerId) errors.push(product.id+" brand/manufacturer ownership mismatch");
     if(!categoryIds.has(product.categoryId)) errors.push(product.id+" references missing category "+product.categoryId);
-    for(const relation of product.sourceIds) if(!sourceIds.has(relation)) errors.push(product.id+" references missing source "+relation);
-    for(const relation of product.protocolIds) if(!protocolIds.has(relation)) errors.push(product.id+" references missing protocol "+relation);
-    for(const relation of product.platformIds) if(!platformIds.has(relation)) errors.push(product.id+" references missing platform "+relation);
-    for(const relation of product.capabilityIds) if(!capabilityIds.has(relation)) errors.push(product.id+" references missing capability "+relation);
-    for(const spec of product.specifications) if(!sourceIds.has(spec.sourceId)) errors.push(product.id+" specification references missing source "+spec.sourceId);
+    for(const modelId of product.modelIds){
+      if(!modelIds.has(modelId)) errors.push(product.id+" references missing device model "+modelId);
+      else if(deviceModels.find((model)=>model.id===modelId)?.productId!==product.id) errors.push(product.id+" device model parent mismatch "+modelId);
+    }
+  }
+  for(const model of deviceModels){
+    if(!productIds.has(model.productId)) errors.push(model.id+" references missing product "+model.productId);
+    for(const relation of model.sourceIds) if(!sourceIds.has(relation)) errors.push(model.id+" references missing source "+relation);
+    for(const relation of model.protocolIds) if(!protocolIds.has(relation)) errors.push(model.id+" references missing protocol "+relation);
+    for(const relation of model.platformIds) if(!platformIds.has(relation)) errors.push(model.id+" references missing platform "+relation);
+    for(const relation of model.capabilityIds) if(!capabilityIds.has(relation)) errors.push(model.id+" references missing capability "+relation);
+    for(const spec of model.specifications) if(!sourceIds.has(spec.sourceId)) errors.push(model.id+" specification references missing source "+spec.sourceId);
   }
   for(const protocol of protocols) for(const relation of protocol.sourceIds) if(!sourceIds.has(relation)) errors.push(protocol.id+" references missing source "+relation);
   return { valid: errors.length===0, errors };
