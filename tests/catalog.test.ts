@@ -20,9 +20,9 @@ test("every product links to an existing manufacturer, category and source", () 
 });
 
 test("product protocol, platform and capability relations must resolve", () => {
-  const protocolIds = new Set(protocols.map((item) => item.id));
-  const capabilityIds = new Set(capabilities.map((item) => item.id));
-  const platformIds = new Set(["apple-home", "google-home", "alexa", "home-assistant", "harmony-home"]);
+  const protocolIds = new Set<string>(protocols.map((item) => item.id));
+  const capabilityIds = new Set<string>(capabilities.map((item) => item.id));
+  const platformIds = new Set<string>(["apple-home", "google-home", "alexa", "home-assistant", "harmony-home"]);
   for (const product of products) {
     for (const id of product.protocolIds) assert.ok(protocolIds.has(id), product.id + " protocol missing: " + id);
     for (const id of product.capabilityIds) assert.ok(capabilityIds.has(id), product.id + " capability missing: " + id);
@@ -41,10 +41,9 @@ test("public product records never contain guessed prices or unverified media", 
 test("all source URLs are HTTPS and checked dates are ISO dates", () => {
   for (const source of sources) {
     assert.ok(source.url.startsWith("https://"), source.id + " source must use HTTPS");
-    assert.match(source.checkedAt, /^\\d{4}-\\d{2}-\\d{2}$/);
+    assert.match(source.checkedAt, /^\d{4}-\d{2}-\d{2}$/);
   }
 });
-
 
 test("Zod catalog schema and all foreign-key relations pass", () => {
   const result = validateCatalog();
