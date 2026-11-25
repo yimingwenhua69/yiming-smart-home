@@ -25,7 +25,7 @@
 | 产品图片 | 准确型号的当前官方或授权图片，含来源和授权记录 | 未完成；无授权资产时不显示 |
 | 3D 产品 | 准确型号的官方 CAD、实物扫描或有证据的重建模型；可交互查看 | 未完成；没有通过验证的 3D 资产 |
 | 光学资料 | 准确型号 IES/LDT、配光与空间计算 | 未完成；当前只有流明法初步估算 |
-| 数据规范 | 来源、证据等级、兼容、验证、硬件版本、媒体资产记录 | Manufacturer / Brand / Product / DeviceModel 已拆分并建立关系校验；HardwareRevision、独立规格实体、兼容验证记录和媒体实体仍待补齐 |
+| 数据规范 | 来源、证据等级、兼容、验证、硬件版本、媒体资产记录 | Manufacturer / Brand / Product / DeviceModel / ProductSpecification / HardwareRevision / CompatibilityRecord / DeviceVerification 已建立独立实体结构和关系校验；HardwareRevision 与 DeviceVerification 当前无记录；MediaAsset / ThreeDAsset / PhotometricProfile 已建立独立资产登记与权利校验 |
 | 自动化质量 | 单元、集成、覆盖率、浏览器、响应式、无障碍与安全检查 | CI 工作流已建立，必须以实际 Actions 结果验收 |
 | 部署 | 预览、域名、缓存、日志、回滚、真实浏览器验收 | 未完成，未发布生产 |
 
@@ -37,8 +37,8 @@
 - 平台：5
 - 能力定义：15
 - 知识领域：6
-- 品牌：5\n- 产品档案：15\n- 设备型号记录：15（通过 productId 关联 Product；目录证据与规格证据分别标记）
-- 来源：23（官方目录、官方规格、官方兼容清单、标准与社区数据库）
+- 品牌：5\n- 产品档案：25\n- 设备型号记录：25（通过 productId 关联 Product；目录证据与规格证据分别标记）\n- 独立规格记录：65（每项关联准确 DeviceModel 和来源）\n- 官方平台兼容记录：4（Aqara M200、华为鸿蒙智家传感器记录；未确认平台保持空白）\n- SDK 型号映射：14（Aqara SDK 内部 modelId，明确不等同零售 SKU）
+- 来源：23（官方目录、官方规格、官方兼容清单、标准与社区数据库）\n- 硬件版本记录：0（结构已建立，暂无独立核验的版本数据）\n- 本工作室实测记录：0（未进行的实测不伪造）\n- 图片 / 3D / IES-LDT 资产：0（审核结构已建立，未通过授权和型号核验的资产不发布）
 
 产品数量不是验收目标。不得为了达到数量而补造型号或参数。
 
@@ -66,7 +66,7 @@
 
 ## 剩余关键工作
 
-1. 补齐 HardwareRevision、独立 ProductSpecification、CompatibilityRecord 和 DeviceVerification 实体。
+1. 持续采集准确硬件版本、兼容清单与可复现实测，填充已建立的 HardwareRevision / CompatibilityRecord / DeviceVerification 实体。
 2. 扩展来源与产品研究：优先官方说明书、型号页、认证和兼容清单；逐型号核对 Aqara、华为、欧瑞博、小米和涂鸦生态。
 3. 建立 MediaAsset / ThreeDAsset / PhotometricProfile 数据结构与审核工具。
 4. 获得授权或使用明确许可的准确型号图片；无授权继续不展示。
