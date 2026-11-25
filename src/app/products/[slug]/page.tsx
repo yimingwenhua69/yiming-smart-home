@@ -14,6 +14,7 @@ import {
   getProductBySlug,
   getProductSpecificationsForDeviceModel,
   getSourceById,
+  integrationMethods,
   integrationSystems,
   platforms,
   products,
