@@ -8,14 +8,27 @@ This registry records sources to research. A source listing does not by itself p
 
 | Publisher | Official source | Primary research use |
 |---|---|---|
-| Aqara / 绿米 | https://www.aqara.cn/prodCenter | Mainland China products, hubs, switches, lighting, sensors, locks |
-| Xiaomi / 米家 | https://www.mi.com/shop | Current product names, store listings and official detail pages |
+| Aqara / 绿米 | https://www.aqara.cn/cn/prodCenter | Mainland China products, hubs, switches, lighting, sensors, locks |
+| Xiaomi / 米家 | https://www.mi.com/shop | Current product names, store listings and official detail pages; brand / OEM manufacturer relationships still require SKU-level verification |
 | Huawei 鸿蒙智家 | https://consumer.huawei.com/cn/wholehome/ | Smart hosts, panels, sensors, lighting and locks |
 | ORVIBO 欧瑞博 | https://www.orvibo.com/cn/product/productList.html | MixPad, switches, lighting, curtain motors, sensors |
 | LifeSmart 云起 | https://cn.ilifesmart.com/product/all_products/ | Product families and model codes |
 | Yeelight 易来 | https://www.yeelight.com/zh_CN | Smart lighting official brand source; verify exact model pages before catalog admission |
 | BroadLink 博联 | https://www.ibroadlink.com/ | Infrared/RF controllers and device-control products; verify exact current CN products |
 | Tuya 涂鸦 | https://www.tuya.com/cn | IoT platform, SDK, modules and developer ecosystem; do not misclassify OEM products as Tuya-branded hardware |
+
+## Model-level official pages researched in 1.0.0
+
+| Product | Official page | Confirmed information |
+|---|---|---|
+| Aqara Hub M200 | https://www.aqara.cn/Hub-M200_support | PoE, Wi-Fi 6, WPA3, Matter controller, Thread Border Router, Zigbee/Thread child devices, Apple Home QR onboarding and feature differences |
+| Aqara FP2 | https://www.aqara.cn/cn/Aqara_Presence_Detector_FP2_spec | RTCZCGQ12LM, Wi-Fi, Bluetooth 4.2, rated input and environment range |
+| Aqara FP2 support | https://www.aqara.cn/cn/Aqara_Presence_Detector_FP2_support | Millimeter-wave interference zones, local automation gateway requirement and direction events |
+| Aqara Door & Window Sensor T1 | https://www.aqara.cn/cn/d18_spec | MCCGQ12LM, Zigbee 3.0, CR1632, 22 mm maximum sensing gap |
+| Aqara FP1E | https://www.aqara.cn/Aqara-AI-Presence-Detector-FP1E_spec | RTCZCGQ13LM, Zigbee and official power / environmental parameters |
+| Aqara Motion Sensor P1 | https://www.aqara.cn/cn/Motion-Sensor-P1_spec | RTCGQ14LM, Zigbee 3.0, CR2450 and official dimensions |
+| Aqara SDK supported device list | https://opendoc.aqara.cn/docs/SDK%E5%BC%80%E5%8F%91/Android%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%91/%E9%85%8D%E7%BD%91SDK%E6%94%AF%E6%8C%81%E8%AE%BE%E5%A4%87%E6%B8%85%E5%8D%95.html | Aqara SDK internal model identifiers; not retail SKU or generic Zigbee model IDs |
+| ORVIBO S5 | https://global.orvibo.com/cn/product/s5.html | 24° / 36° beam angles and 0°–25° adjustment; historical detail page, theoretical lab data and illustrative imagery only |
 
 ## Open compatibility and engineering sources
 
