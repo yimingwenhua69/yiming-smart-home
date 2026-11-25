@@ -78,6 +78,10 @@ export function validateCatalog() {
   checkCollection("category",categories,categorySchema);
   checkCollection("product",products,productSchema);
   checkCollection("device-model",deviceModels,deviceModelSchema);
+  checkCollection("hardware-revision",hardwareRevisions,hardwareRevisionSchema);
+  checkCollection("product-specification",productSpecifications,specificationSchema);
+  checkCollection("compatibility-record",compatibilityRecords,compatibilitySchema);
+  checkCollection("device-verification",deviceVerifications,verificationSchema);
   checkCollection("protocol",protocols,protocolSchema);
   checkCollection("platform",platforms,platformSchema);
   checkCollection("capability",capabilities,capabilitySchema);
@@ -89,6 +93,10 @@ export function validateCatalog() {
   const categoryIds=ids.get("category")??new Set<string>();
   const productIds=ids.get("product")??new Set<string>();
   const modelIds=ids.get("device-model")??new Set<string>();
+  const revisionIds=ids.get("hardware-revision")??new Set<string>();
+  const specificationIds=ids.get("product-specification")??new Set<string>();
+  const compatibilityIds=ids.get("compatibility-record")??new Set<string>();
+  const verificationIds=ids.get("device-verification")??new Set<string>();
   const protocolIds=ids.get("protocol")??new Set<string>();
   const platformIds=ids.get("platform")??new Set<string>();
   const capabilityIds=ids.get("capability")??new Set<string>();
@@ -112,9 +120,42 @@ export function validateCatalog() {
       if(!sourceIds.has(mapping.sourceId)) errors.push(model.id+" integration mapping references missing source "+mapping.sourceId);
     }
     for(const relation of model.protocolIds) if(!protocolIds.has(relation)) errors.push(model.id+" references missing protocol "+relation);
-    for(const relation of model.platformIds) if(!platformIds.has(relation)) errors.push(model.id+" references missing platform "+relation);
     for(const relation of model.capabilityIds) if(!capabilityIds.has(relation)) errors.push(model.id+" references missing capability "+relation);
-    for(const spec of model.specifications) if(!sourceIds.has(spec.sourceId)) errors.push(model.id+" specification references missing source "+spec.sourceId);
+    for(const relation of model.hardwareRevisionIds){
+      if(!revisionIds.has(relation)) errors.push(model.id+" references missing hardware revision "+relation);
+      else if(hardwareRevisions.find((revision)=>revision.id===relation)?.deviceModelId!==model.id) errors.push(model.id+" hardware revision parent mismatch "+relation);
+    }
+    for(const relation of model.specificationIds){
+      if(!specificationIds.has(relation)) errors.push(model.id+" references missing specification "+relation);
+      else if(productSpecifications.find((specification)=>specification.id===relation)?.deviceModelId!==model.id) errors.push(model.id+" specification parent mismatch "+relation);
+    }
+    for(const relation of model.compatibilityRecordIds){
+      if(!compatibilityIds.has(relation)) errors.push(model.id+" references missing compatibility record "+relation);
+      else if(compatibilityRecords.find((record)=>record.id===relation)?.deviceModelId!==model.id) errors.push(model.id+" compatibility parent mismatch "+relation);
+    }
+    for(const relation of model.verificationIds){
+      if(!verificationIds.has(relation)) errors.push(model.id+" references missing verification "+relation);
+      else if(deviceVerifications.find((verification)=>verification.id===relation)?.deviceModelId!==model.id) errors.push(model.id+" verification parent mismatch "+relation);
+    }
+  }
+  for(const revision of hardwareRevisions){
+    if(!modelIds.has(revision.deviceModelId)) errors.push(revision.id+" references missing device model "+revision.deviceModelId);
+    for(const sourceId of revision.sourceIds) if(!sourceIds.has(sourceId)) errors.push(revision.id+" references missing source "+sourceId);
+  }
+  for(const specification of productSpecifications){
+    if(!modelIds.has(specification.deviceModelId)) errors.push(specification.id+" references missing device model "+specification.deviceModelId);
+    if(!sourceIds.has(specification.sourceId)) errors.push(specification.id+" references missing source "+specification.sourceId);
+  }
+  for(const record of compatibilityRecords){
+    if(!modelIds.has(record.deviceModelId)) errors.push(record.id+" references missing device model "+record.deviceModelId);
+    if(!sourceIds.has(record.sourceId)) errors.push(record.id+" references missing source "+record.sourceId);
+    if(record.targetType==="platform"&&!platformIds.has(record.targetId)) errors.push(record.id+" references missing platform "+record.targetId);
+    if(record.targetType==="integration"&&!integrationSystemIds.has(record.targetId)) errors.push(record.id+" references missing integration "+record.targetId);
+  }
+  for(const verification of deviceVerifications){
+    if(!modelIds.has(verification.deviceModelId)) errors.push(verification.id+" references missing device model "+verification.deviceModelId);
+    if(verification.hardwareRevisionId&&!revisionIds.has(verification.hardwareRevisionId)) errors.push(verification.id+" references missing hardware revision "+verification.hardwareRevisionId);
+    for(const sourceId of verification.sourceIds) if(!sourceIds.has(sourceId)) errors.push(verification.id+" references missing source "+sourceId);
   }
   for(const protocol of protocols) for(const relation of protocol.sourceIds) if(!sourceIds.has(relation)) errors.push(protocol.id+" references missing source "+relation);
   return { valid: errors.length===0, errors };
