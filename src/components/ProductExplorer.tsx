@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { FavoriteButton } from "@/components/FavoriteButton";
-import { getBrandById, getManufacturerById, getProductSpecificationsForDeviceModel, type DeviceModel, type Product, type ProductCategory } from "@/data/catalog";
+import { getBrandById, getCompatibilityRecordsForDeviceModel, getManufacturerById, getProductSpecificationsForDeviceModel, platforms, type DeviceModel, type Product, type ProductCategory } from "@/data/catalog";
 
 export function ProductExplorer({ products, deviceModels, categories }: { products: Product[]; deviceModels: DeviceModel[]; categories: ProductCategory[] }) {
   const [query,setQuery]=useState("");
@@ -59,6 +59,7 @@ export function ProductExplorer({ products, deviceModels, categories }: { produc
         <tr><td>型号</td>{compared.map((product)=><td key={product.id}>{modelsFor(product.id).map((model)=>model.modelCode??"未公开").join(" / ")}</td>)}</tr>
         <tr><td>分类</td>{compared.map((product)=><td key={product.id}>{categories.find((item)=>item.id===product.categoryId)?.name??product.categoryId}</td>)}</tr>
         <tr><td>协议</td>{compared.map((product)=><td key={product.id}>{modelsFor(product.id).flatMap((model)=>model.protocolIds).join(" / ")||"未核实"}</td>)}</tr>
+        <tr><td>平台兼容</td>{compared.map((product)=><td key={product.id}>{modelsFor(product.id).flatMap((model)=>getCompatibilityRecordsForDeviceModel(model.id).filter((record)=>record.targetType==="platform"&&(record.status==="supported"||record.status==="partial")).map((record)=>platforms.find((platform)=>platform.id===record.targetId)?.name??record.targetId)).join(" / ")||"未核实"}</td>)}</tr>
         <tr><td>证据状态</td>{compared.map((product)=><td key={product.id}>{modelsFor(product.id)[0]?.verificationStatus==="official-specification"?"官方规格":"官方目录"}</td>)}</tr>
         {specNames.map((name)=><tr key={name}><td>{name}</td>{compared.map((product)=><td key={product.id}>{modelsFor(product.id).flatMap((model)=>getProductSpecificationsForDeviceModel(model.id)).find((spec)=>spec.name===name)?.value??"—"}</td>)}</tr>)}
       </tbody></table></div>
