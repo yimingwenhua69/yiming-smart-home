@@ -86,3 +86,5 @@ Historical interim 1.0.0 snapshot: 15 product records, 15 device-model records, 
 - Added explicit organization roles (hardware manufacturer, brand owner, ecosystem provider, IoT platform provider) and brand roles (hardware, ecosystem, platform) so Tuya is not misrepresented as an OEM hardware manufacturer.
 - Manufacturer / brand directory now renders both organizations and brands with their role classifications; product detail pages display these distinctions.
 - Search now includes platforms, integration systems and integration methods in addition to products, manufacturers, brands, protocols and knowledge guides.
+
+- Current HEAD 61e96a7ad95922140d4d8ffaa5e9fa0c7b7a0564 passed all GitHub Actions gates in run 45710699381 after Tuya platform integration, organization/brand role classification, product detail display and expanded search indexing. All steps passed: Prisma schema, Prisma client generation, ESLint, TypeScript, tests, coverage, production build, Chromium installation and Playwright browser tests.
