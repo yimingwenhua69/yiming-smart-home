@@ -7,6 +7,8 @@ export type MediaAsset = {
   id: string;
   deviceModelId: string;
   kind: "image" | "video" | "diagram";
+  altText: string;
+  caption: string;
   sourceId: string;
   sourceUrl: string;
   publisher: string;
@@ -64,7 +66,7 @@ export function getMediaAssetsForModel(deviceModelId: string) {
 }
 
 export function getVerifiedImagesForModel(deviceModelId: string) {
-  return getMediaAssetsForModel(deviceModelId).filter((asset) =>
+  return getMediaAssetsForModel(deviceModelId).filter((asset): asset is MediaAsset & { localPath: string } =>
     asset.kind === "image" &&
     (asset.rightsStatus === "cleared" || asset.rightsStatus === "open-license") &&
     asset.lifecycle === "current" &&
@@ -73,7 +75,7 @@ export function getVerifiedImagesForModel(deviceModelId: string) {
 }
 
 export function getVerifiedThreeDAsset(deviceModelId: string) {
-  return threeDAssets.find((asset) =>
+  return threeDAssets.find((asset): asset is ThreeDAsset & { localPath: string } =>
     asset.deviceModelId === deviceModelId &&
     (asset.rightsStatus === "cleared" || asset.rightsStatus === "open-license") &&
     asset.lifecycle === "current" &&
@@ -82,7 +84,7 @@ export function getVerifiedThreeDAsset(deviceModelId: string) {
 }
 
 export function getVerifiedPhotometricProfile(deviceModelId: string) {
-  return photometricProfiles.find((asset) =>
+  return photometricProfiles.find((asset): asset is PhotometricProfile & { localPath: string } =>
     asset.deviceModelId === deviceModelId &&
     (asset.rightsStatus === "cleared" || asset.rightsStatus === "open-license") &&
     asset.lifecycle === "current" &&
@@ -102,6 +104,8 @@ export function validateAssetRegistry() {
     if (!knownModels.has(asset.deviceModelId)) errors.push(asset.id + " references unknown device model " + asset.deviceModelId);
     if (!knownSources.has(asset.sourceId)) errors.push(asset.id + " references unknown source " + asset.sourceId);
     if (!asset.sourceUrl.startsWith("https://")) errors.push(asset.id + " source URL must use HTTPS");
+    if ("kind" in asset && asset.kind === "image" && !asset.altText.trim()) errors.push(asset.id + " image altText is required");
+    if ("kind" in asset && asset.kind === "image" && !asset.caption.trim()) errors.push(asset.id + " image caption is required");
     if (!/^\d{4}-\d{2}-\d{2}$/.test(asset.checkedAt)) errors.push(asset.id + " checkedAt must be an ISO date");
     if (asset.localPath && !asset.localPath.startsWith("/")) errors.push(asset.id + " localPath must be a site-root path");
     if ((asset.rightsStatus === "cleared" || asset.rightsStatus === "open-license") && !asset.license) errors.push(asset.id + " must record the license");
