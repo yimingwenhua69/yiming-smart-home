@@ -11,6 +11,13 @@ test("catalog entity identifiers are unique", () => {
   }
 });
 
+test("organizations and brands have explicit non-interchangeable roles", () => {
+  assert.equal(manufacturers.find((item) => item.id === "tuya")?.organizationType, "iot-platform-provider");
+  assert.equal(brands.find((item) => item.id === "tuya")?.brandType, "platform-brand");
+  assert.equal(brands.find((item) => item.id === "mi-home")?.brandType, "ecosystem-brand");
+  assert.equal(brands.find((item) => item.id === "xiaomi")?.brandType, "hardware-brand");
+});
+
 test("every product links to an existing manufacturer, brand, category and model", () => {
   for (const product of products) {
     assert.ok(manufacturers.some((item) => item.id === product.manufacturerId), product.id + " manufacturer missing");
