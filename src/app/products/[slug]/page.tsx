@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageFrame } from "@/components/PageFrame";
-import { getBrandById, getCategoryById, getDeviceModelsForProduct, getManufacturerById, getProductBySlug, getSourceById, products } from "@/data/catalog";
+import { capabilities, getBrandById, getCategoryById, getDeviceModelsForProduct, getManufacturerById, getProductBySlug, getSourceById, platforms, products, protocols } from "@/data/catalog";
+import { getMediaAssetsForModel, getVerifiedImagesForModel, getVerifiedPhotometricProfile, getVerifiedThreeDAsset } from "@/data/assets";
 
 export const dynamicParams = false;
 
@@ -28,6 +29,10 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const category = getCategoryById(product.categoryId);
   const sourceIds = Array.from(new Set(models.flatMap((item) => item.sourceIds)));
   const productSources = sourceIds.map(getSourceById).filter((source) => source !== undefined);
+  const media = getMediaAssetsForModel(model.id);
+  const verifiedImages = getVerifiedImagesForModel(model.id);
+  const verifiedThreeD = getVerifiedThreeDAsset(model.id);
+  const photometric = getVerifiedPhotometricProfile(model.id);
   return (
     <PageFrame eyebrow="PRODUCT / DEVICE MODEL / SOURCE VERIFIED" title={product.name} description={product.summary}>
       <section className="content-section">
@@ -49,7 +54,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           <div className="panel">
             <h2>资料完整度</h2>
             <p className="notice">{model.verificationStatus === "official-specification" ? "已找到厂商官方规格或兼容资料。规格仍需按型号、固件与安装环境理解。" : "已在厂商官方产品目录找到该产品名称；完整规格、硬件版本和平台兼容性仍待逐项核实。"}</p>
-            <p style={{ color: "var(--muted)", fontSize: 12, lineHeight: 1.9 }}>产品图片：未取得可确认的本地复用授权，暂不展示。3D 模型：暂无与该准确型号匹配且来源可追溯的模型。</p>
+            <p style={{ color: "var(--muted)", fontSize: 12, lineHeight: 1.9 }}>图片资产：{verifiedImages.length} 个可发布 / {media.length} 个登记。3D 模型：{verifiedThreeD ? "已登记可发布资产" : "暂无准确型号且权利已核验的模型"}。光度文件：{photometric ? "已登记" : "暂无准确型号 IES/LDT 文件"}。未取得展示授权或型号匹配证据的素材不会出现在页面。</p>
             <span className="status-text">{model.verificationStatus}</span>
           </div>
         </div>
@@ -61,8 +66,8 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       <section className="content-section">
         <div className="section-heading"><h2>协议、平台与能力</h2><p>仅显示已有证据支持的关联，不通过产品名称推断协议和生态兼容。</p></div>
         <div className="product-detail">
-          <div className="panel"><h2>协议</h2><p>{model.protocolIds.length ? model.protocolIds.join("、") : "未核实"}</p></div>
-          <div className="panel"><h2>平台与能力</h2><p>平台：{model.platformIds.length ? model.platformIds.join("、") : "未核实"}</p><p>能力：{model.capabilityIds.length ? model.capabilityIds.join("、") : "未核实"}</p></div>
+          <div className="panel"><h2>协议</h2><p>{model.protocolIds.length ? model.protocolIds.map((id) => protocols.find((item) => item.id === id)?.name ?? id).join("、") : "未核实"}</p></div>
+          <div className="panel"><h2>平台与能力</h2><p>平台：{model.platformIds.length ? model.platformIds.map((id) => platforms.find((item) => item.id === id)?.name ?? id).join("、") : "未核实"}</p><p>能力：{model.capabilityIds.length ? model.capabilityIds.map((id) => capabilities.find((item) => item.id === id)?.name ?? id).join("、") : "未核实"}</p></div>
         </div>
       </section>
       <section className="content-section">
