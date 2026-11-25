@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { PageFrame } from "@/components/PageFrame";
 import { categories, products, sources } from "@/data/catalog";
 import { ProductExplorer } from "@/components/ProductExplorer";
