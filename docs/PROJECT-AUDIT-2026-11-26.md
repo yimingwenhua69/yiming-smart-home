@@ -82,3 +82,7 @@ Historical interim 1.0.0 snapshot: 15 product records, 15 device-model records, 
 - CI passed all gates on current HEAD 0e4a191f9bac2b868ccfd35c11d66d1270025a0f (GitHub Actions run 45708859850): Prisma schema, ESLint, TypeScript, unit/integration tests, coverage, production build and Playwright browser tests. No production deployment or local Windows validation is implied.
 
 - Tuya: added the Tuya Smart / Smart Life platform, TuyaOS Link SDK and Tuya Cloud Development API integration systems, official SDK / cloud / pairing sources, and a seven-method integration matrix. Tuya is treated as a platform provider; OEM hardware manufacturers must be identified per product SKU.
+
+- Added explicit organization roles (hardware manufacturer, brand owner, ecosystem provider, IoT platform provider) and brand roles (hardware, ecosystem, platform) so Tuya is not misrepresented as an OEM hardware manufacturer.
+- Manufacturer / brand directory now renders both organizations and brands with their role classifications; product detail pages display these distinctions.
+- Search now includes platforms, integration systems and integration methods in addition to products, manufacturers, brands, protocols and knowledge guides.
