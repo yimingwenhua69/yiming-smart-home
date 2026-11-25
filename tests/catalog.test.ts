@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { brands, capabilities, categories, compatibilityRecords, deviceModels, deviceVerifications, hardwareRevisions, integrationSystems, manufacturers, productSpecifications, products, protocols, sources } from "../src/data/catalog";
-import { validateCatalog } from "../src/lib/catalog-schema";
+import { catalogRegistry, validateCatalog } from "../src/lib/catalog-schema";
 import { mediaAssets, photometricProfiles, threeDAssets, validateAssetRegistry } from "../src/data/assets";
 
 test("catalog entity identifiers are unique", () => {
@@ -74,4 +74,89 @@ test("media, 3D and photometric asset registry enforces model and rights provena
   assert.equal(mediaAssets.length, 0);
   assert.equal(threeDAssets.length, 0);
   assert.equal(photometricProfiles.length, 0);
+});
+
+
+test("catalog validator reports malformed records and duplicate identifiers", () => {
+  const malformed = {
+    ...catalogRegistry,
+    sources: [
+      ...catalogRegistry.sources,
+      { ...catalogRegistry.sources[0], id: "duplicate-source", url: "not-a-url" },
+      { ...catalogRegistry.sources[0], id: catalogRegistry.sources[0].id }
+    ],
+    manufacturers: [{ ...catalogRegistry.manufacturers[0], website: "not-a-url" }],
+    brands: [{ ...catalogRegistry.brands[0], name: "", manufacturerId: "missing-manufacturer" }],
+    categories: [{ ...catalogRegistry.categories[0], id: "" }],
+    products: [{ ...catalogRegistry.products[0], slug: "bad slug", manufacturerId: "missing-manufacturer", brandId: "missing-brand", categoryId: "missing-category", modelIds: ["missing-model"] }],
+    integrationSystems: [{ ...catalogRegistry.integrationSystems[0], documentationUrl: "not-a-url" }],
+    platforms: [{ ...catalogRegistry.platforms[0], link: "not-a-url" }],
+    capabilities: [{ ...catalogRegistry.capabilities[0], name: "" }]
+  } as unknown as typeof catalogRegistry;
+  const result = validateCatalog(malformed);
+  assert.equal(result.valid, false);
+  assert.ok(result.errors.some((error) => error.includes("duplicate source id")));
+  assert.ok(result.errors.some((error) => error.includes("source duplicate-source")));
+  assert.ok(result.errors.some((error) => error.includes("manufacturer")));
+  assert.ok(result.errors.some((error) => error.includes("brand")));
+  assert.ok(result.errors.some((error) => error.includes("category")));
+  assert.ok(result.errors.some((error) => error.includes("product")));
+  assert.ok(result.errors.some((error) => error.includes("integration-system")));
+  assert.ok(result.errors.some((error) => error.includes("platform")));
+  assert.ok(result.errors.some((error) => error.includes("capability")));
+});
+
+test("catalog validator catches broken foreign keys and child-parent mismatches", () => {
+  const baseModel = catalogRegistry.deviceModels[0];
+  const baseProduct = catalogRegistry.products[0];
+  const brokenModel = {
+    ...baseModel,
+    id: "broken-device-model",
+    productId: "missing-product",
+    sourceIds: ["missing-source"],
+    integrationModels: [{ integrationId: "missing-integration", modelId: "internal-model", sourceId: "missing-source" }],
+    protocolIds: ["missing-protocol"],
+    capabilityIds: ["missing-capability"],
+    hardwareRevisionIds: ["revision-parent-mismatch"],
+    specificationIds: ["spec-parent-mismatch"],
+    compatibilityRecordIds: ["compat-parent-mismatch"],
+    verificationIds: ["verification-parent-mismatch"]
+  };
+  const brokenRegistry = {
+    ...catalogRegistry,
+    brands: [{ ...catalogRegistry.brands[0], manufacturerId: "missing-manufacturer" }],
+    products: [
+      { ...baseProduct, id: "broken-product", manufacturerId: "missing-manufacturer", brandId: "missing-brand", categoryId: "missing-category", modelIds: ["missing-model"] },
+      { ...baseProduct, id: "brand-owner-mismatch", manufacturerId: "huawei", brandId: catalogRegistry.brands[0].id },
+      { ...baseProduct, id: "wrong-model-parent", modelIds: [baseModel.id] }
+    ],
+    deviceModels: [brokenModel],
+    hardwareRevisions: [
+      { id: "revision-parent-mismatch", deviceModelId: baseModel.id, revisionCode: "R1", region: "CN", sourceIds: ["missing-source"], evidenceLevel: "official", checkedAt: "2026-11-26", notes: "" },
+      { id: "revision-missing-model", deviceModelId: "missing-model", revisionCode: "R2", region: "CN", sourceIds: ["missing-source"], evidenceLevel: "official", checkedAt: "2026-11-26", notes: "" }
+    ],
+    productSpecifications: [
+      { id: "spec-parent-mismatch", deviceModelId: baseModel.id, name: "test", value: "1", unit: null, sourceId: "missing-source", evidenceLevel: "official", checkedAt: "2026-11-26", notes: "" },
+      { id: "spec-missing-model", deviceModelId: "missing-model", name: "test", value: "1", unit: null, sourceId: "missing-source", evidenceLevel: "official", checkedAt: "2026-11-26", notes: "" }
+    ],
+    compatibilityRecords: [
+      { id: "compat-parent-mismatch", deviceModelId: baseModel.id, targetType: "platform", targetId: "missing-platform", status: "supported", evidenceLevel: "official", sourceId: "missing-source", features: [], checkedAt: "2026-11-26", notes: "" },
+      { id: "compat-missing-integration", deviceModelId: "missing-model", targetType: "integration", targetId: "missing-integration", status: "unverified", evidenceLevel: "documented", sourceId: "missing-source", features: [], checkedAt: "2026-11-26", notes: "" }
+    ],
+    deviceVerifications: [
+      { id: "verification-parent-mismatch", deviceModelId: baseModel.id, verificationType: "pairing", result: "pass", evidenceLevel: "lab-tested", testedAt: "2026-11-26", hardwareRevisionId: "missing-revision", firmwareVersion: null, environment: "test", steps: [], observations: [], sourceIds: ["missing-source"] },
+      { id: "verification-missing-model", deviceModelId: "missing-model", verificationType: "functional", result: "partial", evidenceLevel: "field-tested", testedAt: "2026-11-26", hardwareRevisionId: null, firmwareVersion: null, environment: "test", steps: [], observations: [], sourceIds: ["missing-source"] }
+    ],
+    protocols: [{ ...catalogRegistry.protocols[0], sourceIds: ["missing-source"] }]
+  } as unknown as typeof catalogRegistry;
+  const result = validateCatalog(brokenRegistry);
+  assert.equal(result.valid, false);
+  for (const fragment of [
+    "missing manufacturer", "missing brand", "brand/manufacturer ownership mismatch",
+    "missing category", "missing device model", "device model parent mismatch",
+    "missing product", "missing source", "missing integration system", "missing protocol",
+    "missing capability", "hardware revision parent mismatch", "specification parent mismatch",
+    "compatibility parent mismatch", "verification parent mismatch", "missing hardware revision",
+    "missing platform", "missing integration"
+  ]) assert.ok(result.errors.some((error) => error.includes(fragment)), "expected validation error: " + fragment);
 });
