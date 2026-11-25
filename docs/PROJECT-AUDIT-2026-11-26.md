@@ -79,4 +79,4 @@ Historical interim 1.0.0 snapshot: 15 product records, 15 device-model records, 
 - Added Bluetooth Mesh as a separate protocol instead of conflating it with BLE.
 - Separated Xiaomi hardware brand from Mi Home ecosystem brand; products are assigned to Xiaomi brand.
 - Current catalog count: 27 products, 27 device models, 134 independent specifications, 8 protocols, 6 brands, 37 sources, 5 compatibility / integration path records, 2 integration systems, 14 Aqara SDK mappings.
-- CI passed all gates at commit 1c62780d4b01921b1ec5fa78fa52b745b86d176e (type check, tests, coverage, production build and browser tests). Later Xiaomi and documentation commits are awaiting their own latest Actions result; do not treat the earlier green run as proof for the current HEAD.
+- CI passed all gates on current HEAD 0e4a191f9bac2b868ccfd35c11d66d1270025a0f (GitHub Actions run 45708859850): Prisma schema, ESLint, TypeScript, unit/integration tests, coverage, production build and Playwright browser tests. No production deployment or local Windows validation is implied.
