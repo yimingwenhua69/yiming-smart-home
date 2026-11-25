@@ -48,13 +48,38 @@ export type Product = {
   modelIds: string[];
 };
 
+export type IntegrationModelMapping = {
+  integrationId: string;
+  modelId: string;
+  sourceId: string;
+};
+
+export type IntegrationSystem = {
+  id: string;
+  name: string;
+  kind: "manufacturer-sdk" | "open-source-integration" | "platform-api";
+  owner: string;
+  documentationUrl: string;
+  notes: string;
+};
+
+export const integrationSystems: IntegrationSystem[] = [
+  {
+    id: "aqara-sdk",
+    name: "Aqara 配网 SDK",
+    kind: "manufacturer-sdk",
+    owner: "Aqara 开放平台",
+    documentationUrl: "https://opendoc.aqara.cn/",
+    notes: "modelId 为 Aqara SDK 内部设备映射标识，不等同于零售 SKU 或通用 Zigbee modelId。"
+  }
+];
+
 export type DeviceModel = {
   id: string;
   productId: string;
   modelCode: string | null;
   hardwareRevision: string | null;
-  integrationModelIds: { integrationId: string; modelId: string; sourceId: string }[];
-  integrationModelIds?: { integrationId: string; modelId: string; sourceId: string }[];
+  integrationModelIds: IntegrationModelMapping[];
   protocolIds: string[];
   platformIds: string[];
   capabilityIds: string[];
@@ -79,6 +104,7 @@ type ProductModelSeed = {
   brandId: string;
   categoryId: string;
   summary: string;
+  integrationModelIds?: IntegrationModelMapping[];
   protocolIds: string[];
   platformIds: string[];
   capabilityIds: string[];
