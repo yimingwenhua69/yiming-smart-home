@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { brands, capabilities, categories, compatibilityRecords, deviceModels, deviceVerifications, hardwareRevisions, integrationSystems, manufacturers, platforms, productSpecifications, products, protocols, sources } from "@/data/catalog";
+import { brands, capabilities, categories, compatibilityRecords, deviceModels, deviceVerifications, hardwareRevisions, integrationMethods, integrationSystems, manufacturers, platforms, productSpecifications, products, protocols, sources } from "@/data/catalog";
 
 const id = z.string().trim().min(1);
 const httpsUrl = z.string().url().refine((value)=>value.startsWith("https://"),"URL must use HTTPS");
@@ -21,7 +21,8 @@ const productSchema = z.object({
   id, slug: z.string().regex(/^[a-z0-9-]+$/), name: z.string().min(1),
   manufacturerId: id, brandId: id, categoryId: id, summary: z.string(), modelIds: z.array(id).min(1)
 });
-const integrationSystemSchema = z.object({ id, name: z.string().min(1), kind: z.enum(["manufacturer-sdk","manufacturer-bridge","open-source-integration","platform-api"]), owner: z.string().min(1), documentationUrl: httpsUrl, notes: z.string() });
+const integrationSystemSchema = z.object({ id, name: z.string().min(1), kind: z.enum(["manufacturer-sdk","manufacturer-bridge","platform-sdk","open-source-integration","platform-api"]), owner: z.string().min(1), documentationUrl: httpsUrl, notes: z.string() });
+const integrationMethodSchema = z.object({ id, name: z.string().min(1), description: z.string(), securityNotes: z.string() });
 const integrationMappingSchema = z.object({ integrationId: id, modelId: id, sourceId: id });
 const hardwareRevisionSchema = z.object({
   id, deviceModelId: id, revisionCode: id, region: z.enum(["CN","GLOBAL"]),
@@ -59,7 +60,7 @@ const platformSchema = z.object({ id, name: z.string(), owner: z.string(), summa
 const capabilitySchema = z.object({ id, name: z.string(), valueType: z.string() });
 
 export const catalogRegistry = {
-  sources, integrationSystems, manufacturers, brands, categories, products, deviceModels,
+  sources, integrationSystems, integrationMethods, manufacturers, brands, categories, products, deviceModels,
   hardwareRevisions, productSpecifications, compatibilityRecords, deviceVerifications,
   protocols, platforms, capabilities
 };
@@ -84,6 +85,7 @@ export function validateCatalog(registry: typeof catalogRegistry = catalogRegist
   };
   checkCollection("source",sources,sourceSchema);
   checkCollection("integration-system",integrationSystems,integrationSystemSchema);
+  checkCollection("integration-method",integrationMethods,integrationMethodSchema);
   checkCollection("manufacturer",manufacturers,manufacturerSchema);
   checkCollection("brand",brands,brandSchema);
   checkCollection("category",categories,categorySchema);
@@ -99,6 +101,7 @@ export function validateCatalog(registry: typeof catalogRegistry = catalogRegist
 
   const sourceIds=ids.get("source")??new Set<string>();
   const integrationSystemIds=ids.get("integration-system")??new Set<string>();
+  const integrationMethodIds=ids.get("integration-method")??new Set<string>();
   const manufacturerIds=ids.get("manufacturer")??new Set<string>();
   const brandIds=ids.get("brand")??new Set<string>();
   const categoryIds=ids.get("category")??new Set<string>();
@@ -162,6 +165,7 @@ export function validateCatalog(registry: typeof catalogRegistry = catalogRegist
     if(!sourceIds.has(record.sourceId)) errors.push(record.id+" references missing source "+record.sourceId);
     if(record.targetType==="platform"&&!platformIds.has(record.targetId)) errors.push(record.id+" references missing platform "+record.targetId);
     if(record.targetType==="integration"&&!integrationSystemIds.has(record.targetId)) errors.push(record.id+" references missing integration "+record.targetId);
+    if(record.methodId&&!integrationMethodIds.has(record.methodId)) errors.push(record.id+" references missing integration method "+record.methodId);
   }
   for(const verification of deviceVerifications){
     if(!modelIds.has(verification.deviceModelId)) errors.push(verification.id+" references missing device model "+verification.deviceModelId);
