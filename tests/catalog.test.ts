@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { capabilities, categories, manufacturers, products, protocols, sources } from "../src/data/catalog";
+import { validateCatalog } from "../src/lib/catalog-schema";
 
 test("catalog entity identifiers are unique", () => {
   for (const collection of [sources, manufacturers, categories, products, protocols, capabilities]) {
@@ -42,4 +43,11 @@ test("all source URLs are HTTPS and checked dates are ISO dates", () => {
     assert.ok(source.url.startsWith("https://"), source.id + " source must use HTTPS");
     assert.match(source.checkedAt, /^\\d{4}-\\d{2}-\\d{2}$/);
   }
+});
+
+
+test("Zod catalog schema and all foreign-key relations pass", () => {
+  const result = validateCatalog();
+  assert.deepEqual(result.errors, []);
+  assert.equal(result.valid, true);
 });
