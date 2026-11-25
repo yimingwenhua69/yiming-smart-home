@@ -21,7 +21,7 @@ const productSchema = z.object({
   id, slug: z.string().regex(/^[a-z0-9-]+$/), name: z.string().min(1),
   manufacturerId: id, brandId: id, categoryId: id, summary: z.string(), modelIds: z.array(id).min(1)
 });
-const integrationSystemSchema = z.object({ id, name: z.string().min(1), kind: z.enum(["manufacturer-sdk","open-source-integration","platform-api"]), owner: z.string().min(1), documentationUrl: httpsUrl, notes: z.string() });
+const integrationSystemSchema = z.object({ id, name: z.string().min(1), kind: z.enum(["manufacturer-sdk","manufacturer-bridge","open-source-integration","platform-api"]), owner: z.string().min(1), documentationUrl: httpsUrl, notes: z.string() });
 const integrationMappingSchema = z.object({ integrationId: id, modelId: id, sourceId: id });
 const hardwareRevisionSchema = z.object({
   id, deviceModelId: id, revisionCode: id, region: z.enum(["CN","GLOBAL"]),
