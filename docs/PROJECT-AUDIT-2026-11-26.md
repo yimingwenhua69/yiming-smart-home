@@ -78,5 +78,7 @@ Historical interim 1.0.0 snapshot: 15 product records, 15 device-model records, 
 - Xiaomi: added the official Xiaomi Smart Multi-mode Gateway 2 crowdfunding record (campaign ended; current availability and retail SKU unverified) and Xiaomi Smart Home Screen 10 official listing (model code and radio functions not exposed by the readable official page).
 - Added Bluetooth Mesh as a separate protocol instead of conflating it with BLE.
 - Separated Xiaomi hardware brand from Mi Home ecosystem brand; products are assigned to Xiaomi brand.
-- Current catalog count: 27 products, 27 device models, 134 independent specifications, 8 protocols, 6 brands, 37 sources, 5 compatibility / integration path records, 2 integration systems, 14 Aqara SDK mappings.
+- Current catalog count: 27 products, 27 device models, 134 independent specifications, 8 protocols, 6 platforms, 6 brands, 40 sources, 6 compatibility / integration path records, 4 integration systems, 7 integration methods, 14 Aqara SDK mappings.
 - CI passed all gates on current HEAD 0e4a191f9bac2b868ccfd35c11d66d1270025a0f (GitHub Actions run 45708859850): Prisma schema, ESLint, TypeScript, unit/integration tests, coverage, production build and Playwright browser tests. No production deployment or local Windows validation is implied.
+
+- Tuya: added the Tuya Smart / Smart Life platform, TuyaOS Link SDK and Tuya Cloud Development API integration systems, official SDK / cloud / pairing sources, and a seven-method integration matrix. Tuya is treated as a platform provider; OEM hardware manufacturers must be identified per product SKU.
