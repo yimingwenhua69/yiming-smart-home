@@ -58,14 +58,14 @@
 
 ## YIMING STUDIO 1.0.0 接续状态（2026-11-26，当前有效）
 
-当前有效分支：\`codex/yiming-smart-home-v1.0.0\`。以该分支源码和 [V1.0.0 TASK-001](docs/worklog/V1.0.0-TASK-001.md) 为准。上方 P2 交接段落为历史记录，不代表当前 GitHub 状态。
+当前有效分支：`codex/yiming-smart-home-v1.0.0`。以该分支源码和 [V1.0.0 TASK-001](docs/worklog/V1.0.0-TASK-001.md) 为准。上方 P2 交接段落为历史记录，不代表当前 GitHub 状态。
 
-已建立 Next.js 16 + React 19 + TypeScript + Tailwind 的中文知识库首轮页面：品牌首页、产品库与详情、厂商目录、协议、平台、灯光、场景、工程、搜索、产品对比、收藏和流明法初步估算器。产品数据在 \`src/data/catalog.ts\`，知识内容在 \`src/data/knowledge.ts\`，Zod 校验在 \`src/lib/catalog-schema.ts\`。
+已建立 Next.js 16 + React 19 + TypeScript + Tailwind 的中文知识库首轮页面：品牌首页、产品库与详情、厂商目录、协议、平台、灯光、场景、工程、搜索、产品对比、收藏和流明法初步估算器。产品数据在 `src/data/catalog.ts`，知识内容在 `src/data/knowledge.ts`，Zod 校验在 `src/lib/catalog-schema.ts`。
 
-首批公开数据为 5 个厂商、7 个品类、7 个协议、5 个平台、15 个能力、6 个知识域、14 个产品档案、18 个来源。产品条目区分官方目录与官方规格证据；不明参数不填、不显示未授权图片或 3D 模型。
+当前数据为 5 个制造商、6 个品牌、7 个分类、8 个协议、5 个平台、16 个能力、27 个产品、27 个设备型号、134 条独立规格、5 条兼容 / 集成路径记录、2 个集成系统、14 条 Aqara SDK 映射和 37 个来源。产品条目区分官方目录、官方规格和兼容证据；未知参数不填，不展示未授权图片或未经型号核验的 3D 模型。
 
 旧示例设备 API 已返回 410，旧 Prisma seed 已变成 no-op，避免再次公开虚构通用设备。公开知识页面不查询 PostgreSQL；旧健康接口仍需数据库连接。
 
-CI 工作流已添加，但在 GitHub Actions 返回真实成功结果前，不得宣称 lint、typecheck、tests、coverage、build 或浏览器测试已通过。当前未配置生产部署。
+CI 工作流已添加；提交 1c62780d4b01921b1ec5fa78fa52b745b86d176e 的 lint、typecheck、tests、coverage、production build 和 Playwright 浏览器测试全部通过。之后增加了小米产品记录、品牌拆分、CI 并发控制与文档更新，当前 HEAD 的新 Actions 结果仍须重新核验。当前未配置生产部署。
 
-后续必须完成：Product / DeviceModel / HardwareRevision 规范化、型号级深度资料采集、来源与兼容关系、图片版权核验、真实 GLB / CAD / 扫描模型、IES/LDT 光度资料、全文知识索引、Cloudflare OpenNext 预览部署和真实浏览器验收。没有授权或证据时，宁可显示缺失状态，不得伪造。
+后续必须完成：补充真实 HardwareRevision 和 DeviceVerification 记录；继续采集 Tuya 与更多 Xiaomi 型号级资料；取得准确型号且授权清晰的图片、GLB / CAD / 扫描模型和 IES/LDT 文件；扩展全文知识正文索引；验证 Cloudflare OpenNext 适配、预览部署、域名、缓存、回滚与生产视觉验收。没有授权或证据时，保持缺失状态，不得伪造。
