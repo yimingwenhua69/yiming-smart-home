@@ -44,7 +44,7 @@
 
 当前数据实体已拆分为：
 
-- Manufacturer / Brand：品牌归属制造商，二者独立登记。
+- Manufacturer / Brand：品牌归属组织，二者独立登记；组织角色区分硬件制造商、品牌运营方、生态服务商与 IoT 平台服务商，品牌角色区分硬件品牌、生态品牌与平台品牌。
 - Product / DeviceModel：产品与准确设备型号分开，使用稳定 ID 关联。
 - HardwareRevision：硬件版本独立实体；当前记录数为 0，未确认的版本不虚构。
 - ProductSpecification：每条参数独立记录，绑定准确设备型号、来源、证据等级与核验日期。
