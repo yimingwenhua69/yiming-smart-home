@@ -66,6 +66,6 @@
 
 旧示例设备 API 已返回 410，旧 Prisma seed 已变成 no-op，避免再次公开虚构通用设备。公开知识页面不查询 PostgreSQL；旧健康接口仍需数据库连接。
 
-CI 工作流已添加；当前 HEAD 0e4a191f9bac2b868ccfd35c11d66d1270025a0f 的 Prisma schema、lint、typecheck、tests、coverage、production build 和 Playwright 浏览器测试全部通过（GitHub Actions run 45708859850）。当前未配置生产部署。
+CI 工作流已添加；当前 HEAD 61e96a7ad95922140d4d8ffaa5e9fa0c7b7a0564 的 Prisma schema、lint、typecheck、tests、coverage、production build 和 Playwright 浏览器测试全部通过（GitHub Actions run 45710699381）。当前未配置生产部署。
 
 后续必须完成：补充真实 HardwareRevision 和 DeviceVerification 记录；继续采集 Tuya OEM 与更多 Xiaomi 型号级资料；取得准确型号且授权清晰的图片、GLB / CAD / 扫描模型和 IES/LDT 文件；扩展全文知识正文索引；验证 Cloudflare OpenNext 适配、预览部署、域名、缓存、回滚与生产视觉验收。没有授权或证据时，保持缺失状态，不得伪造。
