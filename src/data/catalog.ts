@@ -57,11 +57,28 @@ export type IntegrationModelMapping = {
 export type IntegrationSystem = {
   id: string;
   name: string;
-  kind: "manufacturer-sdk" | "manufacturer-bridge" | "open-source-integration" | "platform-api";
+  kind: "manufacturer-sdk" | "manufacturer-bridge" | "platform-sdk" | "open-source-integration" | "platform-api";
   owner: string;
   documentationUrl: string;
   notes: string;
 };
+
+export type IntegrationMethod = {
+  id: string;
+  name: string;
+  description: string;
+  securityNotes: string;
+};
+
+export const integrationMethods: IntegrationMethod[] = [
+  { id: "native", name: "原生集成", description: "设备或厂商生态通过平台官方支持的原生接入方式集成。", securityNotes: "必须确认具体型号、平台认证、功能范围和固件版本。" },
+  { id: "matter", name: "Matter", description: "通过 Matter 标准协议与兼容控制器建立本地互操作连接。", securityNotes: "认证、设备类型、集群、功能暴露和控制器支持需逐项核对。" },
+  { id: "lan-api", name: "局域网 API", description: "通过本地网络接口或本地服务进行设备控制与状态读取。", securityNotes: "核实鉴权、TLS、网络隔离、令牌管理与离线行为。" },
+  { id: "cloud-api", name: "云端 API", description: "通过厂商云服务 API 管理账号、设备、状态和控制指令。", securityNotes: "依赖互联网、账号授权和云服务可用性；需审查数据出境与隐私权限。" },
+  { id: "mqtt", name: "MQTT", description: "通过 MQTT broker / topic 交换设备状态和控制消息。", securityNotes: "核实 TLS、证书、ACL、topic 隔离、消息保留与重放风险。" },
+  { id: "webhook", name: "Webhook", description: "通过 HTTP 回调推送事件或触发外部工作流。", securityNotes: "核实签名校验、重放保护、来源限制和超时重试策略。" },
+  { id: "third-party-bridge", name: "第三方桥接", description: "由网关、桥接服务或社区集成把设备能力映射到目标生态。", securityNotes: "能力可能不完整；需记录桥接版本、维护状态和本地 / 云端依赖。" }
+];
 
 export const integrationSystems: IntegrationSystem[] = [
   {
@@ -79,6 +96,22 @@ export const integrationSystems: IntegrationSystem[] = [
     owner: "Aqara",
     documentationUrl: "https://www.aqara.cn/cn/Aqara-AI-Presence-Detector-FP1E_support",
     notes: "部分 Zigbee 子设备需经兼容 Aqara 网关桥接 Matter 接入第三方生态；不代表设备可直接加入所有平台，也不保证所有私有能力透传。"
+  },
+  {
+    id: "tuya-link-sdk",
+    name: "TuyaOS Link SDK",
+    kind: "platform-sdk",
+    owner: "Tuya Developer Platform",
+    documentationUrl: "https://developer.tuya.com/cn/link-sdk",
+    notes: "设备端 SDK 抽象硬件与操作系统接口；官方文档说明其与涂鸦云通过 MQTT / HTTP over TLS 通信。它是设备接入开发工具，不代表任意 OEM 设备都能直接互通。"
+  },
+  {
+    id: "tuya-cloud-api",
+    name: "Tuya Cloud Development API",
+    kind: "platform-api",
+    owner: "Tuya Developer Platform",
+    documentationUrl: "https://developer.tuya.com/cn/docs/im-project-services/Cloud-self-development",
+    notes: "提供账号、设备、应用和控制能力的云端 API 路径；需要授权和云服务，不应描述为本地 LAN API。"
   }
 ];
 
@@ -110,6 +143,7 @@ export type CompatibilityRecord = {
   deviceModelId: string;
   targetType: "platform" | "integration";
   targetId: string;
+  methodId: string | null;
   status: "supported" | "partial" | "unsupported" | "unverified";
   evidenceLevel: EvidenceLevel;
   sourceId: string;
@@ -158,6 +192,7 @@ export type DeviceModel = {
 type CompatibilitySeed = {
   targetType: "platform" | "integration";
   targetId: string;
+  methodId: string | null;
   status: "supported" | "partial" | "unsupported" | "unverified";
   evidenceLevel: EvidenceLevel;
   sourceId: string;
@@ -224,6 +259,39 @@ export const sources: CatalogSource[] = [
     checkedAt: "2026-11-26",
     region: "CN",
     notes: "官方众筹页列出蓝牙、蓝牙 Mesh、Zigbee、双频 Wi-Fi 和有线网口；众筹已结束，当前销售状态与具体零售 SKU 尚未核实。"
+  },
+  {
+    id: "tuya-link-sdk-docs",
+    publisher: "Tuya Developer Platform",
+    title: "TuyaOS Link SDK 官方说明",
+    url: "https://developer.tuya.com/cn/link-sdk",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "GLOBAL",
+    notes: "官方说明 Link SDK 抽象硬件与操作系统接口；设备与涂鸦云通过 MQTT、HTTP 等协议并基于 TLS 建立连接。"
+  },
+  {
+    id: "tuya-cloud-self-development",
+    publisher: "Tuya Developer Platform",
+    title: "涂鸦云对接自助开发文档",
+    url: "https://developer.tuya.com/cn/docs/im-project-services/Cloud-self-development",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "GLOBAL",
+    notes: "官方文档说明 OEM App、Smart Life App SDK、云开发 API、设备管理与消息订阅等对接方案；具体能力取决于项目授权和产品方案。"
+  },
+  {
+    id: "tuya-smart-app-pairing",
+    publisher: "Tuya Developer Platform",
+    title: "Smart App SDK 设备配网官方文档",
+    url: "https://developer.tuya.com/cn/docs/app-development/network-pairing",
+    sourceType: "official-specification",
+    evidenceLevel: "official",
+    checkedAt: "2026-11-26",
+    region: "GLOBAL",
+    notes: "官方说明 Wi-Fi、蓝牙和 Zigbee 设备配网需按硬件能力和具体 App SDK 版本实现；不代表某个 OEM 设备默认支持所有配网类型。"
   },
   {
     id: "huawei-wholehome-cn",
@@ -644,7 +712,8 @@ export const platforms = [
   { id: "google-home", name: "Google Home", owner: "Google", summary: "Google 智能家居平台，支持的设备类型与功能取决于设备接入方式。", link: "https://home.google.com/", integration: "Matter / Cloud integration", cautions: ["云端集成与 Matter 本地接入的能力边界不同。"] },
   { id: "alexa", name: "Amazon Alexa", owner: "Amazon", summary: "语音助手与智能家居平台，可通过兼容设备、技能或 Matter 接入。", link: "https://www.amazon.com/alexa", integration: "Matter / Skills / Cloud", cautions: ["Skill、云端和本地 Matter 暴露能力需分别记录。"] },
   { id: "home-assistant", name: "Home Assistant", owner: "Open Home Foundation", summary: "开放式家庭自动化平台，集成覆盖本地协议、云服务与社区设备。", link: "https://www.home-assistant.io/", integration: "Native / MQTT / Matter / Bridges", cautions: ["社区集成不等于厂商官方支持；需记录版本与维护状态。"] },
-  { id: "harmony-home", name: "华为鸿蒙智家", owner: "Huawei", summary: "华为全屋智能生态，包含主机、面板、传感器、照明与场景服务。", link: "https://consumer.huawei.com/cn/wholehome/", integration: "Huawei ecosystem", cautions: ["以华为官方兼容清单和具体主机/设备型号为准。"] }
+  { id: "harmony-home", name: "华为鸿蒙智家", owner: "Huawei", summary: "华为全屋智能生态，包含主机、面板、传感器、照明与场景服务。", link: "https://consumer.huawei.com/cn/wholehome/", integration: "Huawei ecosystem", cautions: ["以华为官方兼容清单和具体主机/设备型号为准。"] },
+    { id: "tuya-smart", name: "涂鸦智能 / Smart Life", owner: "Tuya", summary: "面向 OEM 与智能设备厂商的 IoT 平台和消费级智能生活 App 生态；设备接入路径包括 TuyaOS、App SDK 与云 API。", link: "https://www.tuya.com/cn", integration: "TuyaOS Link SDK / Smart App SDK / Cloud API", cautions: ["涂鸦平台品牌不等于硬件制造商；每个 OEM 设备必须单独核实真实生产商与型号。", "云 API 依赖账号授权和互联网服务，不等同于本地控制。", "设备是否支持 Matter、HomeKit 或其他平台必须按准确 SKU 与认证资料核实。"] }
 ] as const;
 
 export const capabilities = [
@@ -671,16 +740,16 @@ const productModelSeeds: ProductModelSeed[] = [
   { id: "xiaomi-smart-screen-10", slug: "xiaomi-smart-home-screen-10", name: "Xiaomi 智能家庭屏 10", model: null, manufacturerId: "xiaomi", brandId: "xiaomi", categoryId: "switch", summary: "小米官网列出的智能家庭屏产品，可作为智能家居交互屏档案入口；当前只确认官方产品名称。", protocolIds: [], capabilityIds: [], sourceIds: ["xiaomi-smart-screen-10"], evidenceLevel: "official", verificationStatus: "official-listing", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["当前可读取的官方参数页未暴露准确硬件型号、无线协议、网关角色和第三方平台兼容细节。", "不得仅凭家庭屏产品名称推断其具备 Zigbee、Thread、Matter 或 BLE 网关功能。"] },
 
   { id: "aqara-m3", slug: "aqara-hub-m3", name: "方舟智慧中枢 M3", model: "ZHWG24LM", manufacturerId: "aqara", brandId: "aqara", categoryId: "gateway", summary: "Aqara 官方参数页确认的家庭中枢网关，支持 Wi-Fi、Zigbee 与 Thread 等无线连接。", protocolIds: ["wifi", "zigbee", "thread"], capabilityIds: [], sourceIds: ["aqara-catalog-cn", "aqara-m3-spec"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "ZHWG24LM", sourceId: "aqara-m3-spec" }, { name: "产品尺寸", value: "105 × 105 × 36.5 mm", sourceId: "aqara-m3-spec" }, { name: "电源输入", value: "5 V ⎓ 2 A", sourceId: "aqara-m3-spec" }, { name: "PoE 输入", value: "48 V ⎓ 0.27 A", sourceId: "aqara-m3-spec" }, { name: "工作温度", value: "−10–50 °C", sourceId: "aqara-m3-spec" }, { name: "工作湿度", value: "0–95% RH，无冷凝", sourceId: "aqara-m3-spec" }, { name: "无线协议", value: "Wi-Fi IEEE 802.11 a/b/g/n/ac 2.4/5 GHz；Zigbee / Thread IEEE 802.15.4；Bluetooth 5.1", sourceId: "aqara-m3-spec" }], limitations: ["官方参数页列示数据；未据此推断该中枢对所有第三方设备开放全部能力。", "不同功能可能要求其他 Aqara 网关、设备固件或特定软件版本。"] },
-  { id: "aqara-m200", compatibilityRecords: [{ targetType: "platform", targetId: "apple-home", status: "supported", evidenceLevel: "official", sourceId: "aqara-m200-support", features: ["HomeKit 二维码接入", "Matter 二维码接入"], checkedAt: "2026-11-26", notes: "官方支持页明确列出 Apple Home 接入方式；HomeKit 与 Matter 接入的功能存在差异。" }],  slug: "aqara-hub-m200", name: "网关 M200", model: "M200", manufacturerId: "aqara", brandId: "aqara", categoryId: "gateway", summary: "Aqara 官方支持资料确认的 Matter 控制器与 Thread 边界路由器，可连接 Zigbee 和 Thread 子设备。", protocolIds: ["wifi", "zigbee", "thread", "matter"], capabilityIds: [], sourceIds: ["aqara-catalog-cn", "aqara-m200-support"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "网络连接", value: "PoE 有线；双频 Wi-Fi 6（2.4GHz / 5GHz），WPA3", sourceId: "aqara-m200-support" }, { name: "中枢角色", value: "Matter 控制器、Thread 边界路由器", sourceId: "aqara-m200-support" }, { name: "子设备协议", value: "Zigbee、Thread", sourceId: "aqara-m200-support" }, { name: "Apple Home 接入", value: "支持 HomeKit 二维码与 Matter 二维码两种方式", sourceId: "aqara-m200-support" }, { name: "实验室连接测试", value: "40 个 Zigbee + 40 个 Thread 子设备同时连接（厂商实验室数据）", sourceId: "aqara-m200-support" }], limitations: ["HomeKit 与 Matter 二维码接入的功能存在差异：官方支持页说明空调模式仅在 Matter 接入第三方生态时可用；Matter 接入目前不支持 Security 功能。", "40 + 40 子设备数据为厂商实验室测试，不应视为所有现场网络条件下的性能保证。", "本记录尚未核实 M200 的独立零售硬件 SKU 代码，M200 为官方产品名称。"] },
-  { id: "aqara-fp1e", compatibilityRecords: [{ targetType: "integration", targetId: "aqara-matter-bridge", status: "partial", evidenceLevel: "official", sourceId: "aqara-fp1e-support", features: ["经兼容 Aqara 网关桥接 Matter 后接入第三方生态"], checkedAt: "2026-11-26", notes: "该路径依赖兼容 Aqara 网关与固件；不能推断为 FP1E 原生 Matter 设备或全平台功能等价。" }],integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.sensor_occupy.agl1", sourceId: "aqara-open-platform-device-list" }],  slug: "aqara-fp1e", name: "AI 智能存在传感器 FP1E", model: "RTCZCGQ13LM", manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "采用 Zigbee 无线连接的 AI 存在传感器；第三方生态接入需通过支持的 Aqara 网关桥接。", protocolIds: ["zigbee"], capabilityIds: ["occupancy"], sourceIds: ["aqara-catalog-cn", "aqara-fp1e-spec", "aqara-fp1e-support"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "RTCZCGQ13LM", sourceId: "aqara-fp1e-spec" }, { name: "产品尺寸", value: "57 × 50 × 37 mm", sourceId: "aqara-fp1e-spec" }, { name: "无线连接", value: "Zigbee", sourceId: "aqara-fp1e-spec" }, { name: "额定输入", value: "5 V / 1 A", sourceId: "aqara-fp1e-spec" }, { name: "电源接口", value: "USB-A", sourceId: "aqara-fp1e-spec" }, { name: "工作温度", value: "−10–40 °C", sourceId: "aqara-fp1e-spec" }, { name: "工作湿度", value: "0–95% RH，无冷凝", sourceId: "aqara-fp1e-spec" }], limitations: ["需要支持 Zigbee 3.0 的 Aqara 网关完成添加。", "第三方生态支持路径为经 Aqara 网关桥接 Matter；不代表 FP1E 可直接独立加入所有第三方平台。", "兼容网关型号和固件以官方支持页为准。"] },
+  { id: "aqara-m200", compatibilityRecords: [{ targetType: "platform", targetId: "apple-home", methodId: "native", status: "supported", evidenceLevel: "official", sourceId: "aqara-m200-support", features: ["HomeKit 二维码接入"], checkedAt: "2026-11-26", notes: "官方支持页明确列出 HomeKit 二维码接入；具体功能受 HomeKit 接入方式限制。" }, { targetType: "platform", targetId: "apple-home", methodId: "matter", status: "supported", evidenceLevel: "official", sourceId: "aqara-m200-support", features: ["Matter 二维码接入"], checkedAt: "2026-11-26", notes: "官方支持页明确列出 Matter 二维码接入；Matter 与 HomeKit 接入的功能存在差异，Matter 接入不支持部分 Security 功能。" }],  slug: "aqara-hub-m200", name: "网关 M200", model: "M200", manufacturerId: "aqara", brandId: "aqara", categoryId: "gateway", summary: "Aqara 官方支持资料确认的 Matter 控制器与 Thread 边界路由器，可连接 Zigbee 和 Thread 子设备。", protocolIds: ["wifi", "zigbee", "thread", "matter"], capabilityIds: [], sourceIds: ["aqara-catalog-cn", "aqara-m200-support"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "网络连接", value: "PoE 有线；双频 Wi-Fi 6（2.4GHz / 5GHz），WPA3", sourceId: "aqara-m200-support" }, { name: "中枢角色", value: "Matter 控制器、Thread 边界路由器", sourceId: "aqara-m200-support" }, { name: "子设备协议", value: "Zigbee、Thread", sourceId: "aqara-m200-support" }, { name: "Apple Home 接入", value: "支持 HomeKit 二维码与 Matter 二维码两种方式", sourceId: "aqara-m200-support" }, { name: "实验室连接测试", value: "40 个 Zigbee + 40 个 Thread 子设备同时连接（厂商实验室数据）", sourceId: "aqara-m200-support" }], limitations: ["HomeKit 与 Matter 二维码接入的功能存在差异：官方支持页说明空调模式仅在 Matter 接入第三方生态时可用；Matter 接入目前不支持 Security 功能。", "40 + 40 子设备数据为厂商实验室测试，不应视为所有现场网络条件下的性能保证。", "本记录尚未核实 M200 的独立零售硬件 SKU 代码，M200 为官方产品名称。"] },
+  { id: "aqara-fp1e", compatibilityRecords: [{ targetType: "integration", targetId: "aqara-matter-bridge", methodId: "third-party-bridge", status: "partial", evidenceLevel: "official", sourceId: "aqara-fp1e-support", features: ["经兼容 Aqara 网关桥接 Matter 后接入第三方生态"], checkedAt: "2026-11-26", notes: "该路径依赖兼容 Aqara 网关与固件；不能推断为 FP1E 原生 Matter 设备或全平台功能等价。" }],integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.sensor_occupy.agl1", sourceId: "aqara-open-platform-device-list" }],  slug: "aqara-fp1e", name: "AI 智能存在传感器 FP1E", model: "RTCZCGQ13LM", manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "采用 Zigbee 无线连接的 AI 存在传感器；第三方生态接入需通过支持的 Aqara 网关桥接。", protocolIds: ["zigbee"], capabilityIds: ["occupancy"], sourceIds: ["aqara-catalog-cn", "aqara-fp1e-spec", "aqara-fp1e-support"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "RTCZCGQ13LM", sourceId: "aqara-fp1e-spec" }, { name: "产品尺寸", value: "57 × 50 × 37 mm", sourceId: "aqara-fp1e-spec" }, { name: "无线连接", value: "Zigbee", sourceId: "aqara-fp1e-spec" }, { name: "额定输入", value: "5 V / 1 A", sourceId: "aqara-fp1e-spec" }, { name: "电源接口", value: "USB-A", sourceId: "aqara-fp1e-spec" }, { name: "工作温度", value: "−10–40 °C", sourceId: "aqara-fp1e-spec" }, { name: "工作湿度", value: "0–95% RH，无冷凝", sourceId: "aqara-fp1e-spec" }], limitations: ["需要支持 Zigbee 3.0 的 Aqara 网关完成添加。", "第三方生态支持路径为经 Aqara 网关桥接 Matter；不代表 FP1E 可直接独立加入所有第三方平台。", "兼容网关型号和固件以官方支持页为准。"] },
   { id: "aqara-fp310", slug: "aqara-fp310", name: "AI 多维人在传感器 FP310", model: "FP310", manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 官网当前产品目录列出的免布线长续航人体感知产品。", protocolIds: [], capabilityIds: ["occupancy"], sourceIds: ["aqara-catalog-cn"], evidenceLevel: "official", verificationStatus: "official-listing", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["官网目录宣传语不作为量化续航、感知距离或协议参数。"] },
   { id: "aqara-fp400", slug: "aqara-fp400", name: "AI 空间传感器 FP400", model: "FP400", manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 官网当前产品目录列出的空间感知产品。", protocolIds: [], capabilityIds: ["occupancy"], sourceIds: ["aqara-catalog-cn"], evidenceLevel: "official", verificationStatus: "official-listing", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [], limitations: ["未核实精确感知区域、算法能力、供电与平台映射。"] },
   { id: "aqara-fp2",integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.motion.agl001", sourceId: "aqara-open-platform-device-list" }],  slug: "aqara-fp2", name: "Aqara 场景传感器 FP2", model: "RTCZCGQ12LM", manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "基于 Wi-Fi 的毫米波场景传感器，支持多目标感知和方向事件；本地自动化需兼容的局域网自动化网关。", protocolIds: ["wifi"], capabilityIds: ["occupancy", "scene"], sourceIds: ["aqara-catalog-cn", "aqara-fp2-spec", "aqara-fp2-support"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "RTCZCGQ12LM", sourceId: "aqara-fp2-spec" }, { name: "无线连接", value: "Wi-Fi IEEE 802.11 b/g/n 2.4 GHz；Bluetooth 4.2", sourceId: "aqara-fp2-spec" }, { name: "额定输入", value: "5 V / 1 A", sourceId: "aqara-fp2-spec" }, { name: "执行标准", value: "GB 4943.1-2022", sourceId: "aqara-fp2-spec" }, { name: "工作温度", value: "−10–40 °C", sourceId: "aqara-fp2-spec" }, { name: "工作湿度", value: "0–95% RH，无冷凝", sourceId: "aqara-fp2-spec" }, { name: "本地自动化", value: "需支持 Wi-Fi 局域网自动化的网关", sourceId: "aqara-fp2-support" }], limitations: ["毫米波对窗帘、风扇、绿植等运动目标敏感，安装时需设置干扰源、进出口和边缘区域以减少误报。", "官方支持页指出本地自动化需要支持 Wi-Fi 局域网自动化的网关。", "参数页列出 Bluetooth 4.2，但本记录不将其推断为可直接控制设备的 BLE 服务。"] },
   { id: "aqara-p1",integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.motion.ac02", sourceId: "aqara-open-platform-device-list" }],  slug: "aqara-motion-sensor-p1", name: "人体传感器 P1", model: "RTCGQ14LM", manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 官方参数页确认的 Zigbee 3.0 人体移动传感器。", protocolIds: ["zigbee"], capabilityIds: ["occupancy"], sourceIds: ["aqara-catalog-cn", "aqara-p1-spec"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "RTCGQ14LM", sourceId: "aqara-p1-spec" }, { name: "产品尺寸", value: "Φ33.1 × 41.6 mm（不含支架）", sourceId: "aqara-p1-spec" }, { name: "净重", value: "33 g（不含支架）", sourceId: "aqara-p1-spec" }, { name: "电池类型", value: "CR2450", sourceId: "aqara-p1-spec" }, { name: "无线连接", value: "Zigbee 3.0", sourceId: "aqara-p1-spec" }, { name: "工作温度", value: "−10–55 °C", sourceId: "aqara-p1-spec" }, { name: "工作湿度", value: "≤95% RH（无凝结）", sourceId: "aqara-p1-spec" }], limitations: ["传感器安装位置、遮挡、宠物活动和环境温度会影响实际触发效果；需要现场验证。"] },
   { id: "aqara-door-window-t1",integrationModels: [{ integrationId: "aqara-sdk", modelId: "lumi.magnet.agl02", sourceId: "aqara-open-platform-device-list" }],  slug: "aqara-door-window-sensor-t1", name: "门窗传感器 T1", model: "MCCGQ12LM", manufacturerId: "aqara", brandId: "aqara", categoryId: "sensor", summary: "Aqara 官方参数页确认的 Zigbee 3.0 门窗开合状态传感器。", protocolIds: ["zigbee"], capabilityIds: ["contact"], sourceIds: ["aqara-catalog-cn", "aqara-door-window-t1-spec"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "MCCGQ12LM", sourceId: "aqara-door-window-t1-spec" }, { name: "无线连接", value: "Zigbee 3.0", sourceId: "aqara-door-window-t1-spec" }, { name: "产品尺寸", value: "41 × 22 × 11 mm", sourceId: "aqara-door-window-t1-spec" }, { name: "电池型号", value: "CR1632", sourceId: "aqara-door-window-t1-spec" }, { name: "最大感应距离", value: "22 mm", sourceId: "aqara-door-window-t1-spec" }, { name: "工作温度", value: "−10–50 °C", sourceId: "aqara-door-window-t1-spec" }, { name: "工作湿度", value: "0–95% RH，无冷凝", sourceId: "aqara-door-window-t1-spec" }], limitations: ["官方支持页要求主体与磁铁安装标记对齐，最大间距不超过 22 mm；金属门窗可能衰减无线信号。", "需核对兼容网关、设备固件和实际安装位置。"] },
-  { id: "huawei-ai-sensor-ber-se10", compatibilityRecords: [{ targetType: "platform", targetId: "harmony-home", status: "supported", evidenceLevel: "official", sourceId: "huawei-sensor-compatibility", features: ["鸿蒙智家融合感知"], checkedAt: "2026-11-26", notes: "支持范围仅限官方融合感知支持清单中列出的主机、型号和软件版本。" }],  slug: "huawei-ai-sensor-ber-se10", name: "华为鸿蒙智家 AI 超感传感器", model: "BER-SE10", manufacturerId: "huawei", brandId: "huawei-wholehome", categoryId: "sensor", summary: "华为官方融合感知支持清单明确列出的传感器型号。", protocolIds: [], capabilityIds: ["occupancy"], sourceIds: ["huawei-wholehome-cn", "huawei-sensor-compatibility"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "BER-SE10", sourceId: "huawei-sensor-compatibility" }], limitations: ["官方清单确认该型号属于融合感知支持产品；具体主机兼容范围、软件版本与安装要求须一并核对官方清单。"] },
-  { id: "huawei-ai-sensor-ber-se00", compatibilityRecords: [{ targetType: "platform", targetId: "harmony-home", status: "supported", evidenceLevel: "official", sourceId: "huawei-sensor-compatibility", features: ["鸿蒙智家融合感知"], checkedAt: "2026-11-26", notes: "支持范围仅限官方融合感知支持清单中列出的主机、型号和软件版本。" }],  slug: "huawei-ai-sensor-ber-se00", name: "华为全屋智能 AI 超感传感器", model: "BER-SE00", manufacturerId: "huawei", brandId: "huawei-wholehome", categoryId: "sensor", summary: "华为官方融合感知支持清单明确列出的上一命名体系传感器型号。", protocolIds: [], capabilityIds: ["occupancy"], sourceIds: ["huawei-sensor-compatibility"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "BER-SE00", sourceId: "huawei-sensor-compatibility" }], limitations: ["不能仅凭型号相近推断 BER-SE00 与 BER-SE10 的硬件、固件或功能完全一致。"] },
-  { id: "huawei-ai-sensor-air", compatibilityRecords: [{ targetType: "platform", targetId: "harmony-home", status: "supported", evidenceLevel: "official", sourceId: "huawei-ai-sensor-air", features: ["鸿蒙智家空间感知与场景联动"], checkedAt: "2026-11-26", notes: "官方产品介绍支持其鸿蒙智家场景能力；具体主机与软件版本仍须核对。" }],  slug: "huawei-ai-sensor-air", name: "华为鸿蒙智家 AI 超感传感器 Air", model: null, manufacturerId: "huawei", brandId: "huawei-wholehome", categoryId: "sensor", summary: "华为官方产品页介绍的红外、毫米波与光感融合传感器，面向空间存在感知与场景联动。", protocolIds: [], capabilityIds: ["occupancy", "illuminance"], sourceIds: ["huawei-wholehome-cn", "huawei-ai-sensor-air"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "感知方式", value: "红外、毫米波、光感三感融合", sourceId: "huawei-ai-sensor-air" }, { name: "安装孔径", value: "支持标准 75 mm 孔径内嵌安装（需预埋件并提前预留开孔、布线）", sourceId: "huawei-ai-sensor-air" }, { name: "响应时延宣传值", value: "0.6 秒（华为实验室数据；实际受主机、网络、灯具和联动链路影响）", sourceId: "huawei-ai-sensor-air" }], limitations: ["当前官方产品介绍页未在本轮确认完整产品型号代码。", "感知效果受环境温度、遮挡、人体姿态、吊顶高度和家具遮挡影响。", "官方页面明确响应时延来自实验室，不能作为所有现场的保证值。"] },
+  { id: "huawei-ai-sensor-ber-se10", compatibilityRecords: [{ targetType: "platform", targetId: "harmony-home", methodId: "native", status: "supported", evidenceLevel: "official", sourceId: "huawei-sensor-compatibility", features: ["鸿蒙智家融合感知"], checkedAt: "2026-11-26", notes: "支持范围仅限官方融合感知支持清单中列出的主机、型号和软件版本。" }],  slug: "huawei-ai-sensor-ber-se10", name: "华为鸿蒙智家 AI 超感传感器", model: "BER-SE10", manufacturerId: "huawei", brandId: "huawei-wholehome", categoryId: "sensor", summary: "华为官方融合感知支持清单明确列出的传感器型号。", protocolIds: [], capabilityIds: ["occupancy"], sourceIds: ["huawei-wholehome-cn", "huawei-sensor-compatibility"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "BER-SE10", sourceId: "huawei-sensor-compatibility" }], limitations: ["官方清单确认该型号属于融合感知支持产品；具体主机兼容范围、软件版本与安装要求须一并核对官方清单。"] },
+  { id: "huawei-ai-sensor-ber-se00", compatibilityRecords: [{ targetType: "platform", targetId: "harmony-home", methodId: "native", status: "supported", evidenceLevel: "official", sourceId: "huawei-sensor-compatibility", features: ["鸿蒙智家融合感知"], checkedAt: "2026-11-26", notes: "支持范围仅限官方融合感知支持清单中列出的主机、型号和软件版本。" }],  slug: "huawei-ai-sensor-ber-se00", name: "华为全屋智能 AI 超感传感器", model: "BER-SE00", manufacturerId: "huawei", brandId: "huawei-wholehome", categoryId: "sensor", summary: "华为官方融合感知支持清单明确列出的上一命名体系传感器型号。", protocolIds: [], capabilityIds: ["occupancy"], sourceIds: ["huawei-sensor-compatibility"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "官方型号", value: "BER-SE00", sourceId: "huawei-sensor-compatibility" }], limitations: ["不能仅凭型号相近推断 BER-SE00 与 BER-SE10 的硬件、固件或功能完全一致。"] },
+  { id: "huawei-ai-sensor-air", compatibilityRecords: [{ targetType: "platform", targetId: "harmony-home", methodId: "native", status: "supported", evidenceLevel: "official", sourceId: "huawei-ai-sensor-air", features: ["鸿蒙智家空间感知与场景联动"], checkedAt: "2026-11-26", notes: "官方产品介绍支持其鸿蒙智家场景能力；具体主机与软件版本仍须核对。" }],  slug: "huawei-ai-sensor-air", name: "华为鸿蒙智家 AI 超感传感器 Air", model: null, manufacturerId: "huawei", brandId: "huawei-wholehome", categoryId: "sensor", summary: "华为官方产品页介绍的红外、毫米波与光感融合传感器，面向空间存在感知与场景联动。", protocolIds: [], capabilityIds: ["occupancy", "illuminance"], sourceIds: ["huawei-wholehome-cn", "huawei-ai-sensor-air"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "感知方式", value: "红外、毫米波、光感三感融合", sourceId: "huawei-ai-sensor-air" }, { name: "安装孔径", value: "支持标准 75 mm 孔径内嵌安装（需预埋件并提前预留开孔、布线）", sourceId: "huawei-ai-sensor-air" }, { name: "响应时延宣传值", value: "0.6 秒（华为实验室数据；实际受主机、网络、灯具和联动链路影响）", sourceId: "huawei-ai-sensor-air" }], limitations: ["当前官方产品介绍页未在本轮确认完整产品型号代码。", "感知效果受环境温度、遮挡、人体姿态、吊顶高度和家具遮挡影响。", "官方页面明确响应时延来自实验室，不能作为所有现场的保证值。"] },
   { id: "orvibo-w10", slug: "orvibo-curtain-motor-w10", name: "直流超静音窗帘电机", model: "W10", manufacturerId: "orvibo", brandId: "orvibo", categoryId: "curtain", summary: "欧瑞博官方安装参数页面列出 W10 电机及其额定参数。", protocolIds: ["wifi"], capabilityIds: ["curtain-position"], sourceIds: ["orvibo-curtain-install"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "产品规格", value: "40 × 40 × 320 mm", sourceId: "orvibo-curtain-install" }, { name: "额定功率", value: "36 W", sourceId: "orvibo-curtain-install" }, { name: "额定输入", value: "100–240 V~，50/60 Hz", sourceId: "orvibo-curtain-install" }, { name: "额定电流", value: "1.3 A", sourceId: "orvibo-curtain-install" }, { name: "额定扭矩", value: "1.0 N·m", sourceId: "orvibo-curtain-install" }, { name: "额定转速", value: "118 rpm", sourceId: "orvibo-curtain-install" }, { name: "工作温度", value: "−0–50 °C（原文标注）", sourceId: "orvibo-curtain-install" }, { name: "无线频率", value: "Wi-Fi 2.4 GHz", sourceId: "orvibo-curtain-install" }, { name: "质保", value: "二年（官网页面标注）", sourceId: "orvibo-curtain-install" }], limitations: ["以上为厂商页面列示的理论参数，不代表本工作室实测。安装前需核对窗帘重量、轨道长度、供电、行程和控制方案。"] },
   { id: "orvibo-w13-w14", slug: "orvibo-curtain-track-w13-w14", name: "免测量可伸缩导轨", model: "W13 / W14", manufacturerId: "orvibo", brandId: "orvibo", categoryId: "accessory", summary: "欧瑞博官方安装参数页面列出的窗帘伸缩导轨。", protocolIds: [], capabilityIds: [], sourceIds: ["orvibo-curtain-install"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "可调长度", value: "W13：1.7–3 m；W14：2.2–4 m", sourceId: "orvibo-curtain-install" }, { name: "负载", value: "20 kg，单边 10 kg", sourceId: "orvibo-curtain-install" }, { name: "轨道壁厚", value: "1.3 mm", sourceId: "orvibo-curtain-install" }, { name: "导轨宽度", value: "63.2 mm", sourceId: "orvibo-curtain-install" }], limitations: ["厂商页面理论参数；适配电机、安装跨度和窗帘类型需现场复核。"] },
   { id: "orvibo-mixpad-c", slug: "orvibo-mixpad-c", name: "MixPad C 超级智能开关", model: "MixPad C", manufacturerId: "orvibo", brandId: "orvibo", categoryId: "switch", summary: "欧瑞博官方参数页面列出的 MixPad C 超级智能开关。", protocolIds: ["wifi"], capabilityIds: ["on-off", "scene"], sourceIds: ["orvibo-curtain-install"], evidenceLevel: "official", verificationStatus: "official-specification", lastVerified: "2026-11-26", region: "CN", price: null, image: null, threeDAsset: null, specifications: [{ name: "处理器", value: "四核心 ARM Cortex-A35", sourceId: "orvibo-curtain-install" }, { name: "显示屏", value: "4 英寸，480 × 480", sourceId: "orvibo-curtain-install" }, { name: "供电", value: "220 V 零火线供电", sourceId: "orvibo-curtain-install" }, { name: "无线", value: "Wi-Fi、蓝牙（页面未明确蓝牙版本）", sourceId: "orvibo-curtain-install" }], limitations: ["官网页面未列明无线协议版本、开放 API、Matter 认证及跨平台兼容情况；不得自行推断。"] },
