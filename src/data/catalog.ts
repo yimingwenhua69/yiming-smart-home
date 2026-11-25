@@ -18,6 +18,7 @@ export type Manufacturer = {
   website: string;
   productCenter: string;
   country: string;
+  organizationType: "hardware-manufacturer" | "brand-owner" | "ecosystem-provider" | "iot-platform-provider";
   status: "active" | "researching";
   note: string;
 };
@@ -33,6 +34,7 @@ export type Brand = {
   id: string;
   name: string;
   manufacturerId: string;
+  brandType: "hardware-brand" | "ecosystem-brand" | "platform-brand";
   website: string;
   note: string;
 };
@@ -670,20 +672,20 @@ export const sources: CatalogSource[] = [
 ];
 
 export const manufacturers: Manufacturer[] = [
-  { id: "aqara", name: "绿米联创", englishName: "Aqara", website: "https://aqara.cn/", productCenter: "https://aqara.cn/cn/prodCenter", country: "中国", status: "active", note: "全屋智能设备、传感、照明、门锁与网关产品线。" },
-  { id: "xiaomi", name: "小米", englishName: "Xiaomi", website: "https://www.mi.com/", productCenter: "https://www.mi.com/shop", country: "中国", status: "researching", note: "米家生态；产品、品牌与制造商关系必须按具体型号核实。" },
-  { id: "huawei", name: "华为终端", englishName: "Huawei", website: "https://consumer.huawei.com/cn/", productCenter: "https://consumer.huawei.com/cn/wholehome/", country: "中国", status: "active", note: "鸿蒙智家、智能主机、传感器、面板、照明与门锁。" },
-  { id: "orvibo", name: "欧瑞博", englishName: "ORVIBO", website: "https://www.orvibo.com/cn/", productCenter: "https://global.orvibo.com/cn/product/productList.html", country: "中国", status: "active", note: "MixPad、中控、照明、窗帘与安防传感产品线。" },
-  { id: "tuya", name: "涂鸦智能", englishName: "Tuya", website: "https://www.tuya.com/cn", productCenter: "https://www.tuya.com/cn", country: "中国", status: "researching", note: "以 IoT 平台、开发工具和生态能力为主；不得将 OEM 设备误登记为涂鸦自有品牌产品。" }
+  { id: "aqara", name: "绿米联创", englishName: "Aqara", website: "https://aqara.cn/", productCenter: "https://aqara.cn/cn/prodCenter", country: "中国", organizationType: "hardware-manufacturer", status: "active", note: "全屋智能设备、传感、照明、门锁与网关产品线。" },
+  { id: "xiaomi", name: "小米", englishName: "Xiaomi", website: "https://www.mi.com/", productCenter: "https://www.mi.com/shop", country: "中国", organizationType: "brand-owner", status: "researching", note: "米家生态；产品、品牌与制造商关系必须按具体型号核实。" },
+  { id: "huawei", name: "华为终端", englishName: "Huawei", website: "https://consumer.huawei.com/cn/", productCenter: "https://consumer.huawei.com/cn/wholehome/", country: "中国", organizationType: "ecosystem-provider", status: "active", note: "鸿蒙智家、智能主机、传感器、面板、照明与门锁。" },
+  { id: "orvibo", name: "欧瑞博", englishName: "ORVIBO", website: "https://www.orvibo.com/cn/", productCenter: "https://global.orvibo.com/cn/product/productList.html", country: "中国", organizationType: "hardware-manufacturer", status: "active", note: "MixPad、中控、照明、窗帘与安防传感产品线。" },
+  { id: "tuya", name: "涂鸦智能", englishName: "Tuya", website: "https://www.tuya.com/cn", productCenter: "https://www.tuya.com/cn", country: "中国", organizationType: "iot-platform-provider", status: "researching", note: "以 IoT 平台、开发工具和生态能力为主；不得将 OEM 设备误登记为涂鸦自有品牌产品。" }
 ];
 
 export const brands: Brand[] = [
-  { id: "aqara", name: "Aqara", manufacturerId: "aqara", website: "https://aqara.cn/", note: "Aqara 智能家居品牌；产品型号和销售区域需逐项核对。" },
-  { id: "mi-home", name: "米家", manufacturerId: "xiaomi", website: "https://www.mi.com/", note: "米家生态品牌；具体产品制造商可能不同，需按 SKU 核实。" },
-  { id: "xiaomi", name: "Xiaomi", manufacturerId: "xiaomi", website: "https://www.mi.com/", note: "小米自有硬件品牌；产品型号、生产主体和销售区域仍需按准确 SKU 核实。" },
-  { id: "huawei-wholehome", name: "华为全屋智能", manufacturerId: "huawei", website: "https://consumer.huawei.com/cn/wholehome/", note: "华为全屋智能产品与生态品牌。" },
-  { id: "orvibo", name: "欧瑞博", manufacturerId: "orvibo", website: "https://www.orvibo.com/cn/", note: "欧瑞博智能家居品牌。" },
-  { id: "tuya", name: "涂鸦智能", manufacturerId: "tuya", website: "https://www.tuya.com/cn", note: "涂鸦智能平台与品牌；OEM 产品不得自动归入涂鸦品牌硬件。" }
+  { id: "aqara", name: "Aqara", manufacturerId: "aqara", brandType: "hardware-brand", website: "https://aqara.cn/", note: "Aqara 智能家居品牌；产品型号和销售区域需逐项核对。" },
+  { id: "mi-home", name: "米家", manufacturerId: "xiaomi", brandType: "ecosystem-brand", website: "https://www.mi.com/", note: "米家生态品牌；具体产品制造商可能不同，需按 SKU 核实。" },
+  { id: "xiaomi", name: "Xiaomi", manufacturerId: "xiaomi", brandType: "hardware-brand", website: "https://www.mi.com/", note: "小米自有硬件品牌；产品型号、生产主体和销售区域仍需按准确 SKU 核实。" },
+  { id: "huawei-wholehome", name: "华为全屋智能", manufacturerId: "huawei", brandType: "ecosystem-brand", website: "https://consumer.huawei.com/cn/wholehome/", note: "华为全屋智能产品与生态品牌。" },
+  { id: "orvibo", name: "欧瑞博", manufacturerId: "orvibo", brandType: "hardware-brand", website: "https://www.orvibo.com/cn/", note: "欧瑞博智能家居品牌。" },
+  { id: "tuya", name: "涂鸦智能", manufacturerId: "tuya", brandType: "platform-brand", website: "https://www.tuya.com/cn", note: "涂鸦智能平台与品牌；OEM 产品不得自动归入涂鸦品牌硬件。" }
 ];
 
 export const categories: ProductCategory[] = [
