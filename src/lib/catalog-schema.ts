@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { brands, capabilities, categories, deviceModels, manufacturers, platforms, products, protocols, sources } from "@/data/catalog";
+import { brands, capabilities, categories, deviceModels, integrationSystems, manufacturers, platforms, products, protocols, sources } from "@/data/catalog";
 
 const id = z.string().trim().min(1);
 const httpsUrl = z.string().url().refine((value)=>value.startsWith("https://"),"URL must use HTTPS");
@@ -21,8 +21,10 @@ const productSchema = z.object({
   id, slug: z.string().regex(/^[a-z0-9-]+$/), name: z.string().min(1),
   manufacturerId: id, brandId: id, categoryId: id, summary: z.string(), modelIds: z.array(id).min(1)
 });
+const integrationSystemSchema = z.object({ id, name: z.string().min(1), kind: z.enum(["manufacturer-sdk","open-source-integration","platform-api"]), owner: z.string().min(1), documentationUrl: httpsUrl, notes: z.string() });
+const integrationMappingSchema = z.object({ integrationId: id, modelId: id, sourceId: id });
 const deviceModelSchema = z.object({
-  id, productId: id, modelCode: z.string().nullable(), hardwareRevision: z.string().nullable(),
+  id, productId: id, modelCode: z.string().nullable(), hardwareRevision: z.string().nullable(), integrationModels: z.array(integrationMappingSchema),
   protocolIds: z.array(id), platformIds: z.array(id), capabilityIds: z.array(id), sourceIds: z.array(id).min(1),
   evidenceLevel: evidence, verificationStatus: z.enum(["official-listing","official-specification","needs-model-verification"]),
   lastVerified: z.string().regex(/^\d{4}-\d{2}-\d{2}$/), region: z.literal("CN"),
@@ -48,6 +50,7 @@ export function validateCatalog() {
     ids.set(name,seen);
   };
   checkCollection("source",sources,sourceSchema);
+  checkCollection("integration-system",integrationSystems,integrationSystemSchema);
   checkCollection("manufacturer",manufacturers,manufacturerSchema);
   checkCollection("brand",brands,brandSchema);
   checkCollection("category",categories,categorySchema);
@@ -58,6 +61,7 @@ export function validateCatalog() {
   checkCollection("capability",capabilities,capabilitySchema);
 
   const sourceIds=ids.get("source")??new Set<string>();
+  const integrationSystemIds=ids.get("integration-system")??new Set<string>();
   const manufacturerIds=ids.get("manufacturer")??new Set<string>();
   const brandIds=ids.get("brand")??new Set<string>();
   const categoryIds=ids.get("category")??new Set<string>();
@@ -81,6 +85,10 @@ export function validateCatalog() {
   for(const model of deviceModels){
     if(!productIds.has(model.productId)) errors.push(model.id+" references missing product "+model.productId);
     for(const relation of model.sourceIds) if(!sourceIds.has(relation)) errors.push(model.id+" references missing source "+relation);
+    for(const mapping of model.integrationModels){
+      if(!integrationSystemIds.has(mapping.integrationId)) errors.push(model.id+" references missing integration system "+mapping.integrationId);
+      if(!sourceIds.has(mapping.sourceId)) errors.push(model.id+" integration mapping references missing source "+mapping.sourceId);
+    }
     for(const relation of model.protocolIds) if(!protocolIds.has(relation)) errors.push(model.id+" references missing protocol "+relation);
     for(const relation of model.platformIds) if(!platformIds.has(relation)) errors.push(model.id+" references missing platform "+relation);
     for(const relation of model.capabilityIds) if(!capabilityIds.has(relation)) errors.push(model.id+" references missing capability "+relation);
