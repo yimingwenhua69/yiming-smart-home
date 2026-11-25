@@ -9,6 +9,8 @@ This registry records sources to research. A source listing does not by itself p
 | Publisher | Official source | Primary research use |
 |---|---|---|
 | Aqara / 绿米 | https://www.aqara.cn/cn/prodCenter | Mainland China products, hubs, switches, lighting, sensors, locks |
+| Xiaomi / 米家 | https://www.mi.com/smart-screen/specs | Xiaomi 智能家庭屏 10 official product listing; model code and radio details remain unverified |
+| Xiaomi 智能多模网关 2 | https://m.mi.com/crowdfunding/proddetail/1000468 | Official crowdfunding record lists Bluetooth, Bluetooth Mesh, Zigbee, dual-band Wi-Fi and Ethernet; campaign ended and current SKU availability is unverified |
 | Xiaomi / 米家 | https://www.mi.com/shop | Current product names, store listings and official detail pages; brand / OEM manufacturer relationships still require SKU-level verification |
 | Huawei 鸿蒙智家 | https://consumer.huawei.com/cn/wholehome/ | Smart hosts, panels, sensors, lighting and locks |
 | ORVIBO 欧瑞博 | https://www.orvibo.com/cn/product/productList.html | MixPad, switches, lighting, curtain motors, sensors |
