@@ -71,3 +71,12 @@ No claim is made that local PowerShell commands, npm tests, builds, SCALE gates,
 
 
 Current catalog after model-level research: 15 product records, 15 device-model records, 5 brands, and 23 sources. Added official Aqara M200, FP2 and Door/Window Sensor T1 support/spec references and an Orvibo S5 record explicitly marked for model verification because its detail page is historical and uses lab-theory data.
+
+## Latest 1.0.0 continuation (2026-11-26)
+
+- Aqara: added official model/spec/support records for Motion Sensor T1/E1, Door & Window Sensor E1/P1, Temperature & Humidity Sensor T1, Water Leak Sensor T1, Light Sensor T1 and Vibration Sensor T1. Conflicting temperature-range wording is preserved with source notes rather than silently reconciled.
+- Xiaomi: added the official Xiaomi Smart Multi-mode Gateway 2 crowdfunding record (campaign ended; current availability and retail SKU unverified) and Xiaomi Smart Home Screen 10 official listing (model code and radio functions not exposed by the readable official page).
+- Added Bluetooth Mesh as a separate protocol instead of conflating it with BLE.
+- Separated Xiaomi hardware brand from Mi Home ecosystem brand; products are assigned to Xiaomi brand.
+- Current catalog count: 27 products, 27 device models, 134 independent specifications, 8 protocols, 6 brands, 37 sources, 5 compatibility / integration path records, 2 integration systems, 14 Aqara SDK mappings.
+- CI passed all gates at commit 1c62780d4b01921b1ec5fa78fa52b745b86d176e (type check, tests, coverage, production build and browser tests). Later Xiaomi and documentation commits are awaiting their own latest Actions result; do not treat the earlier green run as proof for the current HEAD.
